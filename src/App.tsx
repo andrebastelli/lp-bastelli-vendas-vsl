@@ -1327,14 +1327,14 @@ function Bonus() {
       style={{ height: `${itens.length * 100}vh` }}
     >
       {/* STICKY */}
-      <div className="sticky top-0 flex h-screen items-center overflow-hidden">
+      <div className="sticky top-0 flex h-screen flex-col justify-center overflow-hidden py-6">
         <div className="mx-auto w-full max-w-6xl px-5 md:px-8">
           {/* HEADER */}
-          <div className="mb-12 max-w-[600px]">
-            <span className="font-mono text-[11px] uppercase tracking-[0.28em] text-bastelli-orange">
+          <div className="mb-4 max-w-[600px] md:mb-8">
+            <span className="font-mono text-[10px] uppercase tracking-[0.28em] text-bastelli-orange md:text-[11px]">
               Bônus
             </span>
-            <h2 className="mt-4 font-display text-[38px] font-light leading-[0.98] tracking-[-0.02em] text-bastelli-navy md:text-[64px]">
+            <h2 className="mt-2 font-display text-[26px] font-light leading-[1.02] tracking-[-0.02em] text-bastelli-navy md:mt-4 md:text-[56px]">
               O acesso vai{" "}
               <span className="italic text-bastelli-orange">além do curso</span>
             </h2>
@@ -1347,36 +1347,36 @@ function Bonus() {
             style={{ animation: "fade-in 500ms ease-out both" }}
           >
             {/* IMAGEM — esquerda */}
-            <div className="flex aspect-[4/3] items-center justify-center bg-[#ee733b] md:aspect-auto md:min-h-[420px]">
+            <div className="flex min-h-[22vh] items-center justify-center bg-[#ee733b] py-6 md:min-h-[34vh]">
               <img
                 src={Mockup}
                 alt={current.title}
-                className="h-auto w-full max-w-[260px] object-contain"
+                className="h-auto w-full max-w-[180px] object-contain md:max-w-[220px]"
               />
             </div>
 
             {/* TEXTO — direita */}
-            <div className="flex flex-col justify-center px-8 py-10 md:px-12">
-              <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-bastelli-orange">
+            <div className="flex flex-col justify-center px-6 py-6 md:px-12 md:py-8">
+              <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-bastelli-orange md:text-[11px]">
                 {String(active + 1).padStart(2, "0")}
               </span>
-              <h3 className="mt-4 font-display text-[26px] leading-tight text-bastelli-navy md:text-[36px]">
+              <h3 className="mt-2 font-display text-[20px] leading-tight text-bastelli-navy md:mt-4 md:text-[32px]">
                 {current.title}
               </h3>
-              <p className="mt-4 max-w-[42ch] text-[15px] leading-relaxed text-bastelli-navy/70 md:text-[17px]">
+              <p className="mt-2 max-w-[42ch] text-[14px] leading-relaxed text-bastelli-navy/70 md:mt-4 md:text-[16px]">
                 {current.desc}
               </p>
             </div>
           </div>
 
-          {/* Progresso — contador + dots (sem setas, controlado pelo scroll) */}
-          <div className="mt-8 border-t border-bastelli-navy/15 pt-6">
+          {/* Progresso — contador + dots */}
+          <div className="mt-4 border-t border-bastelli-navy/15 pt-3 md:mt-6 md:pt-4">
             <div className="flex items-center justify-between gap-4">
               <div className="flex items-baseline gap-2 font-mono text-bastelli-navy/70">
-                <span className="text-[22px] font-semibold text-bastelli-navy md:text-[28px]">
+                <span className="text-[16px] font-semibold text-bastelli-navy md:text-[22px]">
                   {String(active + 1).padStart(2, "0")}
                 </span>
-                <span className="text-[12px] uppercase tracking-[0.2em] text-bastelli-navy/40">
+                <span className="text-[10px] uppercase tracking-[0.2em] text-bastelli-navy/40 md:text-[12px]">
                   / {String(itens.length).padStart(2, "0")}
                 </span>
               </div>
@@ -1386,13 +1386,13 @@ function Bonus() {
                     key={it.title}
                     aria-hidden
                     className={`h-1 rounded-full transition-all duration-500 ${
-                      i === active ? "w-10 bg-bastelli-orange" : "w-2 bg-bastelli-navy/20"
+                      i === active ? "w-8 bg-bastelli-orange md:w-10" : "w-2 bg-bastelli-navy/20"
                     }`}
                   />
                 ))}
               </div>
             </div>
-            <p className="mt-3 font-mono text-[10px] uppercase tracking-[0.22em] text-bastelli-navy/40">
+            <p className="mt-2 font-mono text-[9px] uppercase tracking-[0.22em] text-bastelli-navy/40 md:mt-3 md:text-[10px]">
               Role a página pra ver os próximos bônus
             </p>
           </div>
