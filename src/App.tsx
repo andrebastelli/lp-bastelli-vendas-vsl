@@ -1332,28 +1332,28 @@ function Bonus() {
               {itens.map((item, i) => (
 <div
   key={i}
-  className="min-w-[80vw] md:min-w-[600px] h-[80vh] flex flex-col bg-white border border-bastelli-navy/10 overflow-hidden"
+  className="min-w-full h-[80vh] grid md:grid-cols-2 bg-white border border-bastelli-navy/10 overflow-hidden"
 >
   {/* IMAGEM */}
-  <div className="w-full bg-bastelli-paper flex items-center justify-center py-10">
-  <img
-    src={Mockup}
-    alt={item}
-    className="w-full max-w-[220px] h-auto object-contain"
-  />
-</div>
+  <div className="flex items-center justify-center bg-[#ee733b]">
+    <img
+      src={Mockup}
+      alt={item}
+      className="w-full max-w-[260px] h-auto object-contain"
+    />
+  </div>
 
-  {/* CONTEÚDO */}
-  <div className="p-6 md:p-8 flex flex-col flex-1">
+  {/* TEXTO */}
+  <div className="flex flex-col justify-center px-8 md:px-12">
     <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-bastelli-orange">
       {String(i + 1).padStart(2, "0")}
     </span>
 
-    <h3 className="mt-3 font-display text-[22px] md:text-[26px] leading-tight text-bastelli-navy">
+    <h3 className="mt-4 font-display text-[26px] md:text-[36px] leading-tight text-bastelli-navy">
       {item}
     </h3>
 
-    <p className="mt-3 text-[14px] md:text-[15px] leading-relaxed text-bastelli-navy/70">
+    <p className="mt-4 max-w-[42ch] text-[15px] md:text-[17px] leading-relaxed text-bastelli-navy/70">
       {[
         "Base para estruturar sua loja corretamente.",
         "A metodologia completa de decisão.",
