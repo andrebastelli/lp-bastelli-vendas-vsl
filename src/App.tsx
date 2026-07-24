@@ -472,7 +472,7 @@ function VSLPlayer() {
 }
 
 /* ============================================================
-   2. IDENTIFICAÇÃO
+   2. O PROBLEMA REAL DO LOJISTA
 ============================================================ */
 function Identificacao() {
   const falas = [
