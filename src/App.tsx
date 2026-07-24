@@ -968,7 +968,7 @@ function ApresentacaoCurso() {
               <span className="italic text-bastelli-orange">Uma visão 360º.</span>
             </h2>
             <p className="mt-8 max-w-xl text-[17px] leading-[1.55] text-bastelli-navy/75 md:text-[19px]">
-              É um curso introdutório com Bruno Bastelli. Você senta, assiste
+              É um Curso Online Introdução ao E-commerce com Bruno Bastelli. Você senta, assiste
               em alguns dias e sai enxergando a loja como um sistema — não
               como uma pilha de tarefas soltas.
             </p>
@@ -2178,7 +2178,7 @@ function Footer() {
               className="h-8 w-auto md:h-9"
             />
             <p className="mt-6 max-w-sm text-[13px] leading-relaxed text-bastelli-navy/70">
-              Conteúdo introdutório sobre e-commerce.{" "}
+              Conteúdo de introdução sobre e-commerce.{" "}
               <span className="text-bastelli-navy">
                 Serve como ponto de partida
               </span>{" "}
