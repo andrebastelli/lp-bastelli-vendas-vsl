@@ -476,13 +476,11 @@ function VSLPlayer() {
 ============================================================ */
 function Identificacao() {
   const falas = [
-    { texto: "Coloquei R$ 3 mil em anúncio no mês passado. Vendeu menos que no mês que eu não anunciei.", segmento: "moda" },
-    { texto: "Já troquei de agência três vezes. A conversa muda, o resultado não.", segmento: "cosméticos" },
-    { texto: "Meu Instagram tá bombando de curtida. Aí abro o painel da loja e é deserto.", segmento: "acessórios" },
-    { texto: "Fiz Black Friday, vendi bem, e no fim das contas sobrou menos do que num mês normal.", segmento: "pet" },
-    { texto: "Migrei de plataforma achando que era isso. Gastei, quebrei a cabeça, e o problema continuou.", segmento: "casa & decoração" },
-    { texto: "Vendo bem no WhatsApp, mas sinto que atingi meu teto — não sei como crescer sem virar bagunça.", segmento: "suplementos" },
-    { texto: "Quero abrir minha loja há dois anos. Toda vez que vou começar, trava o medo de queimar dinheiro.", segmento: "artesanato" },
+    { texto: "Você aumenta o tráfego, mas a loja não converte." },
+    { texto: "Troca a campanha, mas o resultado não melhora." },
+    { texto: "Posta mais, mas continua sem previsibilidade." },
+    { texto: "Faz promoção, mas vende com margem apertada." },
+    { texto: "Troca ferramenta, mas continua sem direção." },
   ];
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
@@ -503,12 +501,20 @@ function Identificacao() {
         {/* Cabeçalho assimétrico — nada centralizado */}
         <div className="grid gap-5 md:grid-cols-12 md:gap-10">
           <div className="md:col-span-7">
+            <span className="font-mono text-[11px] uppercase tracking-[0.28em] text-bastelli-orange">
+              O problema real do lojista
+            </span>
             <h2 className="mt-4 font-display text-[36px] font-semibold leading-[1] tracking-[-0.02em] text-bastelli-navy md:text-[60px]">
-              A gente já ouviu essa.
+              Você vai continuar
+              <br />
+              vendendo <span className="text-bastelli-navy/50">no escuro?</span>
             </h2>
           </div>
           <div className="md:col-span-5 md:pt-16">
-            
+            <p className="max-w-sm text-[15px] leading-relaxed text-bastelli-navy/65 md:text-[16px]">
+              Você tenta resolver uma parte, mas o problema parece sempre
+              estar ali.
+            </p>
           </div>
         </div>
 
@@ -528,7 +534,7 @@ function Identificacao() {
             {String(index + 1).padStart(2, "0")}
           </span>
 
-          <div className="relative flex min-h-[200px] items-center md:min-h-[240px]">
+          <div className="relative flex min-h-[160px] items-center md:min-h-[200px]">
             {falas.map((fala, i) => (
               <figure
                 key={i}
@@ -548,10 +554,6 @@ function Identificacao() {
                 <blockquote className="relative font-display text-[26px] font-semibold leading-[1.25] tracking-[-0.01em] text-bastelli-navy md:text-[38px]">
                   {fala.texto}
                 </blockquote>
-                <figcaption className="mt-3 flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.2em] text-bastelli-navy/55 md:mt-6">
-                  <span className="h-px w-6 bg-bastelli-navy/40" />
-                  lojista · {fala.segmento}
-                </figcaption>
               </figure>
             ))}
           </div>
@@ -574,7 +576,7 @@ function Identificacao() {
                     <button
                       key={i}
                       type="button"
-                      aria-label={`Ir para fala ${i + 1}`}
+                      aria-label={`Ir para o ponto ${i + 1}`}
                       onClick={() => setIndex(i)}
                       className={`h-1 rounded-full transition-all duration-500 ${
                         i === index
@@ -591,7 +593,7 @@ function Identificacao() {
                 <button
                   type="button"
                   onClick={goPrev}
-                  aria-label="Fala anterior"
+                  aria-label="Ponto anterior"
                   className="grid h-11 w-11 place-items-center rounded-md border-2 border-bastelli-orange text-bastelli-orange transition hover:bg-bastelli-orange hover:text-white"
                 >
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -601,7 +603,7 @@ function Identificacao() {
                 <button
                   type="button"
                   onClick={goNext}
-                  aria-label="Próxima fala"
+                  aria-label="Próximo ponto"
                   className="grid h-11 w-11 place-items-center rounded-md border-2 border-bastelli-orange text-bastelli-orange transition hover:bg-bastelli-orange hover:text-white"
                 >
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -616,11 +618,14 @@ function Identificacao() {
         {/* Fecho — dividido em duas colunas, com assinatura */}
         <div className="mt-12 grid gap-6 md:mt-28 md:grid-cols-12 md:gap-10">
           <p className="md:col-span-9 text-[19px] leading-[1.45] text-bastelli-navy md:text-[24px]">
-            Se duas dessas você já disse em voz alta, o problema{" "}
+            O problema é que, quando você não entende a operação como um
+            todo,{" "}
             <span className="bg-bastelli-orange/25 px-1.5 py-0.5 font-semibold">
-              não é você não estar tentando
+              qualquer decisão vira tentativa
             </span>
-            . É que ninguém sentou pra te mostrar como as peças se conectam.
+            . Enquanto isso, empresas que entendem a operação de verdade de
+            um e-commerce vendem todo dia — e você fica se perguntando o
+            que elas sabem e você não.
           </p>
           <p className="md:col-span-3 md:pt-2 font-mono text-[12px] uppercase tracking-[0.22em] text-bastelli-navy/55">
             — Bruno Bastelli
