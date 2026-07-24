@@ -7,6 +7,7 @@ import BrunoDev from "@/assets/consuiltoria_com_cliente_bastelli.webp";
 import BrunoAgencia from "@/assets/bruno_agencia.webp";
 import BrunoClientes from "@/assets/bastelli_clientes.webp";
 import BrunoAbcomm from "@/assets/premio_abcomm.webp";
+import Mockup from "@/assets/mockup.webp";
 
 function useAutoScrollCarousel<T extends HTMLElement>(itemCount: number, intervalMs = 4500) {
   const ref = useRef<T | null>(null);
@@ -158,8 +159,9 @@ function Index() {
       <RodaDoEcommerce />
       <ApresentacaoCurso />
       <OQueVaiAprender />
-      <Oferta />
+      <Bonus />
       <SobreBruno />
+      <Oferta />
       <Garantia />
       <FAQ />
       <CtaFinal />
@@ -1253,7 +1255,315 @@ function Accordion({
 }
 
 /* ============================================================
-   7. OFERTA
+   7. BÔNUS
+============================================================ */
+function Bonus() {
+  const sectionRef = useRef(null);
+  const trackRef = useRef(null);
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+  const handleScroll = () => {
+  const section = sectionRef.current;
+  if (!section) return;
+
+  const rect = section.getBoundingClientRect();
+  const windowHeight = window.innerHeight;
+
+  const totalScroll = rect.height - windowHeight;
+
+  if (totalScroll <= 0) {
+    setProgress(0);
+    return;
+  }
+
+  const scrolled = Math.min(Math.max(-rect.top, 0), totalScroll);
+  const progress = scrolled / totalScroll;
+
+  setProgress(progress);
+};
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const itens = [
+    "Introdução ao E-commerce",
+    "Roda do E-commerce",
+    "Boas práticas",
+    "Metas inteligentes",
+    "Campanhas e vendas",
+    "50 ideias de ofertas",
+  ];
+
+  return (
+    <section
+      ref={sectionRef}
+      className="relative h-[300vh] bg-white"
+    >
+      {/* STICKY */}
+      <div className="sticky top-0 h-screen flex items-center overflow-hidden">
+
+        <div className="w-full max-w-6xl mx-auto px-5 md:px-8">
+
+          {/* HEADER */}
+          <div className="mb-12 max-w-[600px]">
+            <span className="font-mono text-[11px] uppercase tracking-[0.28em] text-bastelli-orange">
+              Bônus
+            </span>
+
+            <h2 className="mt-4 font-display text-[38px] md:text-[64px]">
+              O acesso vai{" "}
+              <span className="italic text-bastelli-orange">
+                além do curso
+              </span>
+            </h2>
+          </div>
+
+          {/* TRACK */}
+          <div className="overflow-hidden">
+            <div
+              ref={trackRef}
+              className="flex gap-10 transition-transform duration-75 w-max"
+              style={{
+                transform: `translateX(-${progress * (itens.length - 1) * 100}%)`
+              }}
+            >
+              {itens.map((item, i) => (
+<div
+  key={i}
+  className="min-w-[80vw] md:min-w-[600px] flex flex-col bg-white border border-bastelli-navy/10 overflow-hidden transition duration-500 hover:-translate-y-2 hover:shadow-2xl"
+>
+  {/* IMAGEM */}
+  <div className="w-full bg-bastelli-paper flex items-center justify-center py-10">
+  <img
+    src={Mockup}
+    alt={item}
+    className="w-full max-w-[220px] h-auto object-contain"
+  />
+</div>
+
+  {/* CONTEÚDO */}
+  <div className="p-6 md:p-8 flex flex-col flex-1">
+    <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-bastelli-orange">
+      {String(i + 1).padStart(2, "0")}
+    </span>
+
+    <h3 className="mt-3 font-display text-[22px] md:text-[26px] leading-tight text-bastelli-navy">
+      {item}
+    </h3>
+
+    <p className="mt-3 text-[14px] md:text-[15px] leading-relaxed text-bastelli-navy/70">
+      {[
+        "Base para estruturar sua loja corretamente.",
+        "A metodologia completa de decisão.",
+        "Checklist prático para execução.",
+        "Defina metas claras e mensuráveis.",
+        "Organize campanhas e vendas.",
+        "Ofertas prontas para aplicar.",
+      ][i]}
+    </p>
+  </div>
+</div>
+              ))}
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ============================================================
+   8. SOBRE BRUNO
+============================================================ */
+function SobreBruno() {
+  const scrollRef = useAutoScrollCarousel<HTMLDivElement>(6, 5000);
+  return (
+    <section id="bruno" className="bg-white">
+      <div className="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-32">
+        <div className="grid gap-8 md:grid-cols-12">
+          <div className="min-w-0 md:col-span-4 md:order-2">
+            <div className="sticky top-24">
+              <div className="flex items-center gap-3">
+                <span className="h-px w-8 bg-bastelli-orange" />
+                <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-bastelli-orange">
+                  Quem escreveu isso
+                </span>
+              </div>
+              <h2 className="mt-6 font-display text-[44px] font-light leading-[0.95] text-bastelli-navy md:text-[68px]">
+                Bruno<br />
+                <span className="italic text-bastelli-orange">Bastelli.</span>
+              </h2>
+              <p className="mt-6 max-w-sm text-[15px] leading-relaxed text-bastelli-navy/75">
+                Começou no atendimento da KaBuM. Passou por dev, UX, tráfego e operação antes de virar consultor. Hoje toca a Bastelli Consultoria.
+              </p>
+              <dl className="mt-8 space-y-2 border-t border-bastelli-navy/15 pt-6 font-mono text-[12px] uppercase tracking-[0.18em] text-bastelli-navy/55">
+                <div className="flex justify-between"><dt>No e-commerce</dt><dd className="text-bastelli-navy">16 anos</dd></div>
+                <div className="flex justify-between"><dt>Clientes</dt><dd className="text-bastelli-navy">200+</dd></div>
+                <div className="flex justify-between"><dt>ABComm</dt><dd className="text-bastelli-navy">2023</dd></div>
+              </dl>
+            </div>
+          </div>
+
+          <div className="min-w-0 md:col-span-8 md:order-1 relative md:pr-16 md:before:content-[''] md:before:absolute md:before:top-3 md:before:bottom-3 md:before:right-6 md:before:w-px md:before:border-l md:before:border-dashed md:before:border-bastelli-orange/50">
+            <div ref={scrollRef} className="flex w-full max-w-full snap-x snap-mandatory gap-4 overflow-x-auto pb-4 md:block md:snap-none md:overflow-visible md:gap-0 md:pb-0 [&>article]:snap-center [&>article]:shrink-0 [&>article]:w-[80vw] [&>article]:max-w-[320px] [&>article]:rounded-lg [&>article]:border [&>article]:border-bastelli-navy/15 [&>article]:bg-white [&>article]:p-5 md:[&>article]:w-auto md:[&>article]:max-w-none md:[&>article]:border-0 md:[&>article]:rounded-none md:[&>article]:bg-transparent md:[&>article]:p-0">
+            <Momento
+              n="01"
+              year="2007"
+              chapter="Recomeço"
+              title="O futebol acabou antes da hora. Precisei recomeçar longe do campo."
+              body="Problemas de saúde encerraram a carreira no futebol. Foi ali que a vida profissional recomeçou — dessa vez, atrás de uma tela."
+              img={BrunoSantos}
+            />
+            <Momento
+              n="02"
+              year="2010"
+              chapter="KaBuM"
+              title="Entrei atendendo cliente na KaBuM. Saí entendendo a loja por dentro."
+              body="No atendimento dá pra ver tudo: pedido travado, cobrança errada, entrega atrasada, promessa que a loja não cumpre. Foi a melhor escola que eu poderia ter tido."
+              img={BrunoKabum}
+            />
+            <Momento
+              n="03"
+              year="2012–2018"
+              chapter="Aprofundamento"
+              title="Dev, UX, expedição, integrações, tráfego, Analytics."
+              body="Sete anos passando por área diferente a cada ciclo. Cada uma resolveu uma parte do quebra-cabeça — e mostrou como as partes se travam entre si quando ninguém olha o conjunto."
+              img={BrunoDev}
+            />
+            <Momento
+              n="04"
+              year="2019"
+              chapter="Bastelli"
+              title="Abri a Bastelli pra fazer o que nenhuma agência fazia."
+              body="Consultoria que olha a loja inteira — não só o anúncio. Estruturação de operação, performance, tráfego, dados. Sem terceirizar a decisão que é do dono."
+              img={BrunoAgencia}
+            />
+            <Momento
+              n="05"
+              year="2020–2024"
+              chapter="Clientes"
+              title="200+ lojas atendidas. Um prêmio no meio do caminho."
+              body="Projetos entregues em moda, cosméticos, pet, casa, nichos técnicos. Em 2023, a ABComm reconheceu como Melhor Profissional de E-commerce do Interior de SP."
+              img={BrunoClientes}
+            />
+            <Momento
+              n="06"
+              year="2025"
+              chapter="O curso"
+              title="Aí veio o curso. Fundamentos abertos, sem enrolação."
+              body="Dava pra condensar 16 anos de operação em algo que qualquer lojista pudesse assistir e começar a decidir melhor. Foi o que fiz."
+              img={BrunoAbcomm}
+            />
+            </div>
+
+            {/* Navegação mobile — setas prev/next */}
+            <div className="mt-3 flex items-center justify-end gap-3 md:hidden">
+              <button
+                type="button"
+                onClick={() =>
+                  scrollRef.current?.scrollBy({
+                    left: -(scrollRef.current.clientWidth * 0.85),
+                    behavior: "smooth",
+                  })
+                }
+                aria-label="Momento anterior"
+                className="grid h-11 w-11 place-items-center rounded-md border-2 border-bastelli-orange text-bastelli-orange transition hover:bg-bastelli-orange hover:text-white"
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M15 18l-6-6 6-6" />
+                </svg>
+              </button>
+              <button
+                type="button"
+                onClick={() =>
+                  scrollRef.current?.scrollBy({
+                    left: scrollRef.current.clientWidth * 0.85,
+                    behavior: "smooth",
+                  })
+                }
+                aria-label="Próximo momento"
+                className="grid h-11 w-11 place-items-center rounded-md border-2 border-bastelli-orange text-bastelli-orange transition hover:bg-bastelli-orange hover:text-white"
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M9 18l6-6-6-6" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Momento({
+  n,
+  year,
+  chapter,
+  title,
+  body,
+  img,
+}: {
+  n: string;
+  year: string;
+  chapter: string;
+  title: string;
+  body: string;
+  img: string; // path/import real da imagem OU "[[LABEL DO QUE FALTA]]"
+}) {
+  const isEven = parseInt(n, 10) % 2 === 0;
+  const isPlaceholder = img.startsWith("[[");
+
+  return (
+    <article className="relative md:py-14 md:first:pt-0 md:last:pb-0">
+      <span
+        aria-hidden
+        className="block md:absolute md:-left-[72px] md:top-12 font-display text-[26px] md:text-[38px] font-light leading-none text-bastelli-orange bg-white pr-2 md:block"
+      >
+        {n}
+      </span>
+      <div className="grid grid-cols-1 gap-6 md:gap-10 md:grid-cols-2">
+        <div className={isEven ? "md:order-2" : "md:order-1"}>
+          <div className="flex items-baseline gap-3 flex-wrap">
+            <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-bastelli-orange">
+              {chapter}
+            </span>
+            <span className="font-mono text-[11px] text-bastelli-navy/40">·</span>
+            <span className="font-mono text-[11px] text-bastelli-navy/50">
+              {year}
+            </span>
+          </div>
+          <h3 className="mt-4 font-display text-[28px] font-light leading-[1.05] text-bastelli-navy md:text-[42px]">
+            {title}
+          </h3>
+          <p className="mt-5 max-w-lg text-[15px] leading-relaxed text-bastelli-navy/70 md:text-[16px]">
+            {body}
+          </p>
+        </div>
+        <div className={isEven ? "md:order-1" : "md:order-2"}>
+          {isPlaceholder ? (
+            <Placeholder label={img} ratio="4/5" tone="paper" />
+          ) : (
+            <div className="aspect-[4/5] w-full overflow-hidden rounded-lg bg-bastelli-paper">
+              <img
+                src={img}
+                alt={title}
+                className="h-full w-full object-cover"
+                loading="lazy"
+              />
+            </div>
+          )}
+        </div>
+      </div>
+    </article>
+  );
+}
+
+/* ============================================================
+   9. OFERTA
 ============================================================ */
 function Oferta() {
   const carouselRef = useAutoScrollCarousel<HTMLDivElement>(3, 5000);
@@ -1507,193 +1817,6 @@ function OfertaItem({
         <p className="mt-3 text-[14px] leading-relaxed text-bastelli-navy/70 md:text-[15px]">
           {body}
         </p>
-      </div>
-    </article>
-  );
-}
-
-/* ============================================================
-   8. SOBRE BRUNO
-============================================================ */
-function SobreBruno() {
-  const scrollRef = useAutoScrollCarousel<HTMLDivElement>(6, 5000);
-  return (
-    <section id="bruno" className="bg-white">
-      <div className="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-32">
-        <div className="grid gap-8 md:grid-cols-12">
-          <div className="min-w-0 md:col-span-4 md:order-2">
-            <div className="sticky top-24">
-              <div className="flex items-center gap-3">
-                <span className="h-px w-8 bg-bastelli-orange" />
-                <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-bastelli-orange">
-                  Quem escreveu isso
-                </span>
-              </div>
-              <h2 className="mt-6 font-display text-[44px] font-light leading-[0.95] text-bastelli-navy md:text-[68px]">
-                Bruno<br />
-                <span className="italic text-bastelli-orange">Bastelli.</span>
-              </h2>
-              <p className="mt-6 max-w-sm text-[15px] leading-relaxed text-bastelli-navy/75">
-                Começou no atendimento da KaBuM. Passou por dev, UX, tráfego e operação antes de virar consultor. Hoje toca a Bastelli Consultoria.
-              </p>
-              <dl className="mt-8 space-y-2 border-t border-bastelli-navy/15 pt-6 font-mono text-[12px] uppercase tracking-[0.18em] text-bastelli-navy/55">
-                <div className="flex justify-between"><dt>No e-commerce</dt><dd className="text-bastelli-navy">16 anos</dd></div>
-                <div className="flex justify-between"><dt>Clientes</dt><dd className="text-bastelli-navy">200+</dd></div>
-                <div className="flex justify-between"><dt>ABComm</dt><dd className="text-bastelli-navy">2023</dd></div>
-              </dl>
-            </div>
-          </div>
-
-          <div className="min-w-0 md:col-span-8 md:order-1 relative md:pr-16 md:before:content-[''] md:before:absolute md:before:top-3 md:before:bottom-3 md:before:right-6 md:before:w-px md:before:border-l md:before:border-dashed md:before:border-bastelli-orange/50">
-            <div ref={scrollRef} className="flex w-full max-w-full snap-x snap-mandatory gap-4 overflow-x-auto pb-4 md:block md:snap-none md:overflow-visible md:gap-0 md:pb-0 [&>article]:snap-center [&>article]:shrink-0 [&>article]:w-[80vw] [&>article]:max-w-[320px] [&>article]:rounded-lg [&>article]:border [&>article]:border-bastelli-navy/15 [&>article]:bg-white [&>article]:p-5 md:[&>article]:w-auto md:[&>article]:max-w-none md:[&>article]:border-0 md:[&>article]:rounded-none md:[&>article]:bg-transparent md:[&>article]:p-0">
-            <Momento
-              n="01"
-              year="2007"
-              chapter="Recomeço"
-              title="O futebol acabou antes da hora. Precisei recomeçar longe do campo."
-              body="Problemas de saúde encerraram a carreira no futebol. Foi ali que a vida profissional recomeçou — dessa vez, atrás de uma tela."
-              img={BrunoSantos}
-            />
-            <Momento
-              n="02"
-              year="2010"
-              chapter="KaBuM"
-              title="Entrei atendendo cliente na KaBuM. Saí entendendo a loja por dentro."
-              body="No atendimento dá pra ver tudo: pedido travado, cobrança errada, entrega atrasada, promessa que a loja não cumpre. Foi a melhor escola que eu poderia ter tido."
-              img={BrunoKabum}
-            />
-            <Momento
-              n="03"
-              year="2012–2018"
-              chapter="Aprofundamento"
-              title="Dev, UX, expedição, integrações, tráfego, Analytics."
-              body="Sete anos passando por área diferente a cada ciclo. Cada uma resolveu uma parte do quebra-cabeça — e mostrou como as partes se travam entre si quando ninguém olha o conjunto."
-              img={BrunoDev}
-            />
-            <Momento
-              n="04"
-              year="2019"
-              chapter="Bastelli"
-              title="Abri a Bastelli pra fazer o que nenhuma agência fazia."
-              body="Consultoria que olha a loja inteira — não só o anúncio. Estruturação de operação, performance, tráfego, dados. Sem terceirizar a decisão que é do dono."
-              img={BrunoAgencia}
-            />
-            <Momento
-              n="05"
-              year="2020–2024"
-              chapter="Clientes"
-              title="200+ lojas atendidas. Um prêmio no meio do caminho."
-              body="Projetos entregues em moda, cosméticos, pet, casa, nichos técnicos. Em 2023, a ABComm reconheceu como Melhor Profissional de E-commerce do Interior de SP."
-              img={BrunoClientes}
-            />
-            <Momento
-              n="06"
-              year="2025"
-              chapter="O curso"
-              title="Aí veio o curso. Fundamentos abertos, sem enrolação."
-              body="Dava pra condensar 16 anos de operação em algo que qualquer lojista pudesse assistir e começar a decidir melhor. Foi o que fiz."
-              img={BrunoAbcomm}
-            />
-            </div>
-
-            {/* Navegação mobile — setas prev/next */}
-            <div className="mt-3 flex items-center justify-end gap-3 md:hidden">
-              <button
-                type="button"
-                onClick={() =>
-                  scrollRef.current?.scrollBy({
-                    left: -(scrollRef.current.clientWidth * 0.85),
-                    behavior: "smooth",
-                  })
-                }
-                aria-label="Momento anterior"
-                className="grid h-11 w-11 place-items-center rounded-md border-2 border-bastelli-orange text-bastelli-orange transition hover:bg-bastelli-orange hover:text-white"
-              >
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M15 18l-6-6 6-6" />
-                </svg>
-              </button>
-              <button
-                type="button"
-                onClick={() =>
-                  scrollRef.current?.scrollBy({
-                    left: scrollRef.current.clientWidth * 0.85,
-                    behavior: "smooth",
-                  })
-                }
-                aria-label="Próximo momento"
-                className="grid h-11 w-11 place-items-center rounded-md border-2 border-bastelli-orange text-bastelli-orange transition hover:bg-bastelli-orange hover:text-white"
-              >
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M9 18l6-6-6-6" />
-                </svg>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function Momento({
-  n,
-  year,
-  chapter,
-  title,
-  body,
-  img,
-}: {
-  n: string;
-  year: string;
-  chapter: string;
-  title: string;
-  body: string;
-  img: string; // path/import real da imagem OU "[[LABEL DO QUE FALTA]]"
-}) {
-  const isEven = parseInt(n, 10) % 2 === 0;
-  const isPlaceholder = img.startsWith("[[");
-
-  return (
-    <article className="relative md:py-14 md:first:pt-0 md:last:pb-0">
-      <span
-        aria-hidden
-        className="block md:absolute md:-left-[72px] md:top-12 font-display text-[26px] md:text-[38px] font-light leading-none text-bastelli-orange bg-white pr-2 md:block"
-      >
-        {n}
-      </span>
-      <div className="grid grid-cols-1 gap-6 md:gap-10 md:grid-cols-2">
-        <div className={isEven ? "md:order-2" : "md:order-1"}>
-          <div className="flex items-baseline gap-3 flex-wrap">
-            <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-bastelli-orange">
-              {chapter}
-            </span>
-            <span className="font-mono text-[11px] text-bastelli-navy/40">·</span>
-            <span className="font-mono text-[11px] text-bastelli-navy/50">
-              {year}
-            </span>
-          </div>
-          <h3 className="mt-4 font-display text-[28px] font-light leading-[1.05] text-bastelli-navy md:text-[42px]">
-            {title}
-          </h3>
-          <p className="mt-5 max-w-lg text-[15px] leading-relaxed text-bastelli-navy/70 md:text-[16px]">
-            {body}
-          </p>
-        </div>
-        <div className={isEven ? "md:order-1" : "md:order-2"}>
-          {isPlaceholder ? (
-            <Placeholder label={img} ratio="4/5" tone="paper" />
-          ) : (
-            <div className="aspect-[4/5] w-full overflow-hidden rounded-lg bg-bastelli-paper">
-              <img
-                src={img}
-                alt={title}
-                className="h-full w-full object-cover"
-                loading="lazy"
-              />
-            </div>
-          )}
-        </div>
       </div>
     </article>
   );
