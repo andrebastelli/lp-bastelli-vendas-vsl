@@ -945,7 +945,7 @@ function ApresentacaoCurso() {
     { k: "Aulas", v: "24, curtas e sem enrolação" },
     { k: "Duração", v: "4h28 no total" },
     { k: "Formato", v: "vídeo sob demanda, assiste no seu tempo" },
-    { k: "Nível", v: "introdutório — serve pra quem tá começando e pra quem já opera" },
+    { k: "Nível", v: "introdução — serve pra quem tá começando e pra quem já opera" },
     { k: "Entrega", v: "uma visão inteira da operação, do topo ao pós-venda" },
   ];
   return (
