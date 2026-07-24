@@ -1258,115 +1258,144 @@ function Accordion({
    7. BÔNUS
 ============================================================ */
 function Bonus() {
+  const itens = [
+    {
+      title: "Introdução ao E-commerce",
+      desc: "Base para estruturar sua loja corretamente.",
+    },
+    {
+      title: "Roda do E-commerce",
+      desc: "A metodologia completa de decisão.",
+    },
+    {
+      title: "Boas práticas",
+      desc: "Checklist prático para execução.",
+    },
+    {
+      title: "Metas inteligentes",
+      desc: "Defina metas claras e mensuráveis.",
+    },
+    {
+      title: "Campanhas e vendas",
+      desc: "Organize campanhas e vendas.",
+    },
+    {
+      title: "50 ideias de ofertas",
+      desc: "Ofertas prontas para aplicar.",
+    },
+  ];
+
   const sectionRef = useRef<HTMLElement>(null);
-  const trackRef = useRef<HTMLDivElement>(null);
-  const [progress, setProgress] = useState(0);
+  const [active, setActive] = useState(0);
 
   useEffect(() => {
-  const handleScroll = () => {
-  const section = sectionRef.current;
-  if (!section) return;
+    const handleScroll = () => {
+      const section = sectionRef.current;
+      if (!section) return;
 
-  const rect = section.getBoundingClientRect();
-  const windowHeight = window.innerHeight;
+      const rect = section.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+      const totalScroll = rect.height - windowHeight;
 
-  const totalScroll = rect.height - windowHeight;
+      if (totalScroll <= 0) {
+        setActive(0);
+        return;
+      }
 
-  if (totalScroll <= 0) {
-    setProgress(0);
-    return;
-  }
+      const scrolled = Math.min(Math.max(-rect.top, 0), totalScroll);
+      const pct = scrolled / totalScroll;
 
-  const scrolled = Math.min(Math.max(-rect.top, 0), totalScroll);
-  const progress = scrolled / totalScroll;
+      const idx = Math.min(
+        itens.length - 1,
+        Math.floor(pct * itens.length)
+      );
 
-  setProgress(progress);
-};
+      setActive(idx);
+    };
 
-    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [itens.length]);
 
-  const itens = [
-    "Introdução ao E-commerce",
-    "Roda do E-commerce",
-    "Boas práticas",
-    "Metas inteligentes",
-    "Campanhas e vendas",
-    "50 ideias de ofertas",
-  ];
+  const current = itens[active];
 
   return (
     <section
       ref={sectionRef}
-      className="relative h-[300vh] bg-white"
+      className="relative bg-white"
+      style={{ height: `${itens.length * 100}vh` }}
     >
       {/* STICKY */}
-      <div className="sticky top-0 h-screen flex items-center overflow-hidden">
-
-        <div className="w-full max-w-6xl mx-auto px-5 md:px-8">
-
+      <div className="sticky top-0 flex h-screen items-center overflow-hidden">
+        <div className="mx-auto w-full max-w-6xl px-5 md:px-8">
           {/* HEADER */}
           <div className="mb-12 max-w-[600px]">
             <span className="font-mono text-[11px] uppercase tracking-[0.28em] text-bastelli-orange">
               Bônus
             </span>
-
-            <h2 className="mt-4 font-display text-[38px] md:text-[64px]">
+            <h2 className="mt-4 font-display text-[38px] font-light leading-[0.98] tracking-[-0.02em] text-bastelli-navy md:text-[64px]">
               O acesso vai{" "}
-              <span className="italic text-bastelli-orange">
-                além do curso
-              </span>
+              <span className="italic text-bastelli-orange">além do curso</span>
             </h2>
           </div>
 
-          {/* TRACK */}
-          <div className="overflow-hidden">
-            <div
-              ref={trackRef}
-              className="flex w-full transition-transform duration-75 w-max"
-              style={{
-                transform: `translateX(-${progress * (itens.length - 1) * 100}%)`,
-              }}
-            >
-              {itens.map((item, i) => (
-                <div key={i} className="min-w-full h-[80vh] grid md:grid-cols-2 bg-white border border-bastelli-navy/10 overflow-hidden">
-      
-                {/* IMAGEM */}
-                <div className="flex items-center justify-center bg-[#ee733b]">
-                  <img
-                    src={Mockup}
-                    alt={item}
-                    className="w-full max-w-[260px] h-auto object-contain"
-                  />
-                </div>
+          {/* CARD */}
+          <div
+            key={active}
+            className="grid grid-cols-1 overflow-hidden border border-bastelli-navy/10 md:grid-cols-2"
+            style={{ animation: "fade-in 500ms ease-out both" }}
+          >
+            {/* IMAGEM — esquerda */}
+            <div className="flex aspect-[4/3] items-center justify-center bg-[#ee733b] md:aspect-auto md:min-h-[420px]">
+              <img
+                src={Mockup}
+                alt={current.title}
+                className="h-auto w-full max-w-[260px] object-contain"
+              />
+            </div>
 
-                {/* TEXTO */}
-                <div className="flex flex-col justify-center px-8 md:px-12">
-                  <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-bastelli-orange">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-
-                  <h3 className="mt-4 font-display text-[26px] md:text-[36px] leading-tight text-bastelli-navy">
-                    {item}
-                  </h3>
-
-                  <p className="mt-4 max-w-[42ch] text-[15px] md:text-[17px] leading-relaxed text-bastelli-navy/70">
-                    {[
-                      "Base para estruturar sua loja corretamente.",
-                      "A metodologia completa de decisão.",
-                      "Checklist prático para execução.",
-                      "Defina metas claras e mensuráveis.",
-                      "Organize campanhas e vendas.",
-                      "Ofertas prontas para aplicar.",
-                    ][i]}
-                  </p>
-                </div>
-              </div>
-              ))}
+            {/* TEXTO — direita */}
+            <div className="flex flex-col justify-center px-8 py-10 md:px-12">
+              <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-bastelli-orange">
+                {String(active + 1).padStart(2, "0")}
+              </span>
+              <h3 className="mt-4 font-display text-[26px] leading-tight text-bastelli-navy md:text-[36px]">
+                {current.title}
+              </h3>
+              <p className="mt-4 max-w-[42ch] text-[15px] leading-relaxed text-bastelli-navy/70 md:text-[17px]">
+                {current.desc}
+              </p>
             </div>
           </div>
 
+          {/* Progresso — contador + dots (sem setas, controlado pelo scroll) */}
+          <div className="mt-8 border-t border-bastelli-navy/15 pt-6">
+            <div className="flex items-center justify-between gap-4">
+              <div className="flex items-baseline gap-2 font-mono text-bastelli-navy/70">
+                <span className="text-[22px] font-semibold text-bastelli-navy md:text-[28px]">
+                  {String(active + 1).padStart(2, "0")}
+                </span>
+                <span className="text-[12px] uppercase tracking-[0.2em] text-bastelli-navy/40">
+                  / {String(itens.length).padStart(2, "0")}
+                </span>
+              </div>
+              <div className="flex items-center gap-1.5">
+                {itens.map((it, i) => (
+                  <span
+                    key={it.title}
+                    aria-hidden
+                    className={`h-1 rounded-full transition-all duration-500 ${
+                      i === active ? "w-10 bg-bastelli-orange" : "w-2 bg-bastelli-navy/20"
+                    }`}
+                  />
+                ))}
+              </div>
+            </div>
+            <p className="mt-3 font-mono text-[10px] uppercase tracking-[0.22em] text-bastelli-navy/40">
+              Role a página pra ver os próximos bônus
+            </p>
+          </div>
         </div>
       </div>
     </section>
