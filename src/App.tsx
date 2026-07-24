@@ -1258,8 +1258,8 @@ function Accordion({
    7. BÔNUS
 ============================================================ */
 function Bonus() {
-  const sectionRef = useRef(null);
-  const trackRef = useRef(null);
+  const sectionRef = useRef<HTMLElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
@@ -1324,16 +1324,14 @@ function Bonus() {
           <div className="overflow-hidden">
             <div
               ref={trackRef}
-              className="flex gap-10 transition-transform duration-75 w-max"
+              className="flex w-full transition-transform duration-75 w-max"
               style={{
-                transform: `translateX(-${progress * (itens.length - 1) * 100}%)`
+                transform: `translateX(-${progress * (itens.length - 1) * 100}%)`,
               }}
             >
               {itens.map((item, i) => (
-              <div
-                key={i}
-                className="min-w-full h-[80vh] grid md:grid-cols-2 bg-white border border-bastelli-navy/10 overflow-hidden"
-              >
+                <div key={i} className="min-w-full h-[80vh] grid md:grid-cols-2 bg-white border border-bastelli-navy/10 overflow-hidden">
+      
                 {/* IMAGEM */}
                 <div className="flex items-center justify-center bg-[#ee733b]">
                   <img
