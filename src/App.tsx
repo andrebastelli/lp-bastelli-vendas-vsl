@@ -306,7 +306,7 @@ function Hero() {
       <span className="absolute inset-0 animate-ping rounded-full bg-bastelli-orange/70" />
       <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-bastelli-orange" />
     </span>
-    Curso Online Introdução ao E-commerce
+    Curso Online de Introdução ao E-commerce
   </span>
   <span className="whitespace-nowrap text-white/70">com Bruno Bastelli</span>
 </div>
@@ -968,7 +968,7 @@ function ApresentacaoCurso() {
               <span className="italic text-bastelli-orange">Uma visão 360º.</span>
             </h2>
             <p className="mt-8 max-w-xl text-[17px] leading-[1.55] text-bastelli-navy/75 md:text-[19px]">
-              É um Curso Online Introdução ao E-commerce com Bruno Bastelli. Você senta, assiste
+              É um Curso Online de Introdução ao E-commerce com Bruno Bastelli. Você senta, assiste
               em alguns dias e sai enxergando a loja como um sistema — não
               como uma pilha de tarefas soltas.
             </p>
@@ -1640,7 +1640,7 @@ function Oferta() {
                 />
               </div>
               <h3 className="mt-6 font-display text-[30px] font-light leading-[1.02] tracking-tight text-bastelli-navy md:text-[44px]">
-                Introdução ao E-commerce Bastelli
+                Curso Online de Introdução ao E-commerce com Bruno Bastelli.
               </h3>
               <p className="mt-4 max-w-[54ch] text-[15px] leading-relaxed text-bastelli-navy/75 md:text-[17px]">
                 12 módulos, 24 aulas, 4h28. Do primeiro planejamento até ler o
@@ -2178,7 +2178,7 @@ function Footer() {
               className="h-8 w-auto md:h-9"
             />
             <p className="mt-6 max-w-sm text-[13px] leading-relaxed text-bastelli-navy/70">
-              Conteúdo de introdução sobre e-commerce.{" "}
+              Curso Online de Introdução ao E-commerce com Bruno Bastelli.{" "}
               <span className="text-bastelli-navy">
                 Serve como ponto de partida
               </span>{" "}
