@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body { background: #F6F4EF; color: #101923; font-family: "Inter Tight", ui-sans-serif, system-ui, sans-serif; }
+
+@keyframes roda-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [style*="roda-spin"] { animation: none !important; }
+}
+
+a[href*="lovable.dev"],
+iframe[src*="lovable.dev"],
+div[style*="Edit with Lovable"],
+.lovable-badge,
+#lovable-badge,
+[id^="lovable"],
+[class*="lovable-badge"],
+[data-lovable],
+[data-lovable-badge] {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  position: absolute !important;
+  z-index: -9999 !important;
+}
