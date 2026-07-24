@@ -1332,7 +1332,7 @@ function Bonus() {
               {itens.map((item, i) => (
 <div
   key={i}
-  className="min-w-[80vw] md:min-w-[600px] flex flex-col bg-white border border-bastelli-navy/10 overflow-hidden transition duration-500 hover:-translate-y-2 hover:shadow-2xl"
+  className="min-w-[80vw] md:min-w-[600px] h-[80vh] flex flex-col bg-white border border-bastelli-navy/10 overflow-hidden"
 >
   {/* IMAGEM */}
   <div className="w-full bg-bastelli-paper flex items-center justify-center py-10">
