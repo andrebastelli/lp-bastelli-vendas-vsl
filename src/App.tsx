@@ -155,19 +155,27 @@ function Index() {
       <Hero />
       <Identificacao />
       <QuebraDeCrenca />
-      <ProblemaReal />
-      <PorQueOCurso />
       <RodaDoEcommerce />
       <ApresentacaoCurso />
       <OQueVaiAprender />
-      <SobreBruno />
-      <Provas />
-      <ParaQuemE />
       <Oferta />
-      <Preco />
+      <SobreBruno />
       <Garantia />
       <FAQ />
       <CtaFinal />
+      
+
+      <ProblemaReal />
+      <PorQueOCurso />
+      
+      
+      
+      <Provas />
+      <ParaQuemE />
+      
+      <Preco />
+      
+      
       <Footer />
     </main>
   );
