@@ -1539,16 +1539,18 @@ function Momento({
   chapter: string;
   title: string;
   body: string;
-  img: string; // path/import real da imagem OU "[[LABEL DO QUE FALTA]]"
+  img: string;
 }) {
   const isEven = parseInt(n, 10) % 2 === 0;
   const isPlaceholder = img.startsWith("[[");
 
   return (
-    <article className="relative md:py-14 md:first:pt-0 md:last:pb-0">
+    <article
+      className="relative md:mt-24 md:first:mt-0 md:before:absolute md:before:inset-x-0 md:before:-top-12 md:before:h-px md:before:bg-bastelli-navy/10 md:before:content-[''] md:first:before:hidden"
+    >
       <span
         aria-hidden
-        className="block md:absolute md:-left-[72px] md:top-12 font-display text-[26px] md:text-[38px] font-light leading-none text-bastelli-orange bg-white pr-2 md:block"
+        className="block md:absolute md:-left-[72px] md:top-16 font-display text-[26px] md:text-[38px] font-light leading-none text-bastelli-orange bg-white pr-2 md:block"
       >
         {n}
       </span>
