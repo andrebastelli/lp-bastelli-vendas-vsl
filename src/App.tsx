@@ -315,7 +315,7 @@ function Hero() {
 </div>
 
         <h1 className="mx-auto max-w-5xl text-center font-display text-[38px] font-semibold leading-[1.02] tracking-[-0.025em] md:text-[80px]">
-          Aprenda os{" "}
+          Os{" "}
           <span className="relative inline-block">
             fundamentos
             <span
@@ -323,17 +323,24 @@ function Hero() {
               className="absolute -bottom-1 left-0 h-[6px] w-full bg-bastelli-orange/70 md:-bottom-2 md:h-[12px]"
             />
           </span>{" "}
-          que todo lojista deveria entender antes de abrir, ajustar ou tentar{" "}
-          <span className="text-white/60">crescer uma loja virtual.</span>
+          que todo lojista precisa dominar antes de abrir, ajustar ou{" "}
+          <span className="text-white/60">escalar sua loja virtual.</span>
         </h1>
 
         <p className="mx-auto mt-8 max-w-3xl text-center text-[16px] leading-relaxed text-white/80 md:mt-10 md:text-[19px]">
-          Um treinamento direto e estratégico para quem quer entender o
-          e‑commerce como um negócio de verdade — sem promessa milagrosa, sem
-          fórmula pronta e sem conversa de guru.
+          Sem fórmula mágica. Sem guru. Sem enrolação. Um treinamento
+          estratégico para quem quer construir um e‑commerce de verdade.
         </p>
 
-        <div className="mx-auto mt-10 flex max-w-xl flex-col items-center gap-3 md:mt-12">
+        {/* VSL — acima do CTA */}
+        <div className="mx-auto mt-10 max-w-2xl md:mt-14 md:max-w-4xl">
+          <VSLPlayer />
+          <p className="mx-auto mt-4 max-w-xl text-center text-[13px] leading-relaxed text-white/55 md:text-[14px]">
+            Se você tem uma loja online e as vendas não estão saindo do lugar, começa por aqui. É rápido.
+          </p>
+        </div>
+
+        <div className="mx-auto mt-8 flex max-w-xl flex-col items-center gap-3 md:mt-10">
           <CTA className="w-full">Quero começar agora</CTA>
           <p className="text-[11px] uppercase tracking-[0.24em] text-white/45">
             Acesso imediato · Pagamento único
@@ -341,6 +348,126 @@ function Hero() {
         </div>
       </div>
     </section>
+  );
+}
+
+function VSLPlayer() {
+  const [playing, setPlaying] = useState(false);
+  const anchorRef = useRef<HTMLDivElement | null>(null);
+  const [outOfView, setOutOfView] = useState(false);
+  const [dismissed, setDismissed] = useState(false);
+
+  useEffect(() => {
+    const el = anchorRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([entry]) => setOutOfView(!entry.isIntersecting),
+      { threshold: 0, rootMargin: "-80px 0px 0px 0px" }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  const showFloating = outOfView && !dismissed;
+
+  return (
+    <div ref={anchorRef}>
+    <div className="relative w-full overflow-hidden border border-white/15 bg-black/30 shadow-[0_30px_80px_-40px_rgba(0,0,0,0.7)]">
+      <div style={{ aspectRatio: "16/9" }} className="relative w-full">
+        {playing ? (
+          <div className="flex h-full w-full items-center justify-center bg-black text-center text-white/60">
+            <div className="px-4 font-mono text-[11px] uppercase tracking-widest">
+              [[INSERIR ARQUIVO OU URL DA VSL APROVADA]]
+            </div>
+          </div>
+        ) : (
+          <>
+            <Placeholder label="Poster real com Bruno — VSL" ratio="16/9" tone="navy" />
+            <button
+              onClick={() => setPlaying(true)}
+              aria-label="Reproduzir vídeo"
+              className="absolute inset-0 flex items-center justify-center bg-black/25 transition hover:bg-black/10"
+            >
+              <span className="grid h-16 w-16 place-items-center rounded-full bg-bastelli-orange text-white shadow-lg md:h-20 md:w-20">
+                <svg width="22" height="24" viewBox="0 0 22 24" fill="currentColor">
+                  <path d="M2 2v20l18-10L2 2z" />
+                </svg>
+              </span>
+            </button>
+          </>
+        )}
+      </div>
+    </div>
+    {showFloating && (
+      <div
+        className="fixed bottom-4 right-4 z-50 w-[240px] overflow-hidden rounded-lg border border-white/20 bg-black shadow-2xl animate-fade-in sm:w-[300px] md:w-[340px]"
+        role="complementary"
+        aria-label="Vídeo flutuante"
+      >
+        <div className="flex flex-col items-center justify-center gap-1 bg-bastelli-navy px-3 py-2 pr-8 text-[10px] uppercase tracking-[0.18em] text-white/50">
+          <div className="flex flex-nowrap items-center justify-center gap-2 whitespace-nowrap">
+            <span className="inline-flex items-center gap-2 rounded-sm border border-orange-500/40 bg-orange-500/10 px-2 py-0.5 font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-orange-400">
+              <span className="relative inline-flex items-center justify-center">
+                <span className="absolute inset-0 animate-ping rounded-sm bg-orange-500/60 opacity-75" />
+                <span className="relative inline-flex items-center justify-center rounded-[3px] bg-orange-500 px-1 py-[1px]">
+                  <svg viewBox="0 0 24 24" className="h-2.5 w-2.5 fill-white" aria-hidden="true">
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                </span>
+              </span>
+              Vídeo
+            </span>
+            <span className="text-white/70">Aula-convite</span>
+          </div>
+          <span className="text-white/40">Assista antes de começar</span>
+        </div>
+        <button
+          onClick={() => setDismissed(true)}
+          aria-label="Fechar vídeo flutuante"
+          className="absolute right-1.5 top-1.5 z-10 grid h-6 w-6 place-items-center rounded-full bg-black/70 text-white/80 backdrop-blur transition hover:bg-black hover:text-white"
+        >
+          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" strokeWidth="1.5">
+            <path d="M1 1l8 8M9 1l-8 8" />
+          </svg>
+        </button>
+        <button
+          onClick={() => {
+            anchorRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+          }}
+          className="block w-full text-left"
+          aria-label="Voltar para o vídeo"
+        >
+          <div style={{ aspectRatio: "16/9" }} className="relative w-full bg-black">
+            {playing ? (
+              <div className="flex h-full w-full items-center justify-center bg-black text-center text-white/60">
+                <div className="px-3 font-mono text-[9px] uppercase tracking-widest">
+                  [[VSL EM REPRODUÇÃO]]
+                </div>
+              </div>
+            ) : (
+              <>
+                <Placeholder label="VSL" ratio="16/9" tone="navy" />
+                <span
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    e.preventDefault();
+                    setPlaying(true);
+                  }}
+                  className="absolute inset-0 flex items-center justify-center bg-black/30 transition hover:bg-black/10"
+                >
+                  <span className="grid h-10 w-10 place-items-center rounded-full bg-bastelli-orange text-white shadow-lg">
+                    <svg width="12" height="14" viewBox="0 0 22 24" fill="currentColor">
+                      <path d="M2 2v20l18-10L2 2z" />
+                    </svg>
+                  </span>
+                </span>
+              </>
+            )}
+          </div>
+        </button>
+      </div>
+    )}
+    </div>
   );
 }
 
