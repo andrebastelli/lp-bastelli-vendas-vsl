@@ -637,87 +637,1057 @@ function Identificacao() {
 }
 
 /* ============================================================
-   3. QUEBRA DE CRENÇA
+   3. A VIRADA DE CHAVE
 ============================================================ */
 function QuebraDeCrenca() {
   const pares = [
     {
-      mito: "“É só achar um gestor de tráfego bom.”",
+      mito: "“Tenho produto bom, então deveria vender.”",
       verdade:
-        "Você já trocou três. O quarto não vai resolver um funil que fura antes do anúncio rodar.",
+        "Uma loja virtual pode ter bons produtos e ainda assim não vender.",
     },
     {
-      mito: "“Preciso de um reel que viralize.”",
+      mito: "“Se eu tiver tráfego, as vendas vêm.”",
       verdade:
-        "Já teve o reel com 200 mil views que virou R$ 380 de venda. Alcance não é receita.",
+        "Pode ter tráfego e ainda assim não converter. Pode ter campanha rodando e ainda assim perder dinheiro.",
     },
     {
-      mito: "“Se eu migrar de plataforma, destrava.”",
+      mito: "“A plataforma resolve o problema.”",
       verdade:
-        "Nuvemshop, Shopify, Tray, Loja Integrada — a plataforma raramente é o gargalo. É o que roda em cima dela.",
+        "Pode ter uma plataforma conhecida e ainda assim gerar uma experiência ruim.",
     },
   ];
 
   return (
     <section className="bg-bastelli-navy text-white">
       <div className="mx-auto max-w-6xl px-5 py-20 md:px-8 md:py-32">
-        {/* cabeçalho assimétrico */}
+        {/* cabeçalho */}
         <div className="grid grid-cols-12 gap-6">
           <div className="col-span-12 md:col-span-9">
             <span className="font-mono text-[11px] uppercase tracking-[0.28em] text-bastelli-orange">
-              O que costumam te vender
+              A virada de chave
             </span>
             <h2 className="mt-5 font-display text-[44px] font-light leading-[0.95] tracking-[-0.02em] md:text-[92px]">
-              Anúncio não é{" "}
-              <span className="italic font-normal text-bastelli-orange">estratégia</span>.
-              <br />
-              É <u className="decoration-white/30 underline-offset-[10px] decoration-1">uma peça</u>{" "}
-              de um jogo maior.
+              E-commerce não é{" "}
+              <span className="italic font-normal text-bastelli-orange">
+                uma peça isolada
+              </span>.
             </h2>
           </div>
-          <aside className="col-span-12 md:col-span-3 md:pt-10">
-            
-          </aside>
+          <aside className="col-span-12 md:col-span-3 md:pt-10"></aside>
         </div>
 
-        {/* lista mito → verdade, alinhamentos ligeiramente diferentes */}
+        {/* lista */}
         <ol className="mt-16 md:mt-24">
           {pares.map((p, i) => (
-<li
-  key={p.mito}
-  className={`grid grid-cols-[110px_1fr] gap-4 md:gap-8 border-t border-white/10 py-8 md:py-12
-    ${i === 1 ? "pl-6 md:pl-12" : ""}
-    ${i === 2 ? "pl-12 md:pl-24" : ""}
-  `}
->
-  <div className="relative flex items-start">
-    <span className="font-display font-semibold text-[48px] leading-none text-bastelli-orange md:text-[72px]">
-      {String(i + 1).padStart(2, "0")}
-    </span>
-  </div>
+            <li
+              key={p.mito}
+              className={`grid grid-cols-[110px_1fr] gap-4 md:gap-8 border-t border-white/10 py-8 md:py-12
+                ${i === 1 ? "pl-6 md:pl-12" : ""}
+                ${i === 2 ? "pl-12 md:pl-24" : ""}
+              `}
+            >
+              <div className="relative flex items-start">
+                <span className="font-display font-semibold text-[48px] leading-none text-bastelli-orange md:text-[72px]">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+              </div>
 
-  <div>
-    <p className="font-display text-[20px] leading-[1.25] text-white/55 md:text-[28px]">
-      {p.mito}
-    </p>
-    <p className="mt-3 max-w-[62ch] text-[16px] leading-[1.55] text-white md:mt-4 md:text-[18px]">
-      {p.verdade}
-    </p>
-  </div>
-</li>
+              <div>
+                <p className="font-display text-[20px] leading-[1.25] text-white/55 md:text-[28px]">
+                  {p.mito}
+                </p>
+                <p className="mt-3 max-w-[62ch] text-[16px] leading-[1.55] text-white md:mt-4 md:text-[18px]">
+                  {p.verdade}
+                </p>
+              </div>
+            </li>
           ))}
           <li className="border-t border-white/10" />
         </ol>
 
-        {/* fecho — linha única, tipografia acima do H2 */}
+        {/* fechamento */}
         <p className="mt-16 font-display text-[38px] font-light leading-[1.02] tracking-[-0.02em] md:mt-24 md:text-[112px]">
-          Sua loja não é segunda renda,{" "}
+          É{" "}
           <span className="text-bastelli-orange">
-            não é apenas a plataforma e nem apenas anúncio.
-          </span>
+            planejamento, loja, operação e marketing
+          </span>{" "}
+          funcionando juntos.
         </p>
       </div>
     </section>
+  );
+}
+
+/* ============================================================
+   4. RODA DO E-COMMERCE
+============================================================ */
+function RodaDoEcommerce() {
+  const pilares = [
+    {
+      n: "01",
+      title: "Planejamento",
+      desc:
+        "Meta do mês, calendário de campanha e onde apostar ficha no próximo trimestre. Sem isso, o resto vira reação.",
+    },
+    {
+      n: "02",
+      title: "Loja Virtual",
+      desc:
+        "O caminho do produto até o checkout — foto, descrição, filtro, frete, SEO. É onde a venda acontece ou trava.",
+    },
+    {
+      n: "03",
+      title: "Operação",
+      desc:
+        "Pedido, estoque, ERP, entrega, atendimento. A parte que ninguém vê e que decide se o cliente volta.",
+    },
+    {
+      n: "04",
+      title: "Marketing",
+      desc:
+        "Tráfego, conteúdo, marca, base de clientes. Só entrega resultado quando os outros três já estão em pé.",
+    },
+  ];
+
+  return (
+    <section id="roda" className="relative overflow-hidden bg-white">
+      <div className="mx-auto max-w-6xl px-5 pt-8 pb-12 md:px-8 md:pt-16 md:pb-24">
+        {/* cabeçalho + roda em bleed à direita */}
+        <div className="grid grid-cols-12 items-center gap-4 md:gap-6">
+          <div className="col-span-12 md:col-span-6">
+            <span className="font-mono text-[11px] uppercase tracking-[0.28em] text-bastelli-orange">
+              Metodologia Bastelli
+            </span>
+            <h2 className="mt-4 font-display text-[38px] font-light leading-[0.98] tracking-[-0.02em] text-bastelli-navy md:text-[68px]">
+              Quatro engrenagens.
+              <br />
+              Se uma <span className="italic font-normal text-bastelli-orange">trava</span>,
+              <br />
+              a loja anda torto.
+            </h2>
+            <p className="mt-6 max-w-[42ch] text-[15px] leading-relaxed text-bastelli-navy/65 md:text-[16px]">
+              A Roda do E-commerce é o mapa que a Bastelli usa toda vez que entra
+              numa loja. Ajuda a parar de trocar tática e começar a olhar o todo.
+            </p>
+          </div>
+
+          {/* roda: protagonista, com halos e anéis girando */}
+          <div className="col-span-12 md:col-span-6">
+            <div className="relative mx-auto -mt-2 aspect-square w-full max-w-[420px] md:mt-0 md:mr-[-60px] md:max-w-none md:w-[120%]">
+              {/* halo navy interno para profundidade */}
+              <div
+                aria-hidden
+                className="absolute inset-[10%] rounded-full"
+                style={{
+                  background:
+                    "radial-gradient(closest-side, rgba(35,56,74,0.10), rgba(35,56,74,0) 70%)",
+                }}
+              />
+              {/* anel tracejado girando no sentido contrário */}
+              <div
+                aria-hidden
+                className="absolute inset-[3%] rounded-full border border-dashed border-bastelli-navy/25"
+                style={{
+                  animation: "roda-spin 90s linear infinite reverse",
+                  transformOrigin: "50% 50%",
+                }}
+              />
+              {/* anel fino de destaque */}
+              <div
+                aria-hidden
+                className="absolute inset-[1%] rounded-full border border-bastelli-orange/25"
+              />
+              {/* marcadores cardinais */}
+              <div aria-hidden className="pointer-events-none absolute inset-0">
+                <span className="absolute left-1/2 top-0 h-2 w-px -translate-x-1/2 bg-bastelli-orange/60" />
+                <span className="absolute left-1/2 bottom-0 h-2 w-px -translate-x-1/2 bg-bastelli-orange/60" />
+                <span className="absolute top-1/2 left-0 h-px w-2 -translate-y-1/2 bg-bastelli-orange/60" />
+                <span className="absolute top-1/2 right-0 h-px w-2 -translate-y-1/2 bg-bastelli-orange/60" />
+              </div>
+              <img
+                src={rodaEcommerce}
+                alt="Roda do E-commerce Bastelli — Planejamento, Loja Virtual, Operação e Marketing"
+                className="relative h-full w-full select-none object-contain drop-shadow-[0_28px_50px_rgba(35,56,74,0.18)]"
+                style={{
+                  animation: "roda-spin 40s linear infinite",
+                  transformOrigin: "50% 50%",
+                }}
+                draggable={false}
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* pilares como carrossel */}
+        <RodaPilaresCarousel pilares={pilares} />
+
+        <div className="mt-8 flex flex-col items-start gap-4 md:mt-14 md:flex-row md:items-center md:gap-8">
+          <p className="max-w-[36ch] font-display text-[20px] font-light leading-[1.2] text-bastelli-navy md:text-[24px]">
+            No curso, você vê como as quatro giram juntas{" "}
+            <span className="text-bastelli-orange">na sua loja</span>.
+          </p>
+          <CTA />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function RodaPilaresCarousel({
+  pilares,
+}: {
+  pilares: { n: string; title: string; desc: string }[];
+}) {
+  const [active, setActive] = useState(0);
+  const [paused, setPaused] = useState(false);
+  useEffect(() => {
+    if (paused) return;
+    const id = setInterval(() => setActive((v) => (v + 1) % pilares.length), 5000);
+    return () => clearInterval(id);
+  }, [paused, pilares.length]);
+
+  const current = pilares[active];
+
+  const goPrev = () => setActive((v) => (v - 1 + pilares.length) % pilares.length);
+  const goNext = () => setActive((v) => (v + 1) % pilares.length);
+
+  return (
+    <div
+      className="relative mt-4 md:mt-16"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+      onFocusCapture={() => setPaused(true)}
+      onBlurCapture={() => setPaused(false)}
+    >
+      <div className="relative min-h-[260px] border-t border-bastelli-navy/15 pt-10 md:min-h-[300px] md:pt-14">
+        <div
+          key={current.n}
+          className="grid grid-cols-12 items-baseline gap-4 md:gap-8"
+          style={{ animation: "fade-in 500ms ease-out both" }}
+        >
+          <div
+            className="col-span-3 font-display text-[72px] font-light leading-none text-transparent md:col-span-2 md:text-[132px]"
+            style={{ color: "rgba(35,56,74,0.4)" }}
+          >
+            {current.n}
+          </div>
+          <h3 className="col-span-9 font-display text-[28px] font-normal leading-[1.1] tracking-[-0.01em] text-bastelli-navy md:col-span-3 md:text-[40px]">
+            {current.title}
+          </h3>
+          <p className="col-span-12 max-w-[54ch] text-[16px] leading-relaxed text-bastelli-navy/70 md:col-span-7 md:text-[18px]">
+            {current.desc}
+          </p>
+        </div>
+      </div>
+
+      {/* Controles: contador + dots em cima, setas prev/next abaixo — idêntico ao bloco 2 */}
+      <div className="mt-8 border-t border-bastelli-navy/15 pt-6">
+        <div className="flex flex-col gap-4">
+          {/* Linha 1: contador + dots */}
+          <div className="flex items-center justify-between gap-4">
+            <div className="flex items-baseline gap-2 font-mono text-bastelli-navy/70">
+              <span className="text-[22px] font-semibold text-bastelli-navy md:text-[28px]">
+                {current.n}
+              </span>
+              <span className="text-[12px] uppercase tracking-[0.2em] text-bastelli-navy/40">
+                / {String(pilares.length).padStart(2, "0")}
+              </span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              {pilares.map((p, i) => (
+                <button
+                  key={p.n}
+                  type="button"
+                  onClick={() => setActive(i)}
+                  aria-label={`Ver pilar ${p.title}`}
+                  className={`h-1 rounded-full transition-all duration-500 ${
+                    i === active
+                      ? "w-10 bg-bastelli-orange"
+                      : "w-2 bg-bastelli-navy/20 hover:bg-bastelli-navy/40"
+                  }`}
+                />
+              ))}
+            </div>
+          </div>
+
+          {/* Linha 2: botões prev/next, alinhados à direita */}
+          <div className="flex items-center justify-end gap-3">
+            <button
+              type="button"
+              onClick={goPrev}
+              aria-label="Pilar anterior"
+              className="grid h-11 w-11 place-items-center rounded-md border-2 border-bastelli-orange text-bastelli-orange transition hover:bg-bastelli-orange hover:text-white"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M15 18l-6-6 6-6" />
+              </svg>
+            </button>
+            <button
+              type="button"
+              onClick={goNext}
+              aria-label="Próximo pilar"
+              className="grid h-11 w-11 place-items-center rounded-md border-2 border-bastelli-orange text-bastelli-orange transition hover:bg-bastelli-orange hover:text-white"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M9 18l6-6-6-6" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ============================================================
+   5. APRESENTAÇÃO DO CURSO
+============================================================ */
+function ApresentacaoCurso() {
+  const ficha = [
+    { k: "Aulas", v: "24, curtas e sem enrolação" },
+    { k: "Duração", v: "4h28 no total" },
+    { k: "Formato", v: "vídeo sob demanda, assiste no seu tempo" },
+    { k: "Nível", v: "introdutório — serve pra quem tá começando e pra quem já opera" },
+    { k: "Entrega", v: "uma visão inteira da operação, do topo ao pós-venda" },
+  ];
+  return (
+    <section className="bg-white">
+      <div className="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-28">
+        {/* Kicker + regra */}
+        <div className="flex items-center gap-4">
+          <div className="h-px flex-1 bg-bastelli-navy/15" />
+          <span className="text-[11px] uppercase tracking-[0.28em] text-bastelli-navy/50">
+            Ficha do curso
+          </span>
+        </div>
+
+        <div className="mt-10 grid gap-12 md:grid-cols-12 md:gap-10">
+          {/* Coluna texto */}
+          <div className="md:col-span-7">
+            <h2 className="font-display text-[38px] font-light leading-[0.98] tracking-[-0.02em] text-bastelli-navy md:text-[64px]">
+              Um curso prático.
+              <br />
+              <span className="italic text-bastelli-orange">Uma visão 360º.</span>
+            </h2>
+            <p className="mt-8 max-w-xl text-[17px] leading-[1.55] text-bastelli-navy/75 md:text-[19px]">
+              É um curso introdutório com Bruno Bastelli. Você senta, assiste
+              em alguns dias e sai enxergando a loja como um sistema — não
+              como uma pilha de tarefas soltas.
+            </p>
+            <p className="mt-5 max-w-lg text-[15px] leading-relaxed text-bastelli-navy/60 md:pl-10">
+              Serve pra quem tá começando e quer o mapa antes de sair
+              gastando. E também pra quem já opera, mas sente que tá tapando
+              buraco toda semana.
+            </p>
+
+            {/* Ficha técnica em linhas */}
+            <dl className="mt-12 border-t border-bastelli-navy/15">
+              {ficha.map((row) => (
+                <div
+                  key={row.k}
+                  className="grid grid-cols-[110px_1fr] gap-4 border-b border-bastelli-navy/10 py-3 md:grid-cols-[140px_1fr] md:py-4"
+                >
+                  <dt className="text-[11px] uppercase tracking-[0.2em] text-bastelli-navy/50">
+                    {row.k}
+                  </dt>
+                  <dd className="text-[15px] leading-snug text-bastelli-navy md:text-[16px]">
+                    {row.v}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+
+{/* Coluna numeral dominante */}
+          <div className="relative md:col-span-5 md:pt-16">
+            <div className="relative flex flex-col items-start md:sticky md:top-24">
+              <div className="pointer-events-none select-none font-display text-[160px] font-light leading-[0.82] tracking-[-0.06em] text-bastelli-navy md:text-[220px]">
+                12
+              </div>
+              <div className="mt-1 flex items-baseline gap-3 md:mt-3">
+                <span className="h-px w-10 translate-y-[-4px] bg-bastelli-orange" />
+                <span className="text-[13px] uppercase tracking-[0.24em] text-bastelli-navy/70">
+                  módulos
+                </span>
+              </div>
+              <p className="mt-3 max-w-[260px] text-[13px] leading-relaxed text-bastelli-navy/55 md:mt-5 md:ml-4">
+                Cada módulo cobre uma parte da operação e conversa com as
+                outras. Nenhum vive isolado.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ============================================================
+   6. O QUE VAI APRENDER
+============================================================ */
+function OQueVaiAprender() {
+  const blocos = [
+    {
+      n: "01",
+      t: "Planejamento e metas",
+      d: "Objetivo, calendário e indicadores que cabem no tamanho da sua loja — não no template de agência.",
+      out: [
+        "Montar o calendário de Black Friday sem improviso de última hora",
+        "Definir meta de faturamento a partir de margem, não de vontade",
+        "Escolher 3 KPIs que a sua loja realmente consegue acompanhar",
+      ],
+    },
+    {
+      n: "02",
+      t: "Plataformas e estrutura da loja",
+      d: "O que uma loja precisa ter de verdade — e o que só parece importante no vídeo do YouTube.",
+      out: [
+        "Escolher entre Shopify, Nuvemshop, VTEX e Tray sem achismo",
+        "Saber quando trocar de plataforma (e quando é só desculpa)",
+        "Mapear as integrações mínimas antes de assinar qualquer plano",
+      ],
+    },
+    {
+      n: "03",
+      t: "Produtos, fotos, descrições e experiência de compra",
+      d: "O que decide, em 4 segundos, se a pessoa confia na loja ou fecha a aba.",
+      out: [
+        "Refazer uma ficha de produto sem parecer marketplace genérico",
+        "Organizar categorias para o visitante achar sozinho",
+        "Ajustar fotos e descrição sem contratar estúdio",
+      ],
+    },
+    {
+      n: "04",
+      t: "Pagamentos, frete, logística e operação",
+      d: "A parte chata que sustenta a loja em pé — pagamento, frete, estoque, expedição, antifraude.",
+      out: [
+        "Configurar frete sem comer margem no CEP errado",
+        "Reduzir chargeback ajustando as regras de antifraude",
+        "Desenhar a rotina do pedido: da venda ao objeto postado",
+      ],
+    },
+    {
+      n: "05",
+      t: "Marketing, tráfego e dados",
+      d: "Tráfego é uma engrenagem, não a loja inteira. Aqui você para de terceirizar decisão.",
+      out: [
+        "Ler um relatório do Ads sem depender do gestor traduzir",
+        "Instalar tracking que não mente sobre a origem da venda",
+        "Decidir, com dado, quando vale escalar e quando vale segurar",
+      ],
+    },
+    {
+      n: "06",
+      t: "Atendimento, retenção e crescimento",
+      d: "O que faz o cliente voltar — e o que faz ele sumir depois da primeira compra.",
+      out: [
+        "Atender WhatsApp sem virar SAC de reclamação",
+        "Montar um fluxo de recompra simples (sem CRM caro)",
+        "Descobrir por que o cliente comprou uma vez e não voltou",
+      ],
+    },
+  ];
+
+  const scrollRef = useAutoScrollCarousel<HTMLOListElement>(blocos.length, 4500);
+
+  return (
+    <section id="modulos" className="bg-bastelli-paper">
+      <div className="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-28">
+        <div className="grid gap-10 md:grid-cols-12 md:gap-16">
+          {/* Coluna esquerda — índice sticky */}
+          <aside className="min-w-0 md:col-span-4">
+            <div className="md:sticky md:top-24">
+              <div className="flex items-center gap-3">
+                <span className="h-px w-8 bg-bastelli-orange" />
+                <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-bastelli-orange">
+                  Índice
+                </span>
+              </div>
+              <h2 className="mt-6 font-display text-[38px] font-light leading-[0.98] text-bastelli-navy md:text-[56px]">
+                Seis frentes.<br />
+                <span className="italic text-bastelli-orange">Doze módulos.</span><br />
+                Uma operação<br />inteira.
+              </h2>
+              <p className="mt-6 max-w-sm text-[15px] leading-relaxed text-bastelli-navy/70">
+                Cada bloco cobre uma parte da loja — e conversa com as outras. Nada aqui vive isolado.
+              </p>
+              <dl className="mt-8 space-y-2 border-t border-bastelli-navy/15 pt-6 font-mono text-[12px] uppercase tracking-[0.18em] text-bastelli-navy/60">
+                <div className="flex justify-between"><dt>Módulos</dt><dd className="text-bastelli-navy">12</dd></div>
+                <div className="flex justify-between"><dt>Frentes</dt><dd className="text-bastelli-navy">06</dd></div>
+                <div className="flex justify-between"><dt>Duração</dt><dd className="text-bastelli-navy">4h28</dd></div>
+              </dl>
+            </div>
+          </aside>
+
+          {/* Coluna direita — lista de blocos */}
+          <div className="min-w-0 md:col-span-8">
+            <ol ref={scrollRef} className="flex w-full max-w-full snap-x snap-mandatory gap-4 overflow-x-auto pb-4 md:block md:snap-none md:overflow-visible md:gap-0 md:pb-0 md:divide-y md:divide-bastelli-navy/15 md:border-y md:border-bastelli-navy/15 [&>li]:snap-center [&>li]:shrink-0 [&>li]:w-[80vw] [&>li]:max-w-[320px] [&>li]:border [&>li]:border-bastelli-navy/15 [&>li]:rounded-lg [&>li]:bg-white [&>li]:px-4 md:[&>li]:w-auto md:[&>li]:max-w-none md:[&>li]:border-0 md:[&>li]:rounded-none md:[&>li]:bg-transparent md:[&>li]:px-0">
+              {blocos.map((b) => (
+                <Accordion key={b.n} n={b.n} title={b.t} outcomes={b.out}>
+                  {b.d}
+                </Accordion>
+              ))}
+            </ol>
+
+            {/* Navegação mobile — setas prev/next */}
+            <div className="mt-3 flex items-center justify-end gap-3 md:hidden">
+              <button
+                type="button"
+                onClick={() =>
+                  scrollRef.current?.scrollBy({
+                    left: -(scrollRef.current.clientWidth * 0.85),
+                    behavior: "smooth",
+                  })
+                }
+                aria-label="Módulo anterior"
+                className="grid h-11 w-11 place-items-center rounded-md border-2 border-bastelli-orange text-bastelli-orange transition hover:bg-bastelli-orange hover:text-white"
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M15 18l-6-6 6-6" />
+                </svg>
+              </button>
+              <button
+                type="button"
+                onClick={() =>
+                  scrollRef.current?.scrollBy({
+                    left: scrollRef.current.clientWidth * 0.85,
+                    behavior: "smooth",
+                  })
+                }
+                aria-label="Próximo módulo"
+                className="grid h-11 w-11 place-items-center rounded-md border-2 border-bastelli-orange text-bastelli-orange transition hover:bg-bastelli-orange hover:text-white"
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M9 18l6-6-6-6" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Accordion({
+  n,
+  title,
+  children,
+  outcomes,
+}: {
+  n: string;
+  title: string;
+  children: React.ReactNode;
+  outcomes?: string[];
+}) {
+  const [open, setOpen] = useState(true);
+  return (
+    <li className="list-none">
+      <button
+        onClick={() => setOpen((o) => !o)}
+        className="group grid w-full grid-cols-[auto_1fr_auto] items-baseline gap-6 py-7 text-left md:gap-8"
+        aria-expanded={open}
+      >
+        <span
+          className={`font-display text-[42px] font-light leading-none tracking-tight md:text-[56px] ${
+            open ? "text-bastelli-orange" : "text-bastelli-navy/25"
+          } transition-colors group-hover:text-bastelli-orange`}
+          aria-hidden
+        >
+          {n}
+        </span>
+        <span className="font-display text-[20px] font-medium leading-tight text-bastelli-navy md:text-[26px]">
+          {title}
+        </span>
+        <span
+          className={`grid h-9 w-9 shrink-0 place-items-center rounded-full border text-[13px] transition-all ${
+            open
+              ? "rotate-45 border-bastelli-orange bg-bastelli-orange text-white"
+              : "border-bastelli-navy/30 text-bastelli-navy group-hover:border-bastelli-navy"
+          }`}
+          aria-hidden
+        >
+          +
+        </span>
+      </button>
+      {open && (
+        <div className="grid grid-cols-[auto_1fr] gap-6 pb-8 md:gap-8">
+          <span aria-hidden className="w-[42px] md:w-[56px]" />
+          <div className="max-w-2xl">
+            <p className="text-[16px] leading-relaxed text-bastelli-navy/80 md:text-[17px]">
+              {children}
+            </p>
+            {outcomes && outcomes.length > 0 && (
+              <>
+                <p className="mt-6 font-mono text-[11px] uppercase tracking-[0.2em] text-bastelli-navy/50">
+                  Você sai sabendo
+                </p>
+                <ul className="mt-3 space-y-2.5">
+                  {outcomes.map((o) => (
+                    <li
+                      key={o}
+                      className="grid grid-cols-[auto_1fr] items-start gap-3 text-[15px] leading-snug text-bastelli-navy/85"
+                    >
+                      <span aria-hidden className="mt-[0.7em] h-px w-5 bg-bastelli-orange" />
+                      <span>{o}</span>
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )}
+          </div>
+        </div>
+      )}
+    </li>
+  );
+}
+
+/* ============================================================
+   7. OFERTA
+============================================================ */
+function Oferta() {
+  const carouselRef = useAutoScrollCarousel<HTMLDivElement>(3, 5000);
+  return (
+    <section id="oferta" className="bg-bastelli-paper">
+      <div className="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-28">
+        {/* Header assimétrico 3/9 com ficha técnica no rodapé */}
+        <div className="grid gap-6 md:grid-cols-12 md:gap-10">
+          <div className="md:col-span-3 md:pt-3">
+            <div className="font-mono text-[11px] uppercase tracking-[0.24em] text-bastelli-orange">
+              Composição do acesso
+            </div>
+            <div className="mt-2 font-mono text-[11px] text-bastelli-navy/45">
+              03 entregáveis · 01 acesso
+            </div>
+          </div>
+          <div className="md:col-span-9">
+            <h2 className="font-display text-[38px] font-light leading-[0.98] tracking-tight text-bastelli-navy md:text-[64px]">
+              O que entra{" "}
+              <em className="font-serif italic font-normal text-bastelli-orange">
+                no acesso.
+              </em>
+            </h2>
+            <p className="mt-5 max-w-[54ch] text-[15px] leading-relaxed text-bastelli-navy/70 md:text-[17px]">
+              Um curso principal e dois materiais que ficam do lado do
+              computador enquanto você opera. Nada de bônus inflado pra
+              justificar preço.{" "}
+              <span className="font-mono text-[11px] text-bastelli-orange">
+                [[VALIDAR: OFERTA_FINAL_CONFIRMADA]]
+              </span>
+            </p>
+          </div>
+        </div>
+
+        {/* Corpo — 7/5 assimétrico com itens de peso desigual */}
+        <div className="mt-14 grid grid-cols-1 gap-10 md:mt-20 md:grid-cols-12 md:gap-12">
+          <div className="min-w-0 md:col-span-7">
+            <div
+              ref={carouselRef}
+              className="-mx-5 flex snap-x snap-mandatory items-start gap-4 overflow-x-auto px-5 pb-4 md:mx-0 md:block md:space-y-20 md:overflow-visible md:px-0 md:pb-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            >
+            {/* Item 01 — dominante, foto grande em cima */}
+            <article className="w-[calc(100vw-2.5rem)] shrink-0 snap-center md:w-auto md:shrink md:snap-none">
+              <div className="flex items-baseline gap-3">
+                <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-bastelli-orange">
+                  01 · Curso principal
+                </span>
+                <span aria-hidden className="h-px flex-1 bg-bastelli-navy/15" />
+                <span className="font-mono text-[10px] text-bastelli-navy/40">
+                  peça central
+                </span>
+              </div>
+              <div className="mt-6">
+                <Placeholder
+                  label="Frame real das aulas — dashboard do curso"
+                  ratio="16/9"
+                  tone="paper"
+                />
+              </div>
+              <h3 className="mt-6 font-display text-[30px] font-light leading-[1.02] tracking-tight text-bastelli-navy md:text-[44px]">
+                Introdução ao E-commerce Bastelli
+              </h3>
+              <p className="mt-4 max-w-[54ch] text-[15px] leading-relaxed text-bastelli-navy/75 md:text-[17px]">
+                12 módulos, 24 aulas, 4h28. Do primeiro planejamento até ler o
+                relatório da segunda-feira sem entrar em pânico. A visão inteira
+                da loja, na ordem em que as decisões acontecem.
+              </p>
+            </article>
+
+            {/* Item 02 — split horizontal, foto à direita, texto respirando */}
+            <article className="flex w-[calc(100vw-2.5rem)] shrink-0 snap-center flex-col gap-6 md:grid md:w-auto md:shrink md:snap-none md:grid-cols-[1.2fr_1fr] md:items-center md:gap-10">
+              <div className="md:order-2">
+                <Placeholder
+                  label="Mockup real do e-book — capa e páginas internas"
+                  ratio="16/10"
+                  tone="paper"
+                />
+              </div>
+              <div className="md:order-1">
+                <div className="flex items-baseline gap-3">
+                  <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-bastelli-orange">
+                    02 · E-book
+                  </span>
+                  <span aria-hidden className="h-px flex-1 bg-bastelli-navy/15" />
+                </div>
+                <h3 className="mt-4 font-display text-[24px] font-light leading-[1.1] tracking-tight text-bastelli-navy md:text-[32px]">
+                  A{" "}
+                  <em className="font-serif italic text-bastelli-orange">
+                    Roda do E-commerce
+                  </em>{" "}
+                  no papel.
+                </h3>
+                <p className="mt-4 text-[14px] leading-relaxed text-bastelli-navy/75 md:text-[15px]">
+                  A metodologia da Bastelli traduzida num guia curto pra você
+                  consultar antes de tomar decisão — troca de plataforma,
+                  reajuste de preço, briefing de agência.
+                </p>
+                <dl className="mt-5 grid grid-cols-2 gap-y-2 font-mono text-[11px] text-bastelli-navy/55">
+                  <dt className="uppercase tracking-[0.2em]">Formato</dt>
+                  <dd className="text-right text-bastelli-navy/75">
+                    PDF · leitura rápida
+                  </dd>
+                  <dt className="uppercase tracking-[0.2em]">Uso</dt>
+                  <dd className="text-right text-bastelli-navy/75">
+                    consulta recorrente
+                  </dd>
+                </dl>
+              </div>
+            </article>
+
+            {/* Item 03 — mesmo formato do 02, com imagem à esquerda pra alternar o ritmo */}
+            <article className="flex w-[calc(100vw-2.5rem)] shrink-0 snap-center flex-col gap-6 md:grid md:w-auto md:shrink md:snap-none md:grid-cols-[1.2fr_1fr] md:items-center md:gap-10">
+              <div>
+                <Placeholder
+                  label="Mockup real do manual — capa e páginas internas"
+                  ratio="16/10"
+                  tone="paper"
+                />
+              </div>
+              <div>
+                <div className="flex items-baseline gap-3">
+                  <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-bastelli-orange">
+                    03 · Manual
+                  </span>
+                  <span aria-hidden className="h-px flex-1 bg-bastelli-navy/15" />
+                </div>
+                <h3 className="mt-4 font-display text-[24px] font-light leading-[1.1] tracking-tight text-bastelli-navy md:text-[32px]">
+                  Boas práticas,{" "}
+                  <em className="font-serif italic text-bastelli-orange">
+                    em checklist
+                  </em>
+                  .
+                </h3>
+                <p className="mt-4 text-[14px] leading-relaxed text-bastelli-navy/75 md:text-[15px]">
+                  Checklist por etapa da Roda — o que revisar antes de subir
+                  produto novo, o que testar antes de rodar campanha, o que
+                  perguntar antes de fechar contrato com fornecedor. Pra você
+                  aplicar sem precisar terceirizar.
+                </p>
+                <dl className="mt-5 grid grid-cols-2 gap-y-2 font-mono text-[11px] text-bastelli-navy/55">
+                  <dt className="uppercase tracking-[0.2em]">Formato</dt>
+                  <dd className="text-right text-bastelli-navy/75">
+                    PDF · checklist
+                  </dd>
+                  <dt className="uppercase tracking-[0.2em]">Uso</dt>
+                  <dd className="text-right text-bastelli-navy/75">
+                    aplicação prática
+                  </dd>
+                </dl>
+              </div>
+            </article>
+            </div>
+          </div>
+
+          {/* Aside — "recibo" com borda tracejada */}
+          <aside className="min-w-0 md:col-span-5">
+            <div className="md:sticky md:top-24">
+              <div className="border border-dashed border-bastelli-navy/25 bg-white p-6 md:p-8">
+                <div className="flex items-baseline justify-between border-b border-bastelli-navy/10 pb-4">
+                  <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-bastelli-orange">
+                    Recibo do acesso
+                  </span>
+                  <span className="font-mono text-[10px] text-bastelli-navy/40">
+                    nº 001
+                  </span>
+                </div>
+
+                <dl className="mt-5 space-y-4 text-[13px] text-bastelli-navy/80">
+                  <div className="flex items-baseline justify-between gap-4">
+                    <dt className="font-mono text-[11px] uppercase tracking-[0.18em] text-bastelli-navy/50">
+                      Curso
+                    </dt>
+                    <dd className="text-right">12 módulos · 24 aulas · 4h28</dd>
+                  </div>
+                  <div className="flex items-baseline justify-between gap-4">
+                    <dt className="font-mono text-[11px] uppercase tracking-[0.18em] text-bastelli-navy/50">
+                      E-book
+                    </dt>
+                    <dd className="text-right">Roda do E-commerce</dd>
+                  </div>
+                  <div className="flex items-baseline justify-between gap-4">
+                    <dt className="font-mono text-[11px] uppercase tracking-[0.18em] text-bastelli-navy/50">
+                      Manual
+                    </dt>
+                    <dd className="text-right">Boas práticas por etapa</dd>
+                  </div>
+                  <div className="flex items-baseline justify-between gap-4">
+                    <dt className="font-mono text-[11px] uppercase tracking-[0.18em] text-bastelli-navy/50">
+                      Plataforma
+                    </dt>
+                    <dd className="text-right">Área oficial da Bastelli</dd>
+                  </div>
+                  <div className="flex items-baseline justify-between gap-4 text-bastelli-navy/50">
+                    <dt className="font-mono text-[11px] uppercase tracking-[0.18em]">
+                      Prazo
+                    </dt>
+                    <dd className="text-right font-mono text-[11px]">
+                      [[VALIDAR]]
+                    </dd>
+                  </div>
+                  <div className="flex items-baseline justify-between gap-4 text-bastelli-navy/50">
+                    <dt className="font-mono text-[11px] uppercase tracking-[0.18em]">
+                      Certificado
+                    </dt>
+                    <dd className="text-right font-mono text-[11px]">
+                      [[VALIDAR]]
+                    </dd>
+                  </div>
+                </dl>
+
+                <div className="mt-7 border-t border-dashed border-bastelli-navy/25 pt-6">
+                  <CTA className="w-full">Ir para o checkout Hotmart</CTA>
+                  <p className="mt-3 text-center font-mono text-[10px] uppercase tracking-[0.24em] text-bastelli-navy/40">
+                    Checkout seguro · Hotmart
+                  </p>
+                </div>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function OfertaItem({
+  n,
+  tag,
+  title,
+  body,
+  img,
+}: {
+  n: string;
+  tag: string;
+  title: string;
+  body: string;
+  img: string;
+}) {
+  return (
+    <article className="grid grid-cols-1 gap-5 md:grid-cols-[1fr_1.3fr] md:gap-8">
+      <Placeholder label={img} ratio="4/3" tone="paper" />
+      <div>
+        <div className="flex items-center gap-3 text-[11px] uppercase tracking-[0.2em] text-bastelli-orange">
+          <span className="font-mono">{n}</span>
+          <span className="h-px w-6 bg-bastelli-orange" />
+          {tag}
+        </div>
+        <h3 className="mt-3 font-display text-[24px] leading-tight text-bastelli-navy md:text-[30px]">
+          {title}
+        </h3>
+        <p className="mt-3 text-[14px] leading-relaxed text-bastelli-navy/70 md:text-[15px]">
+          {body}
+        </p>
+      </div>
+    </article>
+  );
+}
+
+/* ============================================================
+   8. SOBRE BRUNO
+============================================================ */
+function SobreBruno() {
+  const scrollRef = useAutoScrollCarousel<HTMLDivElement>(6, 5000);
+  return (
+    <section id="bruno" className="bg-white">
+      <div className="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-32">
+        <div className="grid gap-8 md:grid-cols-12">
+          <div className="min-w-0 md:col-span-4 md:order-2">
+            <div className="sticky top-24">
+              <div className="flex items-center gap-3">
+                <span className="h-px w-8 bg-bastelli-orange" />
+                <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-bastelli-orange">
+                  Quem escreveu isso
+                </span>
+              </div>
+              <h2 className="mt-6 font-display text-[44px] font-light leading-[0.95] text-bastelli-navy md:text-[68px]">
+                Bruno<br />
+                <span className="italic text-bastelli-orange">Bastelli.</span>
+              </h2>
+              <p className="mt-6 max-w-sm text-[15px] leading-relaxed text-bastelli-navy/75">
+                Começou no atendimento da KaBuM. Passou por dev, UX, tráfego e operação antes de virar consultor. Hoje toca a Bastelli Consultoria.
+              </p>
+              <dl className="mt-8 space-y-2 border-t border-bastelli-navy/15 pt-6 font-mono text-[12px] uppercase tracking-[0.18em] text-bastelli-navy/55">
+                <div className="flex justify-between"><dt>No e-commerce</dt><dd className="text-bastelli-navy">16 anos</dd></div>
+                <div className="flex justify-between"><dt>Clientes</dt><dd className="text-bastelli-navy">200+</dd></div>
+                <div className="flex justify-between"><dt>ABComm</dt><dd className="text-bastelli-navy">2023</dd></div>
+              </dl>
+            </div>
+          </div>
+
+          <div className="min-w-0 md:col-span-8 md:order-1 relative md:pr-16 md:before:content-[''] md:before:absolute md:before:top-3 md:before:bottom-3 md:before:right-6 md:before:w-px md:before:border-l md:before:border-dashed md:before:border-bastelli-orange/50">
+            <div ref={scrollRef} className="flex w-full max-w-full snap-x snap-mandatory gap-4 overflow-x-auto pb-4 md:block md:snap-none md:overflow-visible md:gap-0 md:pb-0 [&>article]:snap-center [&>article]:shrink-0 [&>article]:w-[80vw] [&>article]:max-w-[320px] [&>article]:rounded-lg [&>article]:border [&>article]:border-bastelli-navy/15 [&>article]:bg-white [&>article]:p-5 md:[&>article]:w-auto md:[&>article]:max-w-none md:[&>article]:border-0 md:[&>article]:rounded-none md:[&>article]:bg-transparent md:[&>article]:p-0">
+            <Momento
+              n="01"
+              year="2007"
+              chapter="Recomeço"
+              title="O futebol acabou antes da hora. Precisei recomeçar longe do campo."
+              body="Problemas de saúde encerraram a carreira no futebol. Foi ali que a vida profissional recomeçou — dessa vez, atrás de uma tela."
+              img={BrunoSantos}
+            />
+            <Momento
+              n="02"
+              year="2010"
+              chapter="KaBuM"
+              title="Entrei atendendo cliente na KaBuM. Saí entendendo a loja por dentro."
+              body="No atendimento dá pra ver tudo: pedido travado, cobrança errada, entrega atrasada, promessa que a loja não cumpre. Foi a melhor escola que eu poderia ter tido."
+              img={BrunoKabum}
+            />
+            <Momento
+              n="03"
+              year="2012–2018"
+              chapter="Aprofundamento"
+              title="Dev, UX, expedição, integrações, tráfego, Analytics."
+              body="Sete anos passando por área diferente a cada ciclo. Cada uma resolveu uma parte do quebra-cabeça — e mostrou como as partes se travam entre si quando ninguém olha o conjunto."
+              img={BrunoDev}
+            />
+            <Momento
+              n="04"
+              year="2019"
+              chapter="Bastelli"
+              title="Abri a Bastelli pra fazer o que nenhuma agência fazia."
+              body="Consultoria que olha a loja inteira — não só o anúncio. Estruturação de operação, performance, tráfego, dados. Sem terceirizar a decisão que é do dono."
+              img={BrunoAgencia}
+            />
+            <Momento
+              n="05"
+              year="2020–2024"
+              chapter="Clientes"
+              title="200+ lojas atendidas. Um prêmio no meio do caminho."
+              body="Projetos entregues em moda, cosméticos, pet, casa, nichos técnicos. Em 2023, a ABComm reconheceu como Melhor Profissional de E-commerce do Interior de SP."
+              img={BrunoClientes}
+            />
+            <Momento
+              n="06"
+              year="2025"
+              chapter="O curso"
+              title="Aí veio o curso. Fundamentos abertos, sem enrolação."
+              body="Dava pra condensar 16 anos de operação em algo que qualquer lojista pudesse assistir e começar a decidir melhor. Foi o que fiz."
+              img={BrunoAbcomm}
+            />
+            </div>
+
+            {/* Navegação mobile — setas prev/next */}
+            <div className="mt-3 flex items-center justify-end gap-3 md:hidden">
+              <button
+                type="button"
+                onClick={() =>
+                  scrollRef.current?.scrollBy({
+                    left: -(scrollRef.current.clientWidth * 0.85),
+                    behavior: "smooth",
+                  })
+                }
+                aria-label="Momento anterior"
+                className="grid h-11 w-11 place-items-center rounded-md border-2 border-bastelli-orange text-bastelli-orange transition hover:bg-bastelli-orange hover:text-white"
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M15 18l-6-6 6-6" />
+                </svg>
+              </button>
+              <button
+                type="button"
+                onClick={() =>
+                  scrollRef.current?.scrollBy({
+                    left: scrollRef.current.clientWidth * 0.85,
+                    behavior: "smooth",
+                  })
+                }
+                aria-label="Próximo momento"
+                className="grid h-11 w-11 place-items-center rounded-md border-2 border-bastelli-orange text-bastelli-orange transition hover:bg-bastelli-orange hover:text-white"
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M9 18l6-6-6-6" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Momento({
+  n,
+  year,
+  chapter,
+  title,
+  body,
+  img,
+}: {
+  n: string;
+  year: string;
+  chapter: string;
+  title: string;
+  body: string;
+  img: string; // path/import real da imagem OU "[[LABEL DO QUE FALTA]]"
+}) {
+  const isEven = parseInt(n, 10) % 2 === 0;
+  const isPlaceholder = img.startsWith("[[");
+
+  return (
+    <article className="relative md:py-14 md:first:pt-0 md:last:pb-0">
+      <span
+        aria-hidden
+        className="block md:absolute md:-left-[72px] md:top-12 font-display text-[26px] md:text-[38px] font-light leading-none text-bastelli-orange bg-white pr-2 md:block"
+      >
+        {n}
+      </span>
+      <div className="grid grid-cols-1 gap-6 md:gap-10 md:grid-cols-2">
+        <div className={isEven ? "md:order-2" : "md:order-1"}>
+          <div className="flex items-baseline gap-3 flex-wrap">
+            <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-bastelli-orange">
+              {chapter}
+            </span>
+            <span className="font-mono text-[11px] text-bastelli-navy/40">·</span>
+            <span className="font-mono text-[11px] text-bastelli-navy/50">
+              {year}
+            </span>
+          </div>
+          <h3 className="mt-4 font-display text-[28px] font-light leading-[1.05] text-bastelli-navy md:text-[42px]">
+            {title}
+          </h3>
+          <p className="mt-5 max-w-lg text-[15px] leading-relaxed text-bastelli-navy/70 md:text-[16px]">
+            {body}
+          </p>
+        </div>
+        <div className={isEven ? "md:order-1" : "md:order-2"}>
+          {isPlaceholder ? (
+            <Placeholder label={img} ratio="4/5" tone="paper" />
+          ) : (
+            <div className="aspect-[4/5] w-full overflow-hidden rounded-lg bg-bastelli-paper">
+              <img
+                src={img}
+                alt={title}
+                className="h-full w-full object-cover"
+                loading="lazy"
+              />
+            </div>
+          )}
+        </div>
+      </div>
+    </article>
   );
 }
 
@@ -1007,717 +1977,7 @@ function PorQueOCurso() {
   );
 }
 
-/* ============================================================
-   6. RODA DO E-COMMERCE
-============================================================ */
-function RodaDoEcommerce() {
-  const pilares = [
-    {
-      n: "01",
-      title: "Planejamento",
-      desc:
-        "Meta do mês, calendário de campanha e onde apostar ficha no próximo trimestre. Sem isso, o resto vira reação.",
-    },
-    {
-      n: "02",
-      title: "Loja Virtual",
-      desc:
-        "O caminho do produto até o checkout — foto, descrição, filtro, frete, SEO. É onde a venda acontece ou trava.",
-    },
-    {
-      n: "03",
-      title: "Operação",
-      desc:
-        "Pedido, estoque, ERP, entrega, atendimento. A parte que ninguém vê e que decide se o cliente volta.",
-    },
-    {
-      n: "04",
-      title: "Marketing",
-      desc:
-        "Tráfego, conteúdo, marca, base de clientes. Só entrega resultado quando os outros três já estão em pé.",
-    },
-  ];
 
-  return (
-    <section id="roda" className="relative overflow-hidden bg-white">
-      <div className="mx-auto max-w-6xl px-5 pt-8 pb-12 md:px-8 md:pt-16 md:pb-24">
-        {/* cabeçalho + roda em bleed à direita */}
-        <div className="grid grid-cols-12 items-center gap-4 md:gap-6">
-          <div className="col-span-12 md:col-span-6">
-            <span className="font-mono text-[11px] uppercase tracking-[0.28em] text-bastelli-orange">
-              Metodologia Bastelli
-            </span>
-            <h2 className="mt-4 font-display text-[38px] font-light leading-[0.98] tracking-[-0.02em] text-bastelli-navy md:text-[68px]">
-              Quatro engrenagens.
-              <br />
-              Se uma <span className="italic font-normal text-bastelli-orange">trava</span>,
-              <br />
-              a loja anda torto.
-            </h2>
-            <p className="mt-6 max-w-[42ch] text-[15px] leading-relaxed text-bastelli-navy/65 md:text-[16px]">
-              A Roda do E-commerce é o mapa que a Bastelli usa toda vez que entra
-              numa loja. Ajuda a parar de trocar tática e começar a olhar o todo.
-            </p>
-          </div>
-
-          {/* roda: protagonista, com halos e anéis girando */}
-          <div className="col-span-12 md:col-span-6">
-            <div className="relative mx-auto -mt-2 aspect-square w-full max-w-[420px] md:mt-0 md:mr-[-60px] md:max-w-none md:w-[120%]">
-              {/* halo navy interno para profundidade */}
-              <div
-                aria-hidden
-                className="absolute inset-[10%] rounded-full"
-                style={{
-                  background:
-                    "radial-gradient(closest-side, rgba(35,56,74,0.10), rgba(35,56,74,0) 70%)",
-                }}
-              />
-              {/* anel tracejado girando no sentido contrário */}
-              <div
-                aria-hidden
-                className="absolute inset-[3%] rounded-full border border-dashed border-bastelli-navy/25"
-                style={{
-                  animation: "roda-spin 90s linear infinite reverse",
-                  transformOrigin: "50% 50%",
-                }}
-              />
-              {/* anel fino de destaque */}
-              <div
-                aria-hidden
-                className="absolute inset-[1%] rounded-full border border-bastelli-orange/25"
-              />
-              {/* marcadores cardinais */}
-              <div aria-hidden className="pointer-events-none absolute inset-0">
-                <span className="absolute left-1/2 top-0 h-2 w-px -translate-x-1/2 bg-bastelli-orange/60" />
-                <span className="absolute left-1/2 bottom-0 h-2 w-px -translate-x-1/2 bg-bastelli-orange/60" />
-                <span className="absolute top-1/2 left-0 h-px w-2 -translate-y-1/2 bg-bastelli-orange/60" />
-                <span className="absolute top-1/2 right-0 h-px w-2 -translate-y-1/2 bg-bastelli-orange/60" />
-              </div>
-              <img
-                src={rodaEcommerce}
-                alt="Roda do E-commerce Bastelli — Planejamento, Loja Virtual, Operação e Marketing"
-                className="relative h-full w-full select-none object-contain drop-shadow-[0_28px_50px_rgba(35,56,74,0.18)]"
-                style={{
-                  animation: "roda-spin 40s linear infinite",
-                  transformOrigin: "50% 50%",
-                }}
-                draggable={false}
-              />
-            </div>
-          </div>
-        </div>
-
-        {/* pilares como carrossel */}
-        <RodaPilaresCarousel pilares={pilares} />
-
-        <div className="mt-8 flex flex-col items-start gap-4 md:mt-14 md:flex-row md:items-center md:gap-8">
-          <p className="max-w-[36ch] font-display text-[20px] font-light leading-[1.2] text-bastelli-navy md:text-[24px]">
-            No curso, você vê como as quatro giram juntas{" "}
-            <span className="text-bastelli-orange">na sua loja</span>.
-          </p>
-          <CTA />
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function RodaPilaresCarousel({
-  pilares,
-}: {
-  pilares: { n: string; title: string; desc: string }[];
-}) {
-  const [active, setActive] = useState(0);
-  const [paused, setPaused] = useState(false);
-  useEffect(() => {
-    if (paused) return;
-    const id = setInterval(() => setActive((v) => (v + 1) % pilares.length), 5000);
-    return () => clearInterval(id);
-  }, [paused, pilares.length]);
-
-  const current = pilares[active];
-
-  const goPrev = () => setActive((v) => (v - 1 + pilares.length) % pilares.length);
-  const goNext = () => setActive((v) => (v + 1) % pilares.length);
-
-  return (
-    <div
-      className="relative mt-4 md:mt-16"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-      onFocusCapture={() => setPaused(true)}
-      onBlurCapture={() => setPaused(false)}
-    >
-      <div className="relative min-h-[260px] border-t border-bastelli-navy/15 pt-10 md:min-h-[300px] md:pt-14">
-        <div
-          key={current.n}
-          className="grid grid-cols-12 items-baseline gap-4 md:gap-8"
-          style={{ animation: "fade-in 500ms ease-out both" }}
-        >
-          <div
-            className="col-span-3 font-display text-[72px] font-light leading-none text-transparent md:col-span-2 md:text-[132px]"
-            style={{ color: "rgba(35,56,74,0.4)" }}
-          >
-            {current.n}
-          </div>
-          <h3 className="col-span-9 font-display text-[28px] font-normal leading-[1.1] tracking-[-0.01em] text-bastelli-navy md:col-span-3 md:text-[40px]">
-            {current.title}
-          </h3>
-          <p className="col-span-12 max-w-[54ch] text-[16px] leading-relaxed text-bastelli-navy/70 md:col-span-7 md:text-[18px]">
-            {current.desc}
-          </p>
-        </div>
-      </div>
-
-      {/* Controles: contador + dots em cima, setas prev/next abaixo — idêntico ao bloco 2 */}
-      <div className="mt-8 border-t border-bastelli-navy/15 pt-6">
-        <div className="flex flex-col gap-4">
-          {/* Linha 1: contador + dots */}
-          <div className="flex items-center justify-between gap-4">
-            <div className="flex items-baseline gap-2 font-mono text-bastelli-navy/70">
-              <span className="text-[22px] font-semibold text-bastelli-navy md:text-[28px]">
-                {current.n}
-              </span>
-              <span className="text-[12px] uppercase tracking-[0.2em] text-bastelli-navy/40">
-                / {String(pilares.length).padStart(2, "0")}
-              </span>
-            </div>
-            <div className="flex items-center gap-1.5">
-              {pilares.map((p, i) => (
-                <button
-                  key={p.n}
-                  type="button"
-                  onClick={() => setActive(i)}
-                  aria-label={`Ver pilar ${p.title}`}
-                  className={`h-1 rounded-full transition-all duration-500 ${
-                    i === active
-                      ? "w-10 bg-bastelli-orange"
-                      : "w-2 bg-bastelli-navy/20 hover:bg-bastelli-navy/40"
-                  }`}
-                />
-              ))}
-            </div>
-          </div>
-
-          {/* Linha 2: botões prev/next, alinhados à direita */}
-          <div className="flex items-center justify-end gap-3">
-            <button
-              type="button"
-              onClick={goPrev}
-              aria-label="Pilar anterior"
-              className="grid h-11 w-11 place-items-center rounded-md border-2 border-bastelli-orange text-bastelli-orange transition hover:bg-bastelli-orange hover:text-white"
-            >
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M15 18l-6-6 6-6" />
-              </svg>
-            </button>
-            <button
-              type="button"
-              onClick={goNext}
-              aria-label="Próximo pilar"
-              className="grid h-11 w-11 place-items-center rounded-md border-2 border-bastelli-orange text-bastelli-orange transition hover:bg-bastelli-orange hover:text-white"
-            >
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M9 18l6-6-6-6" />
-              </svg>
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-/* ============================================================
-   7. APRESENTAÇÃO DO CURSO
-============================================================ */
-function ApresentacaoCurso() {
-  const ficha = [
-    { k: "Aulas", v: "24, curtas e sem enrolação" },
-    { k: "Duração", v: "4h28 no total" },
-    { k: "Formato", v: "vídeo sob demanda, assiste no seu tempo" },
-    { k: "Nível", v: "introdutório — serve pra quem tá começando e pra quem já opera" },
-    { k: "Entrega", v: "uma visão inteira da operação, do topo ao pós-venda" },
-  ];
-  return (
-    <section className="bg-white">
-      <div className="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-28">
-        {/* Kicker + regra */}
-        <div className="flex items-center gap-4">
-          <div className="h-px flex-1 bg-bastelli-navy/15" />
-          <span className="text-[11px] uppercase tracking-[0.28em] text-bastelli-navy/50">
-            Ficha do curso
-          </span>
-        </div>
-
-        <div className="mt-10 grid gap-12 md:grid-cols-12 md:gap-10">
-          {/* Coluna texto */}
-          <div className="md:col-span-7">
-            <h2 className="font-display text-[38px] font-light leading-[0.98] tracking-[-0.02em] text-bastelli-navy md:text-[64px]">
-              Um curso prático.
-              <br />
-              <span className="italic text-bastelli-orange">Uma visão 360º.</span>
-            </h2>
-            <p className="mt-8 max-w-xl text-[17px] leading-[1.55] text-bastelli-navy/75 md:text-[19px]">
-              É um curso introdutório com Bruno Bastelli. Você senta, assiste
-              em alguns dias e sai enxergando a loja como um sistema — não
-              como uma pilha de tarefas soltas.
-            </p>
-            <p className="mt-5 max-w-lg text-[15px] leading-relaxed text-bastelli-navy/60 md:pl-10">
-              Serve pra quem tá começando e quer o mapa antes de sair
-              gastando. E também pra quem já opera, mas sente que tá tapando
-              buraco toda semana.
-            </p>
-
-            {/* Ficha técnica em linhas */}
-            <dl className="mt-12 border-t border-bastelli-navy/15">
-              {ficha.map((row) => (
-                <div
-                  key={row.k}
-                  className="grid grid-cols-[110px_1fr] gap-4 border-b border-bastelli-navy/10 py-3 md:grid-cols-[140px_1fr] md:py-4"
-                >
-                  <dt className="text-[11px] uppercase tracking-[0.2em] text-bastelli-navy/50">
-                    {row.k}
-                  </dt>
-                  <dd className="text-[15px] leading-snug text-bastelli-navy md:text-[16px]">
-                    {row.v}
-                  </dd>
-                </div>
-              ))}
-            </dl>
-          </div>
-
-{/* Coluna numeral dominante */}
-          <div className="relative md:col-span-5 md:pt-16">
-            <div className="relative flex flex-col items-start md:sticky md:top-24">
-              <div className="pointer-events-none select-none font-display text-[160px] font-light leading-[0.82] tracking-[-0.06em] text-bastelli-navy md:text-[220px]">
-                12
-              </div>
-              <div className="mt-1 flex items-baseline gap-3 md:mt-3">
-                <span className="h-px w-10 translate-y-[-4px] bg-bastelli-orange" />
-                <span className="text-[13px] uppercase tracking-[0.24em] text-bastelli-navy/70">
-                  módulos
-                </span>
-              </div>
-              <p className="mt-3 max-w-[260px] text-[13px] leading-relaxed text-bastelli-navy/55 md:mt-5 md:ml-4">
-                Cada módulo cobre uma parte da operação e conversa com as
-                outras. Nenhum vive isolado.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ============================================================
-   8. O QUE VAI APRENDER
-============================================================ */
-function OQueVaiAprender() {
-  const blocos = [
-    {
-      n: "01",
-      t: "Planejamento e metas",
-      d: "Objetivo, calendário e indicadores que cabem no tamanho da sua loja — não no template de agência.",
-      out: [
-        "Montar o calendário de Black Friday sem improviso de última hora",
-        "Definir meta de faturamento a partir de margem, não de vontade",
-        "Escolher 3 KPIs que a sua loja realmente consegue acompanhar",
-      ],
-    },
-    {
-      n: "02",
-      t: "Plataformas e estrutura da loja",
-      d: "O que uma loja precisa ter de verdade — e o que só parece importante no vídeo do YouTube.",
-      out: [
-        "Escolher entre Shopify, Nuvemshop, VTEX e Tray sem achismo",
-        "Saber quando trocar de plataforma (e quando é só desculpa)",
-        "Mapear as integrações mínimas antes de assinar qualquer plano",
-      ],
-    },
-    {
-      n: "03",
-      t: "Produtos, fotos, descrições e experiência de compra",
-      d: "O que decide, em 4 segundos, se a pessoa confia na loja ou fecha a aba.",
-      out: [
-        "Refazer uma ficha de produto sem parecer marketplace genérico",
-        "Organizar categorias para o visitante achar sozinho",
-        "Ajustar fotos e descrição sem contratar estúdio",
-      ],
-    },
-    {
-      n: "04",
-      t: "Pagamentos, frete, logística e operação",
-      d: "A parte chata que sustenta a loja em pé — pagamento, frete, estoque, expedição, antifraude.",
-      out: [
-        "Configurar frete sem comer margem no CEP errado",
-        "Reduzir chargeback ajustando as regras de antifraude",
-        "Desenhar a rotina do pedido: da venda ao objeto postado",
-      ],
-    },
-    {
-      n: "05",
-      t: "Marketing, tráfego e dados",
-      d: "Tráfego é uma engrenagem, não a loja inteira. Aqui você para de terceirizar decisão.",
-      out: [
-        "Ler um relatório do Ads sem depender do gestor traduzir",
-        "Instalar tracking que não mente sobre a origem da venda",
-        "Decidir, com dado, quando vale escalar e quando vale segurar",
-      ],
-    },
-    {
-      n: "06",
-      t: "Atendimento, retenção e crescimento",
-      d: "O que faz o cliente voltar — e o que faz ele sumir depois da primeira compra.",
-      out: [
-        "Atender WhatsApp sem virar SAC de reclamação",
-        "Montar um fluxo de recompra simples (sem CRM caro)",
-        "Descobrir por que o cliente comprou uma vez e não voltou",
-      ],
-    },
-  ];
-
-  const scrollRef = useAutoScrollCarousel<HTMLOListElement>(blocos.length, 4500);
-
-  return (
-    <section id="modulos" className="bg-bastelli-paper">
-      <div className="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-28">
-        <div className="grid gap-10 md:grid-cols-12 md:gap-16">
-          {/* Coluna esquerda — índice sticky */}
-          <aside className="min-w-0 md:col-span-4">
-            <div className="md:sticky md:top-24">
-              <div className="flex items-center gap-3">
-                <span className="h-px w-8 bg-bastelli-orange" />
-                <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-bastelli-orange">
-                  Índice
-                </span>
-              </div>
-              <h2 className="mt-6 font-display text-[38px] font-light leading-[0.98] text-bastelli-navy md:text-[56px]">
-                Seis frentes.<br />
-                <span className="italic text-bastelli-orange">Doze módulos.</span><br />
-                Uma operação<br />inteira.
-              </h2>
-              <p className="mt-6 max-w-sm text-[15px] leading-relaxed text-bastelli-navy/70">
-                Cada bloco cobre uma parte da loja — e conversa com as outras. Nada aqui vive isolado.
-              </p>
-              <dl className="mt-8 space-y-2 border-t border-bastelli-navy/15 pt-6 font-mono text-[12px] uppercase tracking-[0.18em] text-bastelli-navy/60">
-                <div className="flex justify-between"><dt>Módulos</dt><dd className="text-bastelli-navy">12</dd></div>
-                <div className="flex justify-between"><dt>Frentes</dt><dd className="text-bastelli-navy">06</dd></div>
-                <div className="flex justify-between"><dt>Duração</dt><dd className="text-bastelli-navy">4h28</dd></div>
-              </dl>
-            </div>
-          </aside>
-
-          {/* Coluna direita — lista de blocos */}
-          <div className="min-w-0 md:col-span-8">
-            <ol ref={scrollRef} className="flex w-full max-w-full snap-x snap-mandatory gap-4 overflow-x-auto pb-4 md:block md:snap-none md:overflow-visible md:gap-0 md:pb-0 md:divide-y md:divide-bastelli-navy/15 md:border-y md:border-bastelli-navy/15 [&>li]:snap-center [&>li]:shrink-0 [&>li]:w-[80vw] [&>li]:max-w-[320px] [&>li]:border [&>li]:border-bastelli-navy/15 [&>li]:rounded-lg [&>li]:bg-white [&>li]:px-4 md:[&>li]:w-auto md:[&>li]:max-w-none md:[&>li]:border-0 md:[&>li]:rounded-none md:[&>li]:bg-transparent md:[&>li]:px-0">
-              {blocos.map((b) => (
-                <Accordion key={b.n} n={b.n} title={b.t} outcomes={b.out}>
-                  {b.d}
-                </Accordion>
-              ))}
-            </ol>
-
-            {/* Navegação mobile — setas prev/next */}
-            <div className="mt-3 flex items-center justify-end gap-3 md:hidden">
-              <button
-                type="button"
-                onClick={() =>
-                  scrollRef.current?.scrollBy({
-                    left: -(scrollRef.current.clientWidth * 0.85),
-                    behavior: "smooth",
-                  })
-                }
-                aria-label="Módulo anterior"
-                className="grid h-11 w-11 place-items-center rounded-md border-2 border-bastelli-orange text-bastelli-orange transition hover:bg-bastelli-orange hover:text-white"
-              >
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M15 18l-6-6 6-6" />
-                </svg>
-              </button>
-              <button
-                type="button"
-                onClick={() =>
-                  scrollRef.current?.scrollBy({
-                    left: scrollRef.current.clientWidth * 0.85,
-                    behavior: "smooth",
-                  })
-                }
-                aria-label="Próximo módulo"
-                className="grid h-11 w-11 place-items-center rounded-md border-2 border-bastelli-orange text-bastelli-orange transition hover:bg-bastelli-orange hover:text-white"
-              >
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M9 18l6-6-6-6" />
-                </svg>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function Accordion({
-  n,
-  title,
-  children,
-  outcomes,
-}: {
-  n: string;
-  title: string;
-  children: React.ReactNode;
-  outcomes?: string[];
-}) {
-  const [open, setOpen] = useState(true);
-  return (
-    <li className="list-none">
-      <button
-        onClick={() => setOpen((o) => !o)}
-        className="group grid w-full grid-cols-[auto_1fr_auto] items-baseline gap-6 py-7 text-left md:gap-8"
-        aria-expanded={open}
-      >
-        <span
-          className={`font-display text-[42px] font-light leading-none tracking-tight md:text-[56px] ${
-            open ? "text-bastelli-orange" : "text-bastelli-navy/25"
-          } transition-colors group-hover:text-bastelli-orange`}
-          aria-hidden
-        >
-          {n}
-        </span>
-        <span className="font-display text-[20px] font-medium leading-tight text-bastelli-navy md:text-[26px]">
-          {title}
-        </span>
-        <span
-          className={`grid h-9 w-9 shrink-0 place-items-center rounded-full border text-[13px] transition-all ${
-            open
-              ? "rotate-45 border-bastelli-orange bg-bastelli-orange text-white"
-              : "border-bastelli-navy/30 text-bastelli-navy group-hover:border-bastelli-navy"
-          }`}
-          aria-hidden
-        >
-          +
-        </span>
-      </button>
-      {open && (
-        <div className="grid grid-cols-[auto_1fr] gap-6 pb-8 md:gap-8">
-          <span aria-hidden className="w-[42px] md:w-[56px]" />
-          <div className="max-w-2xl">
-            <p className="text-[16px] leading-relaxed text-bastelli-navy/80 md:text-[17px]">
-              {children}
-            </p>
-            {outcomes && outcomes.length > 0 && (
-              <>
-                <p className="mt-6 font-mono text-[11px] uppercase tracking-[0.2em] text-bastelli-navy/50">
-                  Você sai sabendo
-                </p>
-                <ul className="mt-3 space-y-2.5">
-                  {outcomes.map((o) => (
-                    <li
-                      key={o}
-                      className="grid grid-cols-[auto_1fr] items-start gap-3 text-[15px] leading-snug text-bastelli-navy/85"
-                    >
-                      <span aria-hidden className="mt-[0.7em] h-px w-5 bg-bastelli-orange" />
-                      <span>{o}</span>
-                    </li>
-                  ))}
-                </ul>
-              </>
-            )}
-          </div>
-        </div>
-      )}
-    </li>
-  );
-}
-
-/* ============================================================
-   9. SOBRE BRUNO
-============================================================ */
-function SobreBruno() {
-  const scrollRef = useAutoScrollCarousel<HTMLDivElement>(6, 5000);
-  return (
-    <section id="bruno" className="bg-white">
-      <div className="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-32">
-        <div className="grid gap-8 md:grid-cols-12">
-          <div className="min-w-0 md:col-span-4 md:order-2">
-            <div className="sticky top-24">
-              <div className="flex items-center gap-3">
-                <span className="h-px w-8 bg-bastelli-orange" />
-                <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-bastelli-orange">
-                  Quem escreveu isso
-                </span>
-              </div>
-              <h2 className="mt-6 font-display text-[44px] font-light leading-[0.95] text-bastelli-navy md:text-[68px]">
-                Bruno<br />
-                <span className="italic text-bastelli-orange">Bastelli.</span>
-              </h2>
-              <p className="mt-6 max-w-sm text-[15px] leading-relaxed text-bastelli-navy/75">
-                Começou no atendimento da KaBuM. Passou por dev, UX, tráfego e operação antes de virar consultor. Hoje toca a Bastelli Consultoria.
-              </p>
-              <dl className="mt-8 space-y-2 border-t border-bastelli-navy/15 pt-6 font-mono text-[12px] uppercase tracking-[0.18em] text-bastelli-navy/55">
-                <div className="flex justify-between"><dt>No e-commerce</dt><dd className="text-bastelli-navy">16 anos</dd></div>
-                <div className="flex justify-between"><dt>Clientes</dt><dd className="text-bastelli-navy">200+</dd></div>
-                <div className="flex justify-between"><dt>ABComm</dt><dd className="text-bastelli-navy">2023</dd></div>
-              </dl>
-            </div>
-          </div>
-
-          <div className="min-w-0 md:col-span-8 md:order-1 relative md:pr-16 md:before:content-[''] md:before:absolute md:before:top-3 md:before:bottom-3 md:before:right-6 md:before:w-px md:before:border-l md:before:border-dashed md:before:border-bastelli-orange/50">
-            <div ref={scrollRef} className="flex w-full max-w-full snap-x snap-mandatory gap-4 overflow-x-auto pb-4 md:block md:snap-none md:overflow-visible md:gap-0 md:pb-0 [&>article]:snap-center [&>article]:shrink-0 [&>article]:w-[80vw] [&>article]:max-w-[320px] [&>article]:rounded-lg [&>article]:border [&>article]:border-bastelli-navy/15 [&>article]:bg-white [&>article]:p-5 md:[&>article]:w-auto md:[&>article]:max-w-none md:[&>article]:border-0 md:[&>article]:rounded-none md:[&>article]:bg-transparent md:[&>article]:p-0">
-            <Momento
-              n="01"
-              year="2007"
-              chapter="Recomeço"
-              title="O futebol acabou antes da hora. Precisei recomeçar longe do campo."
-              body="Problemas de saúde encerraram a carreira no futebol. Foi ali que a vida profissional recomeçou — dessa vez, atrás de uma tela."
-              img={BrunoSantos}
-            />
-            <Momento
-              n="02"
-              year="2010"
-              chapter="KaBuM"
-              title="Entrei atendendo cliente na KaBuM. Saí entendendo a loja por dentro."
-              body="No atendimento dá pra ver tudo: pedido travado, cobrança errada, entrega atrasada, promessa que a loja não cumpre. Foi a melhor escola que eu poderia ter tido."
-              img={BrunoKabum}
-            />
-            <Momento
-              n="03"
-              year="2012–2018"
-              chapter="Aprofundamento"
-              title="Dev, UX, expedição, integrações, tráfego, Analytics."
-              body="Sete anos passando por área diferente a cada ciclo. Cada uma resolveu uma parte do quebra-cabeça — e mostrou como as partes se travam entre si quando ninguém olha o conjunto."
-              img={BrunoDev}
-            />
-            <Momento
-              n="04"
-              year="2019"
-              chapter="Bastelli"
-              title="Abri a Bastelli pra fazer o que nenhuma agência fazia."
-              body="Consultoria que olha a loja inteira — não só o anúncio. Estruturação de operação, performance, tráfego, dados. Sem terceirizar a decisão que é do dono."
-              img={BrunoAgencia}
-            />
-            <Momento
-              n="05"
-              year="2020–2024"
-              chapter="Clientes"
-              title="200+ lojas atendidas. Um prêmio no meio do caminho."
-              body="Projetos entregues em moda, cosméticos, pet, casa, nichos técnicos. Em 2023, a ABComm reconheceu como Melhor Profissional de E-commerce do Interior de SP."
-              img={BrunoClientes}
-            />
-            <Momento
-              n="06"
-              year="2025"
-              chapter="O curso"
-              title="Aí veio o curso. Fundamentos abertos, sem enrolação."
-              body="Dava pra condensar 16 anos de operação em algo que qualquer lojista pudesse assistir e começar a decidir melhor. Foi o que fiz."
-              img={BrunoAbcomm}
-            />
-            </div>
-
-            {/* Navegação mobile — setas prev/next */}
-            <div className="mt-3 flex items-center justify-end gap-3 md:hidden">
-              <button
-                type="button"
-                onClick={() =>
-                  scrollRef.current?.scrollBy({
-                    left: -(scrollRef.current.clientWidth * 0.85),
-                    behavior: "smooth",
-                  })
-                }
-                aria-label="Momento anterior"
-                className="grid h-11 w-11 place-items-center rounded-md border-2 border-bastelli-orange text-bastelli-orange transition hover:bg-bastelli-orange hover:text-white"
-              >
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M15 18l-6-6 6-6" />
-                </svg>
-              </button>
-              <button
-                type="button"
-                onClick={() =>
-                  scrollRef.current?.scrollBy({
-                    left: scrollRef.current.clientWidth * 0.85,
-                    behavior: "smooth",
-                  })
-                }
-                aria-label="Próximo momento"
-                className="grid h-11 w-11 place-items-center rounded-md border-2 border-bastelli-orange text-bastelli-orange transition hover:bg-bastelli-orange hover:text-white"
-              >
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M9 18l6-6-6-6" />
-                </svg>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function Momento({
-  n,
-  year,
-  chapter,
-  title,
-  body,
-  img,
-}: {
-  n: string;
-  year: string;
-  chapter: string;
-  title: string;
-  body: string;
-  img: string; // path/import real da imagem OU "[[LABEL DO QUE FALTA]]"
-}) {
-  const isEven = parseInt(n, 10) % 2 === 0;
-  const isPlaceholder = img.startsWith("[[");
-
-  return (
-    <article className="relative md:py-14 md:first:pt-0 md:last:pb-0">
-      <span
-        aria-hidden
-        className="block md:absolute md:-left-[72px] md:top-12 font-display text-[26px] md:text-[38px] font-light leading-none text-bastelli-orange bg-white pr-2 md:block"
-      >
-        {n}
-      </span>
-      <div className="grid grid-cols-1 gap-6 md:gap-10 md:grid-cols-2">
-        <div className={isEven ? "md:order-2" : "md:order-1"}>
-          <div className="flex items-baseline gap-3 flex-wrap">
-            <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-bastelli-orange">
-              {chapter}
-            </span>
-            <span className="font-mono text-[11px] text-bastelli-navy/40">·</span>
-            <span className="font-mono text-[11px] text-bastelli-navy/50">
-              {year}
-            </span>
-          </div>
-          <h3 className="mt-4 font-display text-[28px] font-light leading-[1.05] text-bastelli-navy md:text-[42px]">
-            {title}
-          </h3>
-          <p className="mt-5 max-w-lg text-[15px] leading-relaxed text-bastelli-navy/70 md:text-[16px]">
-            {body}
-          </p>
-        </div>
-        <div className={isEven ? "md:order-1" : "md:order-2"}>
-          {isPlaceholder ? (
-            <Placeholder label={img} ratio="4/5" tone="paper" />
-          ) : (
-            <div className="aspect-[4/5] w-full overflow-hidden rounded-lg bg-bastelli-paper">
-              <img
-                src={img}
-                alt={title}
-                className="h-full w-full object-cover"
-                loading="lazy"
-              />
-            </div>
-          )}
-        </div>
-      </div>
-    </article>
-  );
-}
 
 /* ============================================================
    10. PROVAS
@@ -1983,265 +2243,7 @@ function ParaQuemE() {
   );
 }
 
-/* ============================================================
-   12. OFERTA
-============================================================ */
-function Oferta() {
-  const carouselRef = useAutoScrollCarousel<HTMLDivElement>(3, 5000);
-  return (
-    <section id="oferta" className="bg-bastelli-paper">
-      <div className="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-28">
-        {/* Header assimétrico 3/9 com ficha técnica no rodapé */}
-        <div className="grid gap-6 md:grid-cols-12 md:gap-10">
-          <div className="md:col-span-3 md:pt-3">
-            <div className="font-mono text-[11px] uppercase tracking-[0.24em] text-bastelli-orange">
-              Composição do acesso
-            </div>
-            <div className="mt-2 font-mono text-[11px] text-bastelli-navy/45">
-              03 entregáveis · 01 acesso
-            </div>
-          </div>
-          <div className="md:col-span-9">
-            <h2 className="font-display text-[38px] font-light leading-[0.98] tracking-tight text-bastelli-navy md:text-[64px]">
-              O que entra{" "}
-              <em className="font-serif italic font-normal text-bastelli-orange">
-                no acesso.
-              </em>
-            </h2>
-            <p className="mt-5 max-w-[54ch] text-[15px] leading-relaxed text-bastelli-navy/70 md:text-[17px]">
-              Um curso principal e dois materiais que ficam do lado do
-              computador enquanto você opera. Nada de bônus inflado pra
-              justificar preço.{" "}
-              <span className="font-mono text-[11px] text-bastelli-orange">
-                [[VALIDAR: OFERTA_FINAL_CONFIRMADA]]
-              </span>
-            </p>
-          </div>
-        </div>
 
-        {/* Corpo — 7/5 assimétrico com itens de peso desigual */}
-        <div className="mt-14 grid grid-cols-1 gap-10 md:mt-20 md:grid-cols-12 md:gap-12">
-          <div className="min-w-0 md:col-span-7">
-            <div
-              ref={carouselRef}
-              className="-mx-5 flex snap-x snap-mandatory items-start gap-4 overflow-x-auto px-5 pb-4 md:mx-0 md:block md:space-y-20 md:overflow-visible md:px-0 md:pb-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-            >
-            {/* Item 01 — dominante, foto grande em cima */}
-            <article className="w-[calc(100vw-2.5rem)] shrink-0 snap-center md:w-auto md:shrink md:snap-none">
-              <div className="flex items-baseline gap-3">
-                <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-bastelli-orange">
-                  01 · Curso principal
-                </span>
-                <span aria-hidden className="h-px flex-1 bg-bastelli-navy/15" />
-                <span className="font-mono text-[10px] text-bastelli-navy/40">
-                  peça central
-                </span>
-              </div>
-              <div className="mt-6">
-                <Placeholder
-                  label="Frame real das aulas — dashboard do curso"
-                  ratio="16/9"
-                  tone="paper"
-                />
-              </div>
-              <h3 className="mt-6 font-display text-[30px] font-light leading-[1.02] tracking-tight text-bastelli-navy md:text-[44px]">
-                Introdução ao E-commerce Bastelli
-              </h3>
-              <p className="mt-4 max-w-[54ch] text-[15px] leading-relaxed text-bastelli-navy/75 md:text-[17px]">
-                12 módulos, 24 aulas, 4h28. Do primeiro planejamento até ler o
-                relatório da segunda-feira sem entrar em pânico. A visão inteira
-                da loja, na ordem em que as decisões acontecem.
-              </p>
-            </article>
-
-            {/* Item 02 — split horizontal, foto à direita, texto respirando */}
-            <article className="flex w-[calc(100vw-2.5rem)] shrink-0 snap-center flex-col gap-6 md:grid md:w-auto md:shrink md:snap-none md:grid-cols-[1.2fr_1fr] md:items-center md:gap-10">
-              <div className="md:order-2">
-                <Placeholder
-                  label="Mockup real do e-book — capa e páginas internas"
-                  ratio="16/10"
-                  tone="paper"
-                />
-              </div>
-              <div className="md:order-1">
-                <div className="flex items-baseline gap-3">
-                  <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-bastelli-orange">
-                    02 · E-book
-                  </span>
-                  <span aria-hidden className="h-px flex-1 bg-bastelli-navy/15" />
-                </div>
-                <h3 className="mt-4 font-display text-[24px] font-light leading-[1.1] tracking-tight text-bastelli-navy md:text-[32px]">
-                  A{" "}
-                  <em className="font-serif italic text-bastelli-orange">
-                    Roda do E-commerce
-                  </em>{" "}
-                  no papel.
-                </h3>
-                <p className="mt-4 text-[14px] leading-relaxed text-bastelli-navy/75 md:text-[15px]">
-                  A metodologia da Bastelli traduzida num guia curto pra você
-                  consultar antes de tomar decisão — troca de plataforma,
-                  reajuste de preço, briefing de agência.
-                </p>
-                <dl className="mt-5 grid grid-cols-2 gap-y-2 font-mono text-[11px] text-bastelli-navy/55">
-                  <dt className="uppercase tracking-[0.2em]">Formato</dt>
-                  <dd className="text-right text-bastelli-navy/75">
-                    PDF · leitura rápida
-                  </dd>
-                  <dt className="uppercase tracking-[0.2em]">Uso</dt>
-                  <dd className="text-right text-bastelli-navy/75">
-                    consulta recorrente
-                  </dd>
-                </dl>
-              </div>
-            </article>
-
-            {/* Item 03 — mesmo formato do 02, com imagem à esquerda pra alternar o ritmo */}
-            <article className="flex w-[calc(100vw-2.5rem)] shrink-0 snap-center flex-col gap-6 md:grid md:w-auto md:shrink md:snap-none md:grid-cols-[1.2fr_1fr] md:items-center md:gap-10">
-              <div>
-                <Placeholder
-                  label="Mockup real do manual — capa e páginas internas"
-                  ratio="16/10"
-                  tone="paper"
-                />
-              </div>
-              <div>
-                <div className="flex items-baseline gap-3">
-                  <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-bastelli-orange">
-                    03 · Manual
-                  </span>
-                  <span aria-hidden className="h-px flex-1 bg-bastelli-navy/15" />
-                </div>
-                <h3 className="mt-4 font-display text-[24px] font-light leading-[1.1] tracking-tight text-bastelli-navy md:text-[32px]">
-                  Boas práticas,{" "}
-                  <em className="font-serif italic text-bastelli-orange">
-                    em checklist
-                  </em>
-                  .
-                </h3>
-                <p className="mt-4 text-[14px] leading-relaxed text-bastelli-navy/75 md:text-[15px]">
-                  Checklist por etapa da Roda — o que revisar antes de subir
-                  produto novo, o que testar antes de rodar campanha, o que
-                  perguntar antes de fechar contrato com fornecedor. Pra você
-                  aplicar sem precisar terceirizar.
-                </p>
-                <dl className="mt-5 grid grid-cols-2 gap-y-2 font-mono text-[11px] text-bastelli-navy/55">
-                  <dt className="uppercase tracking-[0.2em]">Formato</dt>
-                  <dd className="text-right text-bastelli-navy/75">
-                    PDF · checklist
-                  </dd>
-                  <dt className="uppercase tracking-[0.2em]">Uso</dt>
-                  <dd className="text-right text-bastelli-navy/75">
-                    aplicação prática
-                  </dd>
-                </dl>
-              </div>
-            </article>
-            </div>
-          </div>
-
-          {/* Aside — "recibo" com borda tracejada */}
-          <aside className="min-w-0 md:col-span-5">
-            <div className="md:sticky md:top-24">
-              <div className="border border-dashed border-bastelli-navy/25 bg-white p-6 md:p-8">
-                <div className="flex items-baseline justify-between border-b border-bastelli-navy/10 pb-4">
-                  <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-bastelli-orange">
-                    Recibo do acesso
-                  </span>
-                  <span className="font-mono text-[10px] text-bastelli-navy/40">
-                    nº 001
-                  </span>
-                </div>
-
-                <dl className="mt-5 space-y-4 text-[13px] text-bastelli-navy/80">
-                  <div className="flex items-baseline justify-between gap-4">
-                    <dt className="font-mono text-[11px] uppercase tracking-[0.18em] text-bastelli-navy/50">
-                      Curso
-                    </dt>
-                    <dd className="text-right">12 módulos · 24 aulas · 4h28</dd>
-                  </div>
-                  <div className="flex items-baseline justify-between gap-4">
-                    <dt className="font-mono text-[11px] uppercase tracking-[0.18em] text-bastelli-navy/50">
-                      E-book
-                    </dt>
-                    <dd className="text-right">Roda do E-commerce</dd>
-                  </div>
-                  <div className="flex items-baseline justify-between gap-4">
-                    <dt className="font-mono text-[11px] uppercase tracking-[0.18em] text-bastelli-navy/50">
-                      Manual
-                    </dt>
-                    <dd className="text-right">Boas práticas por etapa</dd>
-                  </div>
-                  <div className="flex items-baseline justify-between gap-4">
-                    <dt className="font-mono text-[11px] uppercase tracking-[0.18em] text-bastelli-navy/50">
-                      Plataforma
-                    </dt>
-                    <dd className="text-right">Área oficial da Bastelli</dd>
-                  </div>
-                  <div className="flex items-baseline justify-between gap-4 text-bastelli-navy/50">
-                    <dt className="font-mono text-[11px] uppercase tracking-[0.18em]">
-                      Prazo
-                    </dt>
-                    <dd className="text-right font-mono text-[11px]">
-                      [[VALIDAR]]
-                    </dd>
-                  </div>
-                  <div className="flex items-baseline justify-between gap-4 text-bastelli-navy/50">
-                    <dt className="font-mono text-[11px] uppercase tracking-[0.18em]">
-                      Certificado
-                    </dt>
-                    <dd className="text-right font-mono text-[11px]">
-                      [[VALIDAR]]
-                    </dd>
-                  </div>
-                </dl>
-
-                <div className="mt-7 border-t border-dashed border-bastelli-navy/25 pt-6">
-                  <CTA className="w-full">Ir para o checkout Hotmart</CTA>
-                  <p className="mt-3 text-center font-mono text-[10px] uppercase tracking-[0.24em] text-bastelli-navy/40">
-                    Checkout seguro · Hotmart
-                  </p>
-                </div>
-              </div>
-            </div>
-          </aside>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function OfertaItem({
-  n,
-  tag,
-  title,
-  body,
-  img,
-}: {
-  n: string;
-  tag: string;
-  title: string;
-  body: string;
-  img: string;
-}) {
-  return (
-    <article className="grid grid-cols-1 gap-5 md:grid-cols-[1fr_1.3fr] md:gap-8">
-      <Placeholder label={img} ratio="4/3" tone="paper" />
-      <div>
-        <div className="flex items-center gap-3 text-[11px] uppercase tracking-[0.2em] text-bastelli-orange">
-          <span className="font-mono">{n}</span>
-          <span className="h-px w-6 bg-bastelli-orange" />
-          {tag}
-        </div>
-        <h3 className="mt-3 font-display text-[24px] leading-tight text-bastelli-navy md:text-[30px]">
-          {title}
-        </h3>
-        <p className="mt-3 text-[14px] leading-relaxed text-bastelli-navy/70 md:text-[15px]">
-          {body}
-        </p>
-      </div>
-    </article>
-  );
-}
 
 /* ============================================================
    13. PREÇO
