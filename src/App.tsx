@@ -1347,7 +1347,7 @@ function Bonus() {
             style={{ animation: "fade-in 500ms ease-out both" }}
           >
             {/* IMAGEM — esquerda */}
-            <div className="flex min-h-[22vh] items-center justify-center bg-[#ee733b] py-6 md:min-h-[34vh]">
+            <div className="flex min-h-[22vh] items-center justify-center bg-[#f5f3ed] py-6 md:min-h-[34vh]">
               <img
                 src={Mockup}
                 alt={current.title}
