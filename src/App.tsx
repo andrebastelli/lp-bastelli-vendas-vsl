@@ -1361,7 +1361,7 @@ function Bonus() {
               <img
                 src={current.img}
                 alt={current.title}
-                className="h-auto w-full max-w-[180px] object-contain md:max-w-[250px]"
+                className="h-auto w-full max-w-[400px] object-contain md:max-w-[]"
               />
             </div>
 
