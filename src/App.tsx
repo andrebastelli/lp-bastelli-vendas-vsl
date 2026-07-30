@@ -7,7 +7,14 @@ import BrunoDev from "@/assets/consuiltoria_com_cliente_bastelli.webp";
 import BrunoAgencia from "@/assets/bruno_agencia.webp";
 import BrunoClientes from "@/assets/bastelli_clientes.webp";
 import BrunoAbcomm from "@/assets/premio_abcomm.webp";
-import Mockup from "@/assets/mockup.webp";
+import img01 from "@/assets/combo.webp";
+import img02 from "@/assets/boas_praticas.webp";
+import img03 from "@/assets/e-book.webp";
+import img04 from "@/assets/hotmart.webp";
+import img05 from "@/assets/planilha_metas.webp";
+import img06 from "@/assets/planilha_ofertas.webp";
+import img07 from "@/assets/roda_do_e_commerce.webp";
+import img08 from "@/assets/trello.webp";
 
 function useAutoScrollCarousel<T extends HTMLElement>(itemCount: number, intervalMs = 4500) {
   const ref = useRef<T | null>(null);
@@ -1246,31 +1253,47 @@ function Accordion({
 ============================================================ */
 function Bonus() {
   const itens = [
-    {
-      title: "Introdução ao E-commerce",
-      desc: "Base para estruturar sua loja corretamente.",
-    },
-    {
-      title: "Roda do E-commerce",
-      desc: "A metodologia completa de decisão.",
-    },
-    {
-      title: "Boas práticas",
-      desc: "Checklist prático para execução.",
-    },
-    {
-      title: "Metas inteligentes",
-      desc: "Defina metas claras e mensuráveis.",
-    },
-    {
-      title: "Campanhas e vendas",
-      desc: "Organize campanhas e vendas.",
-    },
-    {
-      title: "50 ideias de ofertas",
-      desc: "Ofertas prontas para aplicar.",
-    },
-  ];
+  {
+    title: "Curso principal",
+    desc: "Curso Online de Introdução ao E-commerce com Bruno Bastelli.",
+    img: img01,
+  },
+  {
+    title: "Roda do E-commerce",
+    desc: "A metodologia completa de decisão.",
+    img: img07,
+  },
+  {
+    title: "Boas práticas",
+    desc: "Checklist prático para execução.",
+    img: img02,
+  },
+  {
+    title: "Introdução ao E-commerce",
+    desc: "Base para estruturar sua loja corretamente.",
+    img: img03,
+  },
+  {
+    title: "Metas inteligentes",
+    desc: "Defina metas claras e mensuráveis.",
+    img: img05,
+  },
+  {
+    title: "Ofertas validadas",
+    desc: "Planilha com mais de 50 ideias de ofertas.",
+    img: img06,
+  },
+  {
+    title: "Campanhas e ações",
+    desc: "Organize campanhas e vendas.",
+    img: img08,
+  },
+  {
+    title: "Acesso via Hotmart",
+    desc: "Acesso completo pela plataforma.",
+    img: img04,
+  },
+];
 
   const sectionRef = useRef<HTMLElement>(null);
   const [active, setActive] = useState(0);
@@ -1336,9 +1359,9 @@ function Bonus() {
             {/* IMAGEM — esquerda */}
             <div className="flex min-h-[22vh] items-center justify-center bg-[#f5f3ed] py-6 md:min-h-[34vh]">
               <img
-                src={Mockup}
+                src={current.img}
                 alt={current.title}
-                className="h-auto w-full max-w-[180px] object-contain md:max-w-[220px]"
+                className="h-auto w-full max-w-[180px] object-contain md:max-w-[250px]"
               />
             </div>
 
