@@ -723,8 +723,8 @@ function QuebraDeCrenca() {
             <li
               key={p.mito}
               className={`border-t border-white/10 py-8 md:py-12
-                ${i === 1 ? "pl-6 md:pl-12" : ""}
-                ${i === 2 ? "pl-12 md:pl-24" : ""}
+                ${i === 1 ? "md:pl-12" : ""}
+                ${i === 2 ? "md:pl-24" : ""}
               `}
             >
               {/* Mobile: número em cima, texto embaixo */}
