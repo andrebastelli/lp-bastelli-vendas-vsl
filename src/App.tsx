@@ -1532,7 +1532,7 @@ function SobreBruno() {
           </div>
 
           <div className="min-w-0 md:col-span-8 md:order-1 relative md:pr-16 md:before:content-[''] md:before:absolute md:before:top-3 md:before:bottom-3 md:before:right-6 md:before:w-px md:before:border-l md:before:border-dashed md:before:border-bastelli-orange/50">
-            <div ref={scrollRef} className="flex w-full snap-x snap-mandatory gap-0 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:block md:snap-none md:overflow-visible md:gap-0 [&>article]:snap-start [&>article]:shrink-0 [&>article]:w-full [&>article]:rounded-lg [&>article]:border [&>article]:border-bastelli-navy/15 [&>article]:bg-white [&>article]:p-5 [&>article]:self-start md:[&>article]:w-auto md:[&>article]:border-0 md:[&>article]:rounded-none md:[&>article]:bg-transparent md:[&>article]:p-0">
+            <div ref={scrollRef} className="flex w-full items-start snap-x snap-mandatory gap-0 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:block md:snap-none md:overflow-visible [&>article]:snap-start [&>article]:shrink-0 [&>article]:w-full [&>article]:rounded-lg [&>article]:border [&>article]:border-bastelli-navy/15 [&>article]:bg-white [&>article]:p-5 md:[&>article]:w-auto md:[&>article]:border-0 md:[&>article]:rounded-none md:[&>article]:bg-transparent md:[&>article]:p-0">
             <Momento
               n="01"
               year="2007"
