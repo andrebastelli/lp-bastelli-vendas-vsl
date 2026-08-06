@@ -156,6 +156,45 @@ function Placeholder({
   );
 }
 
+function BackToTop() {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setVisible(window.scrollY > 400);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
+
+  return (
+    <button
+      onClick={scrollToTop}
+      aria-label="Voltar ao topo"
+      className={[
+        "fixed bottom-6 right-6 z-50 flex h-11 w-11 items-center justify-center rounded-full bg-bastelli-navy shadow-lg transition-all duration-300",
+        "hover:bg-bastelli-orange focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-bastelli-orange focus-visible:ring-offset-2",
+        visible ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-4 opacity-0",
+      ].join(" ")}
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="18"
+        height="18"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="white"
+        strokeWidth="2.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden
+      >
+        <path d="m18 15-6-6-6 6" />
+      </svg>
+    </button>
+  );
+}
+
 function Index() {
   return (
     <main className="bg-white font-sans text-bastelli-ink antialiased">
@@ -173,6 +212,7 @@ function Index() {
       <FAQ />
       <CtaFinal />
       <Footer />
+      <BackToTop />
     </main>
   );
 }
