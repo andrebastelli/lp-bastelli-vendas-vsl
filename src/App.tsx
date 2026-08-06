@@ -391,8 +391,9 @@ function Hero() {
   );
 }
 
+const YT_VIDEO_ID = "LRTO8jzWVT0";
+
 function VSLPlayer() {
-  const [playing, setPlaying] = useState(false);
   const anchorRef = useRef<HTMLDivElement | null>(null);
   const [outOfView, setOutOfView] = useState(false);
   const [dismissed, setDismissed] = useState(false);
@@ -409,104 +410,67 @@ function VSLPlayer() {
   }, []);
 
   const showFloating = outOfView && !dismissed;
+  const embedSrc = `https://www.youtube.com/embed/${YT_VIDEO_ID}?rel=0&modestbranding=1`;
 
   return (
     <div ref={anchorRef}>
-    <div className="relative w-full overflow-hidden border border-white/15 bg-black/30 shadow-[0_30px_80px_-40px_rgba(0,0,0,0.7)]">
-      <div style={{ aspectRatio: "16/9" }} className="relative w-full">
-        {playing ? (
-          <div className="flex h-full w-full items-center justify-center bg-black text-center text-white/60">
-            <div className="px-4 font-mono text-[11px] uppercase tracking-widest">
-              [[INSERIR ARQUIVO OU URL DA VSL APROVADA]]
-            </div>
-          </div>
-        ) : (
-          <>
-            <Placeholder label="Poster real com Bruno — VSL" ratio="16/9" tone="navy" />
-            <button
-              onClick={() => setPlaying(true)}
-              aria-label="Reproduzir vídeo"
-              className="absolute inset-0 flex items-center justify-center bg-black/25 transition hover:bg-black/10"
-            >
-              <span className="grid h-16 w-16 place-items-center rounded-full bg-bastelli-orange text-white shadow-lg md:h-20 md:w-20">
-                <svg width="22" height="24" viewBox="0 0 22 24" fill="currentColor">
-                  <path d="M2 2v20l18-10L2 2z" />
-                </svg>
-              </span>
-            </button>
-          </>
-        )}
-      </div>
-    </div>
-    {showFloating && (
-      <div
-        className="fixed bottom-4 right-4 z-50 w-[240px] overflow-hidden rounded-lg border border-white/20 bg-black shadow-2xl animate-fade-in sm:w-[300px] md:w-[340px]"
-        role="complementary"
-        aria-label="Vídeo flutuante"
-      >
-        <div className="flex flex-col items-center justify-center gap-1 bg-bastelli-navy px-3 py-2 pr-8 text-[10px] uppercase tracking-[0.18em] text-white/50">
-          <div className="flex flex-nowrap items-center justify-center gap-2 whitespace-nowrap">
-            <span className="inline-flex items-center gap-2 rounded-sm border border-orange-500/40 bg-orange-500/10 px-2 py-0.5 font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-orange-400">
-              <span className="relative inline-flex items-center justify-center">
-                <span className="absolute inset-0 animate-ping rounded-sm bg-orange-500/60 opacity-75" />
-                <span className="relative inline-flex items-center justify-center rounded-[3px] bg-orange-500 px-1 py-[1px]">
-                  <svg viewBox="0 0 24 24" className="h-2.5 w-2.5 fill-white" aria-hidden="true">
-                    <path d="M8 5v14l11-7z" />
-                  </svg>
-                </span>
-              </span>
-              Vídeo
-            </span>
-            <span className="text-white/70">Aula-convite</span>
-          </div>
-          <span className="text-white/40">Assista antes de começar</span>
+      {/* Player principal */}
+      <div className="relative w-full overflow-hidden border border-white/15 shadow-[0_30px_80px_-40px_rgba(0,0,0,0.7)]">
+        <div style={{ aspectRatio: "16/9" }} className="relative w-full bg-black">
+          <iframe
+            src={embedSrc}
+            title="Aula-convite — Bruno Bastelli"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
+            className="absolute inset-0 h-full w-full border-0"
+          />
         </div>
-        <button
-          onClick={() => setDismissed(true)}
-          aria-label="Fechar vídeo flutuante"
-          className="absolute right-1.5 top-1.5 z-10 grid h-6 w-6 place-items-center rounded-full bg-black/70 text-white/80 backdrop-blur transition hover:bg-black hover:text-white"
+      </div>
+
+      {/* Player flutuante */}
+      {showFloating && (
+        <div
+          className="fixed bottom-4 right-4 z-50 w-[240px] overflow-hidden rounded-lg border border-white/20 bg-black shadow-2xl sm:w-[300px] md:w-[340px]"
+          role="complementary"
+          aria-label="Vídeo flutuante"
         >
-          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" strokeWidth="1.5">
-            <path d="M1 1l8 8M9 1l-8 8" />
-          </svg>
-        </button>
-        <button
-          onClick={() => {
-            anchorRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-          }}
-          className="block w-full text-left"
-          aria-label="Voltar para o vídeo"
-        >
-          <div style={{ aspectRatio: "16/9" }} className="relative w-full bg-black">
-            {playing ? (
-              <div className="flex h-full w-full items-center justify-center bg-black text-center text-white/60">
-                <div className="px-3 font-mono text-[9px] uppercase tracking-widest">
-                  [[VSL EM REPRODUÇÃO]]
-                </div>
-              </div>
-            ) : (
-              <>
-                <Placeholder label="VSL" ratio="16/9" tone="navy" />
-                <span
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    e.preventDefault();
-                    setPlaying(true);
-                  }}
-                  className="absolute inset-0 flex items-center justify-center bg-black/30 transition hover:bg-black/10"
-                >
-                  <span className="grid h-10 w-10 place-items-center rounded-full bg-bastelli-orange text-white shadow-lg">
-                    <svg width="12" height="14" viewBox="0 0 22 24" fill="currentColor">
-                      <path d="M2 2v20l18-10L2 2z" />
+          <div className="flex flex-col items-center justify-center gap-1 bg-bastelli-navy px-3 py-2 pr-8 text-[10px] uppercase tracking-[0.18em] text-white/50">
+            <div className="flex flex-nowrap items-center justify-center gap-2 whitespace-nowrap">
+              <span className="inline-flex items-center gap-2 rounded-sm border border-orange-500/40 bg-orange-500/10 px-2 py-0.5 font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-orange-400">
+                <span className="relative inline-flex items-center justify-center">
+                  <span className="absolute inset-0 animate-ping rounded-sm bg-orange-500/60 opacity-75" />
+                  <span className="relative inline-flex items-center justify-center rounded-[3px] bg-orange-500 px-1 py-[1px]">
+                    <svg viewBox="0 0 24 24" className="h-2.5 w-2.5 fill-white" aria-hidden="true">
+                      <path d="M8 5v14l11-7z" />
                     </svg>
                   </span>
                 </span>
-              </>
-            )}
+                Vídeo
+              </span>
+              <span className="text-white/70">Aula-convite</span>
+            </div>
+            <span className="text-white/40">Assista antes de começar</span>
           </div>
-        </button>
-      </div>
-    )}
+          <button
+            onClick={() => setDismissed(true)}
+            aria-label="Fechar vídeo flutuante"
+            className="absolute right-1.5 top-1.5 z-10 grid h-6 w-6 place-items-center rounded-full bg-black/70 text-white/80 backdrop-blur transition hover:bg-black hover:text-white"
+          >
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" strokeWidth="1.5">
+              <path d="M1 1l8 8M9 1l-8 8" />
+            </svg>
+          </button>
+          <div style={{ aspectRatio: "16/9" }} className="relative w-full bg-black">
+            <iframe
+              src={`${embedSrc}&mute=1`}
+              title="Aula-convite — miniatura flutuante"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              className="absolute inset-0 h-full w-full border-0"
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }
