@@ -722,24 +722,40 @@ function QuebraDeCrenca() {
           {pares.map((p, i) => (
             <li
               key={p.mito}
-              className={`grid grid-cols-[110px_1fr] gap-4 md:gap-8 border-t border-white/10 py-8 md:py-12
+              className={`border-t border-white/10 py-8 md:py-12
                 ${i === 1 ? "pl-6 md:pl-12" : ""}
                 ${i === 2 ? "pl-12 md:pl-24" : ""}
               `}
             >
-              <div className="relative flex items-start">
-                <span className="font-display font-semibold text-[48px] leading-none text-bastelli-orange md:text-[72px]">
+              {/* Mobile: número em cima, texto embaixo */}
+              <div className="flex flex-col gap-3 md:hidden">
+                <span className="font-display font-semibold text-[40px] leading-none text-bastelli-orange">
                   {String(i + 1).padStart(2, "0")}
                 </span>
+                <div>
+                  <p className="font-display text-[19px] leading-[1.25] text-white/55">
+                    {p.mito}
+                  </p>
+                  <p className="mt-3 text-[15px] leading-[1.55] text-white">
+                    {p.verdade}
+                  </p>
+                </div>
               </div>
-
-              <div>
-                <p className="font-display text-[20px] leading-[1.25] text-white/55 md:text-[28px]">
-                  {p.mito}
-                </p>
-                <p className="mt-3 max-w-[62ch] text-[16px] leading-[1.55] text-white md:mt-4 md:text-[18px]">
-                  {p.verdade}
-                </p>
+              {/* Desktop: lado a lado */}
+              <div className="hidden md:grid md:grid-cols-[110px_1fr] md:gap-8">
+                <div className="flex items-start">
+                  <span className="font-display font-semibold text-[72px] leading-none text-bastelli-orange">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                </div>
+                <div>
+                  <p className="font-display text-[28px] leading-[1.25] text-white/55">
+                    {p.mito}
+                  </p>
+                  <p className="mt-4 max-w-[62ch] text-[18px] leading-[1.55] text-white">
+                    {p.verdade}
+                  </p>
+                </div>
               </div>
             </li>
           ))}
@@ -1220,41 +1236,72 @@ function Accordion({
   title,
   children,
   outcomes,
+  defaultOpen = true,
 }: {
   n: string;
   title: string;
   children: React.ReactNode;
   outcomes?: string[];
+  defaultOpen?: boolean;
 }) {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(defaultOpen);
   return (
     <li className="list-none">
       <button
         onClick={() => setOpen((o) => !o)}
-        className="group grid w-full grid-cols-[auto_1fr_auto] items-start gap-4 py-6 text-left md:items-baseline md:gap-8 md:py-7"
+        className="group w-full py-5 text-left md:py-7"
         aria-expanded={open}
       >
-        <span
-          className={`font-display text-[32px] font-light leading-none tracking-tight md:text-[56px] ${
-            open ? "text-bastelli-orange" : "text-bastelli-navy/25"
-          } transition-colors group-hover:text-bastelli-orange`}
-          aria-hidden
-        >
-          {n}
-        </span>
-        <span className="mt-1 font-display text-[17px] font-medium leading-tight text-bastelli-navy md:mt-0 md:text-[26px]">
-          {title}
-        </span>
-        <span
-          className={`grid h-9 w-9 shrink-0 place-items-center rounded-full border text-[13px] transition-all ${
-            open
-              ? "rotate-45 border-bastelli-orange bg-bastelli-orange text-white"
-              : "border-bastelli-navy/30 text-bastelli-navy group-hover:border-bastelli-navy"
-          }`}
-          aria-hidden
-        >
-          +
-        </span>
+        {/* Mobile: número em cima, título + botão na linha debaixo */}
+        <div className="flex items-start justify-between gap-3 md:hidden">
+          <div className="flex flex-col gap-1">
+            <span
+              className={`font-display text-[28px] font-light leading-none tracking-tight ${
+                open ? "text-bastelli-orange" : "text-bastelli-navy/25"
+              } transition-colors group-hover:text-bastelli-orange`}
+              aria-hidden
+            >
+              {n}
+            </span>
+            <span className="font-display text-[16px] font-medium leading-snug text-bastelli-navy">
+              {title}
+            </span>
+          </div>
+          <span
+            className={`mt-1 grid h-9 w-9 shrink-0 place-items-center rounded-full border text-[13px] transition-all ${
+              open
+                ? "rotate-45 border-bastelli-orange bg-bastelli-orange text-white"
+                : "border-bastelli-navy/30 text-bastelli-navy group-hover:border-bastelli-navy"
+            }`}
+            aria-hidden
+          >
+            +
+          </span>
+        </div>
+        {/* Desktop: grid horizontal */}
+        <div className="hidden md:grid md:grid-cols-[auto_1fr_auto] md:items-baseline md:gap-8">
+          <span
+            className={`font-display text-[56px] font-light leading-none tracking-tight ${
+              open ? "text-bastelli-orange" : "text-bastelli-navy/25"
+            } transition-colors group-hover:text-bastelli-orange`}
+            aria-hidden
+          >
+            {n}
+          </span>
+          <span className="font-display text-[26px] font-medium leading-tight text-bastelli-navy">
+            {title}
+          </span>
+          <span
+            className={`grid h-9 w-9 shrink-0 place-items-center rounded-full border text-[13px] transition-all ${
+              open
+                ? "rotate-45 border-bastelli-orange bg-bastelli-orange text-white"
+                : "border-bastelli-navy/30 text-bastelli-navy group-hover:border-bastelli-navy"
+            }`}
+            aria-hidden
+          >
+            +
+          </span>
+        </div>
       </button>
       {open && (
         <div className="grid grid-cols-[auto_1fr] gap-6 pb-8 md:gap-8">
@@ -1485,7 +1532,7 @@ function SobreBruno() {
           </div>
 
           <div className="min-w-0 md:col-span-8 md:order-1 relative md:pr-16 md:before:content-[''] md:before:absolute md:before:top-3 md:before:bottom-3 md:before:right-6 md:before:w-px md:before:border-l md:before:border-dashed md:before:border-bastelli-orange/50">
-            <div ref={scrollRef} className="flex w-full max-w-full snap-x snap-mandatory gap-4 overflow-x-auto pb-4 md:block md:snap-none md:overflow-visible md:gap-0 md:pb-0 [&>article]:snap-center [&>article]:shrink-0 [&>article]:w-[80vw] [&>article]:max-w-[320px] [&>article]:rounded-lg [&>article]:border [&>article]:border-bastelli-navy/15 [&>article]:bg-white [&>article]:p-5 md:[&>article]:w-auto md:[&>article]:max-w-none md:[&>article]:border-0 md:[&>article]:rounded-none md:[&>article]:bg-transparent md:[&>article]:p-0">
+            <div ref={scrollRef} className="flex w-full max-w-full snap-x snap-mandatory gap-4 overflow-x-auto pb-0 md:block md:snap-none md:overflow-visible md:gap-0 md:pb-0 [&>article]:snap-center [&>article]:shrink-0 [&>article]:w-[82vw] [&>article]:max-w-[300px] [&>article]:rounded-lg [&>article]:border [&>article]:border-bastelli-navy/15 [&>article]:bg-white [&>article]:p-5 [&>article]:self-start md:[&>article]:w-auto md:[&>article]:max-w-none md:[&>article]:border-0 md:[&>article]:rounded-none md:[&>article]:bg-transparent md:[&>article]:p-0">
             <Momento
               n="01"
               year="2007"
@@ -2089,6 +2136,7 @@ function FAQ() {
                         key={it.q}
                         n={String(counter).padStart(2, "0")}
                         title={it.q}
+                        defaultOpen={false}
                       >
                         {it.a}
                       </Accordion>
