@@ -108,13 +108,9 @@ function CTA({
   }
   return (
     <a
-      href="#checkout-final"
-      onClick={(e) => {
-        e.preventDefault();
-        document
-          .getElementById("checkout-final")
-          ?.scrollIntoView({ behavior: "smooth", block: "center" });
-      }}
+      href={CHECKOUT_URL}
+      target="_blank"
+      rel="noopener noreferrer"
       className={`${base} ${styles} ${className}`}
     >
       <span className="flex-1 sm:flex-none">{children}</span>
