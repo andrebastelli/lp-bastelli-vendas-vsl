@@ -1425,7 +1425,7 @@ function SobreBruno() {
               <div className="flex items-center gap-3">
                 <span className="h-px w-8 bg-bastelli-orange" />
                 <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-bastelli-orange">
-                  Quem escreveu isso
+                  Com Quem Você Vai Aprender
                 </span>
               </div>
               <h2 className="mt-6 font-display text-[44px] font-light leading-[0.95] text-bastelli-navy md:text-[68px]">
@@ -1438,7 +1438,7 @@ function SobreBruno() {
               <dl className="mt-8 space-y-2 border-t border-bastelli-navy/15 pt-6 font-mono text-[12px] uppercase tracking-[0.18em] text-bastelli-navy/55">
                 <div className="flex justify-between"><dt>No e-commerce</dt><dd className="text-bastelli-navy">16 anos</dd></div>
                 <div className="flex justify-between"><dt>Clientes</dt><dd className="text-bastelli-navy">200+</dd></div>
-                <div className="flex justify-between"><dt>ABComm</dt><dd className="text-bastelli-navy">2023</dd></div>
+                <div className="flex justify-between"><dt>ABComm</dt><dd className="text-bastelli-navy">Vencedor do Prêmio ABComm Consultoria em E-commerce</dd></div>
               </dl>
             </div>
           </div>
@@ -1489,8 +1489,8 @@ function SobreBruno() {
               n="06"
               year="2025"
               chapter="O curso"
-              title="Aí veio o curso. Fundamentos abertos, sem enrolação."
-              body="Dava pra condensar 16 anos de operação em algo que qualquer lojista pudesse assistir e começar a decidir melhor. Foi o que fiz."
+              title="A gente precisa ajudar mais pessoas com o Curso."
+              body="Dava pra condensar 16 anos de operação em algo que qualquer lojista pudesse assistir e começar a decidir melhor. Foi o que fiz, trouxe o curso exclusivo e amado por nossos clientes, para todos os empresários que precisam vender na internet na forma certa."
               img={BrunoAbcomm}
             />
             </div>
@@ -1612,7 +1612,7 @@ function Oferta() {
         <div className="grid gap-6 md:grid-cols-12 md:gap-10">
           <div className="md:col-span-3 md:pt-3">
             <div className="font-mono text-[11px] uppercase tracking-[0.24em] text-bastelli-orange">
-              Composição do acesso
+              O que você vai receber
             </div>
             <div className="mt-2 font-mono text-[11px] text-bastelli-navy/45">
               03 entregáveis · 01 acesso
@@ -1647,18 +1647,15 @@ function Oferta() {
             <article className="w-[calc(100vw-2.5rem)] shrink-0 snap-center md:w-auto md:shrink md:snap-none">
               <div className="flex items-baseline gap-3">
                 <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-bastelli-orange">
-                  01 · Curso principal
+                  01 · Curso Online de Introdução ao E-commerce
                 </span>
                 <span aria-hidden className="h-px flex-1 bg-bastelli-navy/15" />
-                <span className="font-mono text-[10px] text-bastelli-navy/40">
-                  peça central
-                </span>
               </div>
-              <div className="mt-6">
-                <Placeholder
-                  label="Frame real das aulas — dashboard do curso"
-                  ratio="16/9"
-                  tone="paper"
+              <div className="mt-6 overflow-hidden rounded-md">
+                <img
+                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/hotmart_edit2-Mk318cTyI75Jtoycnwmtk4QL5Z4D4Z.png"
+                  alt="Dashboard do Curso Online de Introdução ao E-commerce na Hotmart"
+                  className="w-full h-auto object-contain"
                 />
               </div>
               <h3 className="mt-6 font-display text-[30px] font-light leading-[1.02] tracking-tight text-bastelli-navy md:text-[44px]">
@@ -1674,10 +1671,10 @@ function Oferta() {
             {/* Item 02 — split horizontal, foto à direita, texto respirando */}
             <article className="flex w-[calc(100vw-2.5rem)] shrink-0 snap-center flex-col gap-6 md:grid md:w-auto md:shrink md:snap-none md:grid-cols-[1.2fr_1fr] md:items-center md:gap-10">
               <div className="md:order-2">
-                <Placeholder
-                  label="Mockup real do e-book — capa e páginas internas"
-                  ratio="16/10"
-                  tone="paper"
+                <img
+                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/roda_do_e-commerce_edit-EEhGVuHShdpjyoX51SZ1FqdKyOUUgQ.png"
+                  alt="Planilha Roda do E-commerce — mockup em desktop e tablet"
+                  className="w-full h-auto object-contain"
                 />
               </div>
               <div className="md:order-1">
@@ -1715,10 +1712,10 @@ function Oferta() {
             {/* Item 03 — mesmo formato do 02, com imagem à esquerda pra alternar o ritmo */}
             <article className="flex w-[calc(100vw-2.5rem)] shrink-0 snap-center flex-col gap-6 md:grid md:w-auto md:shrink md:snap-none md:grid-cols-[1.2fr_1fr] md:items-center md:gap-10">
               <div>
-                <Placeholder
-                  label="Mockup real do manual — capa e páginas internas"
-                  ratio="16/10"
-                  tone="paper"
+                <img
+                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/boas_praticas_edit-RsUmpNvBQfIFTJv4SjaQywFT3eiPnx.png"
+                  alt="Planilha de Ideias de Ofertas — mockup em desktop e tablet"
+                  className="w-full h-auto object-contain"
                 />
               </div>
               <div>
@@ -1762,10 +1759,7 @@ function Oferta() {
               <div className="border border-dashed border-bastelli-navy/25 bg-white p-6 md:p-8">
                 <div className="flex items-baseline justify-between border-b border-bastelli-navy/10 pb-4">
                   <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-bastelli-orange">
-                    Recibo do acesso
-                  </span>
-                  <span className="font-mono text-[10px] text-bastelli-navy/40">
-                    nº 001
+                    O que está incluso no valor
                   </span>
                 </div>
 
@@ -1794,20 +1788,12 @@ function Oferta() {
                     </dt>
                     <dd className="text-right">Área oficial da Bastelli</dd>
                   </div>
-                  <div className="flex items-baseline justify-between gap-4 text-bastelli-navy/50">
-                    <dt className="font-mono text-[11px] uppercase tracking-[0.18em]">
-                      Prazo
-                    </dt>
-                    <dd className="text-right font-mono text-[11px]">
-                      [[VALIDAR]]
-                    </dd>
-                  </div>
-                  <div className="flex items-baseline justify-between gap-4 text-bastelli-navy/50">
-                    <dt className="font-mono text-[11px] uppercase tracking-[0.18em]">
+                  <div className="flex items-baseline justify-between gap-4">
+                    <dt className="font-mono text-[11px] uppercase tracking-[0.18em] text-bastelli-navy/50">
                       Certificado
                     </dt>
-                    <dd className="text-right font-mono text-[11px]">
-                      [[VALIDAR]]
+                    <dd className="text-right text-bastelli-navy/80">
+                      Incluso
                     </dd>
                   </div>
                 </dl>
