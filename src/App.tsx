@@ -732,7 +732,7 @@ function RodaDoEcommerce() {
       n: "01",
       title: "Planejamento",
       desc:
-        "Meta do mês, calendário de campanha e onde apostar ficha no próximo trimestre. Sem isso, o resto vira reação.",
+        "Meta do mês, calendário de campanha e onde apostar ficha no próximo trimestre. Sem isso, você lojista não sabe para onde ir.",
     },
     {
       n: "02",
@@ -761,7 +761,7 @@ function RodaDoEcommerce() {
         <div className="grid grid-cols-12 items-center gap-4 md:gap-6">
           <div className="col-span-12 md:col-span-6">
             <span className="font-mono text-[11px] uppercase tracking-[0.28em] text-bastelli-orange">
-              Metodologia Bastelli
+              Metodologia Exclusiva da Bastelli
             </span>
             <h2 className="mt-4 font-display text-[38px] font-light leading-[0.98] tracking-[-0.02em] text-bastelli-navy md:text-[68px]">
               Quatro engrenagens.
@@ -961,7 +961,7 @@ function ApresentacaoCurso() {
         <div className="flex items-center gap-4">
           <div className="h-px flex-1 bg-bastelli-navy/15" />
           <span className="text-[11px] uppercase tracking-[0.28em] text-bastelli-navy/50">
-            Ficha do curso
+            Sobre o Curso
           </span>
         </div>
 
@@ -973,7 +973,7 @@ function ApresentacaoCurso() {
               <br />
               <span className="italic text-bastelli-orange">Uma visão 360º.</span>
             </h2>
-            <p className="mt-8 max-w-xl text-[17px] leading-[1.55] text-bastelli-navy/75 md:text-[19px]">
+            <p className="mt-8 max-w-xl text-[17px] leading-[1.55] text-bastelli-navy/90 md:text-[19px]">
               É um Curso Online de Introdução ao E-commerce com Bruno Bastelli. Você senta, assiste
               em alguns dias e sai enxergando a loja como um sistema, não
               como uma pilha de tarefas soltas.
@@ -1438,7 +1438,7 @@ function SobreBruno() {
               <dl className="mt-8 space-y-2 border-t border-bastelli-navy/15 pt-6 font-mono text-[12px] uppercase tracking-[0.18em] text-bastelli-navy/55">
                 <div className="flex justify-between"><dt>No e-commerce</dt><dd className="text-bastelli-navy">16 anos</dd></div>
                 <div className="flex justify-between"><dt>Clientes</dt><dd className="text-bastelli-navy">200+</dd></div>
-                <div className="flex justify-between"><dt>ABComm</dt><dd className="text-bastelli-navy">Vencedor do Prêmio ABComm Consultoria em E-commerce</dd></div>
+                <div className="flex flex-col gap-0.5"><dt>ABComm</dt><dd className="text-bastelli-navy normal-case tracking-normal text-[11px]">Vencedor do Prêmio ABComm Consultoria em E-commerce</dd></div>
               </dl>
             </div>
           </div>
@@ -1490,7 +1490,7 @@ function SobreBruno() {
               year="2025"
               chapter="O curso"
               title="A gente precisa ajudar mais pessoas com o Curso."
-              body="Dava pra condensar 16 anos de operação em algo que qualquer lojista pudesse assistir e começar a decidir melhor. Foi o que fiz, trouxe o curso exclusivo e amado por nossos clientes, para todos os empresários que precisam vender na internet na forma certa."
+              body="Dava pra condensar 16 anos de operação em algo que qualquer lojista pudesse assistir e começar a decidir melhor. Foi o que fiz, trouxe o curso exclusivo e amado por nossos clientes, para todos os empresários que precisam vender na internet na forma certa, com a metodologia que nos premiou no Prêmio ABComm."
               img={BrunoAbcomm}
             />
             </div>
@@ -1614,9 +1614,7 @@ function Oferta() {
             <div className="font-mono text-[11px] uppercase tracking-[0.24em] text-bastelli-orange">
               O que você vai receber
             </div>
-            <div className="mt-2 font-mono text-[11px] text-bastelli-navy/45">
-              03 entregáveis · 01 acesso
-            </div>
+
           </div>
           <div className="md:col-span-9">
             <h2 className="font-display text-[38px] font-light leading-[0.98] tracking-tight text-bastelli-navy md:text-[64px]">
@@ -1799,10 +1797,21 @@ function Oferta() {
                 </dl>
 
                 <div className="mt-7 border-t border-dashed border-bastelli-navy/25 pt-6">
+                  <div className="mb-4 flex items-baseline justify-between">
+                    <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-bastelli-navy/50">
+                      Valor
+                    </span>
+                    <span className="font-display text-[28px] font-light text-bastelli-navy">
+                      R$ 197,00
+                    </span>
+                  </div>
                   <CTA className="w-full">Ir para o checkout Hotmart</CTA>
-                  <p className="mt-3 text-center font-mono text-[10px] uppercase tracking-[0.24em] text-bastelli-navy/40">
-                    Checkout seguro · Hotmart
-                  </p>
+                  <div className="mt-3 flex items-center justify-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-bastelli-navy/40"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                    <p className="text-center font-mono text-[10px] uppercase tracking-[0.24em] text-bastelli-navy/40">
+                      Compra segura · Hotmart
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1896,7 +1905,7 @@ function Garantia() {
               <div className="mt-6 flex items-center gap-3">
                 <span className="h-px w-10 bg-bastelli-navy/40" />
                 <span className="font-mono text-[12px] tracking-wide text-bastelli-navy/70">
-                  Bruno — Bastelli
+                  Bruno Bastelli
                 </span>
               </div>
             </div>
@@ -1950,19 +1959,19 @@ function FAQ() {
       items: [
         {
           q: "O que vem junto do curso?",
-          a: "A configuração final está em fechamento. [[VALIDAR: OFERTA_FINAL_CONFIRMADA]]",
+          a: "Está incluso o acesso na Hotmart com o Curso Online Introdução E-commerce. O curso tem 12 módulos, 24 aulas e 4 horas, 28 minutos de conteúdo, abordando temas como planejamento, Roda do E-commerce, plataformas, meios de pagamento, fraudes, ERP, logística, estoque, experiência do usuário, SEO, cadastro de produtos, atendimento, metas, análise de dados, tracking, retenção e ciclo de sucesso de uma loja virtual. Incluso o E-book Roda do E-commerce, PDF Manual de Boas Práticas Para E-commerce, entre outros materiais.",
         },
         {
           q: "Como recebo o acesso?",
-          a: "Assim que o pagamento cai na Hotmart, você recebe um e-mail com o login da plataforma da Bastelli. Direto, sem etapa intermediária.",
+          a: "Assim que o pagamento cai na Hotmart, você recebe um e-mail com o login e acesso enviado pela Hotmart com os dados que você utilizou na hora de comprar.",
         },
         {
           q: "Por quanto tempo tenho acesso?",
-          a: "Sem prazo para consumir. O acesso é vitalício: você entra quando conseguir e revisita quando precisar.",
+          a: "O Acesso ao curso e todos os materiais é válido por 1 ano, sendo necessário renovar após esse prazo. Entendemos que antes disso, você precisa concluir os módulos para ter sucesso! É imprescindível que você aplique os conhecimentos.",
         },
         {
           q: "Tem certificado no final?",
-          a: "[[VALIDAR COM O CLIENTE: CERTIFICADO]]",
+          a: "Sim, você terá acesso ao certificado dentro do ambiente da Hotmart após concluir todas as aulas.",
         },
       ],
     },
@@ -1976,7 +1985,7 @@ function FAQ() {
         },
         {
           q: "Tem garantia se eu não gostar?",
-          a: "Tem. Arrependeu, devolve. 7 dias a partir da compra, sem gatilho e sem contagem regressiva.",
+          a: "Sim, em até 7 dias você pode solicitar o cancelamento caso não tenha ficado satisfeito com a qualidade das aulas e curso.",
         },
       ],
     },
@@ -1993,10 +2002,7 @@ function FAQ() {
               <span className="font-mono text-[11px] uppercase tracking-[0.24em] text-bastelli-orange">
                 F.A.Q.
               </span>
-              <span className="h-px w-10 bg-bastelli-navy/30" />
-              <span className="font-mono text-[11px] uppercase tracking-[0.24em] text-bastelli-navy/60">
-                10 respostas
-              </span>
+
             </div>
           </div>
           <div className="col-span-12 md:col-span-9 md:pl-8">
@@ -2074,10 +2080,7 @@ function CtaFinal() {
         <div className="flex items-center gap-3">
           <span className="h-px w-10 bg-bastelli-orange" />
           <span className="font-mono text-[11px] uppercase tracking-[0.24em] text-bastelli-orange">
-            Fim da página
-          </span>
-          <span className="hidden font-mono text-[11px] uppercase tracking-[0.24em] text-white/40 md:inline">
-            · Última chamada honesta
+            Última Chance
           </span>
         </div>
 
@@ -2122,7 +2125,7 @@ function CtaFinal() {
                   <div className="mt-5 flex items-center gap-3">
                     <span className="h-px w-8 bg-white/40" />
                     <span className="font-mono text-[11px] tracking-wide text-white/70">
-                      Bruno — Bastelli
+                      Bruno Bastelli
                     </span>
                   </div>
                 </div>
@@ -2198,11 +2201,9 @@ function Footer() {
           {/* Meta / legal */}
           <div className="col-span-12 md:col-span-7 md:text-right">
             <p className="font-mono text-[12px] leading-relaxed text-bastelli-navy/70">
-              © {new Date().getFullYear()} Bastelli
+              © {new Date().getFullYear()} Bastelli Consultoria
               <br />
-              [[VALIDAR: suporte]]
-              <br />
-              [[VALIDAR: privacidade / termos]]
+              Suporte: (19) 97114-9592
             </p>
           </div>
         </div>
@@ -2210,10 +2211,10 @@ function Footer() {
         {/* Baseline */}
         <div className="mt-12 flex flex-col gap-2 border-t border-bastelli-navy/10 pt-5 md:flex-row md:items-center md:justify-between">
           <span className="font-mono text-[10px] uppercase tracking-[0.24em] text-bastelli-navy/40">
-            Fim do documento
+            Bastelli Consultoria – Todos os direitos Reservados
           </span>
           <span className="font-mono text-[10px] uppercase tracking-[0.24em] text-bastelli-navy/40">
-            v.1 · pré-lançamento
+            CNPJ 43.747.839/0001-09
           </span>
         </div>
       </div>
