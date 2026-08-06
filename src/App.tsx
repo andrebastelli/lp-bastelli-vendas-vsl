@@ -1664,9 +1664,8 @@ function Oferta() {
               </em>
             </h2>
             <p className="mt-5 max-w-[54ch] text-[15px] leading-relaxed text-bastelli-navy/70 md:text-[17px]">
-              Um curso principal e dois materiais que ficam do lado do
-              computador enquanto você opera. Nada de bônus inflado pra
-              justificar preço.
+              Confira todos os itens que estão inclusos junto com o Curso
+              Online Introdução ao E-commerce.
             </p>
           </div>
         </div>
