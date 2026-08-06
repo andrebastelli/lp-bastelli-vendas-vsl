@@ -234,7 +234,7 @@ function Nav() {
           <img
             src={bastelliLogo}
             alt="Bastelli — Consultoria em E-commerce e Performance"
-            className="h-7 w-auto md:h-8"
+            className="h-6 w-auto max-w-[130px] object-contain md:h-8 md:max-w-[160px]"
           />
         </a>
 
@@ -343,16 +343,16 @@ function Hero() {
       />
 
       <div className="relative mx-auto max-w-6xl px-5 pb-20 pt-14 md:px-8 md:pb-28 md:pt-20">
-        <div className="mb-6 flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-[10px] uppercase tracking-[0.24em] text-white/60 md:mb-8 md:flex-nowrap md:whitespace-nowrap md:text-[11px]">
-  <span className="inline-flex items-center gap-2 whitespace-nowrap rounded-sm border border-bastelli-orange/50 bg-bastelli-orange/10 px-2.5 py-1 font-mono font-bold text-bastelli-orange">
-    <span className="relative inline-flex h-1.5 w-1.5">
-      <span className="absolute inset-0 animate-ping rounded-full bg-bastelli-orange/70" />
-      <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-bastelli-orange" />
-    </span>
-    Curso Online de Introdução ao E-commerce
-  </span>
-  <span className="whitespace-nowrap text-white/70">com Bruno Bastelli</span>
-</div>
+        <div className="mb-6 flex flex-col items-center gap-y-2 text-[10px] uppercase tracking-[0.24em] text-white/60 md:mb-8 md:flex-row md:flex-wrap md:justify-center md:gap-x-3 md:text-[11px]">
+          <span className="inline-flex items-center gap-2 rounded-sm border border-bastelli-orange/50 bg-bastelli-orange/10 px-2.5 py-1 font-mono font-bold text-bastelli-orange text-center">
+            <span className="relative inline-flex h-1.5 w-1.5 shrink-0">
+              <span className="absolute inset-0 animate-ping rounded-full bg-bastelli-orange/70" />
+              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-bastelli-orange" />
+            </span>
+            Curso Online de Introdução ao E-commerce
+          </span>
+          <span className="text-white/70">com Bruno Bastelli</span>
+        </div>
 
         <h1 className="mx-auto max-w-5xl text-center font-display text-[38px] font-semibold leading-[1.02] tracking-[-0.025em] md:text-[80px]">
           Os{" "}
@@ -1162,7 +1162,7 @@ function OQueVaiAprender() {
 
           {/* Coluna direita — lista de blocos */}
           <div className="min-w-0 md:col-span-8">
-            <ol ref={scrollRef} className="flex w-full max-w-full snap-x snap-mandatory gap-4 overflow-x-auto pb-4 md:block md:snap-none md:overflow-visible md:gap-0 md:pb-0 md:divide-y md:divide-bastelli-navy/15 md:border-y md:border-bastelli-navy/15 [&>li]:snap-center [&>li]:shrink-0 [&>li]:w-[80vw] [&>li]:max-w-[320px] [&>li]:border [&>li]:border-bastelli-navy/15 [&>li]:rounded-lg [&>li]:bg-white [&>li]:px-4 md:[&>li]:w-auto md:[&>li]:max-w-none md:[&>li]:border-0 md:[&>li]:rounded-none md:[&>li]:bg-transparent md:[&>li]:px-0">
+            <ol ref={scrollRef} className="flex w-full max-w-full snap-x snap-mandatory gap-4 overflow-x-auto pb-0 md:block md:snap-none md:overflow-visible md:gap-0 md:pb-0 md:divide-y md:divide-bastelli-navy/15 md:border-y md:border-bastelli-navy/15 [&>li]:snap-center [&>li]:shrink-0 [&>li]:w-[82vw] [&>li]:max-w-[340px] [&>li]:border [&>li]:border-bastelli-navy/15 [&>li]:rounded-lg [&>li]:bg-white [&>li]:px-4 md:[&>li]:w-auto md:[&>li]:max-w-none md:[&>li]:border-0 md:[&>li]:rounded-none md:[&>li]:bg-transparent md:[&>li]:px-0">
               {blocos.map((b) => (
                 <Accordion key={b.n} n={b.n} title={b.t} outcomes={b.out}>
                   {b.d}
@@ -1170,38 +1170,43 @@ function OQueVaiAprender() {
               ))}
             </ol>
 
-            {/* Navegação mobile — setas prev/next */}
-            <div className="mt-3 flex items-center justify-end gap-3 md:hidden">
-              <button
-                type="button"
-                onClick={() =>
-                  scrollRef.current?.scrollBy({
-                    left: -(scrollRef.current.clientWidth * 0.85),
-                    behavior: "smooth",
-                  })
-                }
-                aria-label="Módulo anterior"
-                className="grid h-11 w-11 place-items-center rounded-md border-2 border-bastelli-orange text-bastelli-orange transition hover:bg-bastelli-orange hover:text-white"
-              >
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M15 18l-6-6 6-6" />
-                </svg>
-              </button>
-              <button
-                type="button"
-                onClick={() =>
-                  scrollRef.current?.scrollBy({
-                    left: scrollRef.current.clientWidth * 0.85,
-                    behavior: "smooth",
-                  })
-                }
-                aria-label="Próximo módulo"
-                className="grid h-11 w-11 place-items-center rounded-md border-2 border-bastelli-orange text-bastelli-orange transition hover:bg-bastelli-orange hover:text-white"
-              >
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M9 18l6-6-6-6" />
-                </svg>
-              </button>
+            {/* Navegação mobile — setas inline */}
+            <div className="mt-4 flex items-center justify-between gap-3 md:hidden">
+              <span className="font-mono text-[11px] text-bastelli-navy/40 uppercase tracking-widest">
+                Role para ver módulos
+              </span>
+              <div className="flex gap-2">
+                <button
+                  type="button"
+                  onClick={() =>
+                    scrollRef.current?.scrollBy({
+                      left: -(scrollRef.current.clientWidth * 0.85),
+                      behavior: "smooth",
+                    })
+                  }
+                  aria-label="Módulo anterior"
+                  className="grid h-9 w-9 place-items-center rounded-md border-2 border-bastelli-orange text-bastelli-orange transition hover:bg-bastelli-orange hover:text-white"
+                >
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M15 18l-6-6 6-6" />
+                  </svg>
+                </button>
+                <button
+                  type="button"
+                  onClick={() =>
+                    scrollRef.current?.scrollBy({
+                      left: scrollRef.current.clientWidth * 0.85,
+                      behavior: "smooth",
+                    })
+                  }
+                  aria-label="Próximo módulo"
+                  className="grid h-9 w-9 place-items-center rounded-md border-2 border-bastelli-orange text-bastelli-orange transition hover:bg-bastelli-orange hover:text-white"
+                >
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M9 18l6-6-6-6" />
+                  </svg>
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -1221,23 +1226,23 @@ function Accordion({
   children: React.ReactNode;
   outcomes?: string[];
 }) {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   return (
     <li className="list-none">
       <button
         onClick={() => setOpen((o) => !o)}
-        className="group grid w-full grid-cols-[auto_1fr_auto] items-baseline gap-6 py-7 text-left md:gap-8"
+        className="group grid w-full grid-cols-[auto_1fr_auto] items-start gap-4 py-6 text-left md:items-baseline md:gap-8 md:py-7"
         aria-expanded={open}
       >
         <span
-          className={`font-display text-[42px] font-light leading-none tracking-tight md:text-[56px] ${
+          className={`font-display text-[32px] font-light leading-none tracking-tight md:text-[56px] ${
             open ? "text-bastelli-orange" : "text-bastelli-navy/25"
           } transition-colors group-hover:text-bastelli-orange`}
           aria-hidden
         >
           {n}
         </span>
-        <span className="font-display text-[20px] font-medium leading-tight text-bastelli-navy md:text-[26px]">
+        <span className="mt-1 font-display text-[17px] font-medium leading-tight text-bastelli-navy md:mt-0 md:text-[26px]">
           {title}
         </span>
         <span
@@ -1531,8 +1536,12 @@ function SobreBruno() {
             />
             </div>
 
-            {/* Navegação mobile — setas prev/next */}
-            <div className="mt-3 flex items-center justify-end gap-3 md:hidden">
+            {/* Navegação mobile — setas inline */}
+            <div className="mt-4 flex items-center justify-between gap-3 md:hidden">
+              <span className="font-mono text-[11px] text-bastelli-navy/40 uppercase tracking-widest">
+                Role para ver mais
+              </span>
+              <div className="flex gap-2">
               <button
                 type="button"
                 onClick={() =>
@@ -1542,9 +1551,9 @@ function SobreBruno() {
                   })
                 }
                 aria-label="Momento anterior"
-                className="grid h-11 w-11 place-items-center rounded-md border-2 border-bastelli-orange text-bastelli-orange transition hover:bg-bastelli-orange hover:text-white"
+                className="grid h-9 w-9 place-items-center rounded-md border-2 border-bastelli-orange text-bastelli-orange transition hover:bg-bastelli-orange hover:text-white"
               >
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M15 18l-6-6 6-6" />
                 </svg>
               </button>
@@ -1557,12 +1566,13 @@ function SobreBruno() {
                   })
                 }
                 aria-label="Próximo momento"
-                className="grid h-11 w-11 place-items-center rounded-md border-2 border-bastelli-orange text-bastelli-orange transition hover:bg-bastelli-orange hover:text-white"
+                className="grid h-9 w-9 place-items-center rounded-md border-2 border-bastelli-orange text-bastelli-orange transition hover:bg-bastelli-orange hover:text-white"
               >
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M9 18l6-6-6-6" />
                 </svg>
               </button>
+              </div>
             </div>
           </div>
         </div>
