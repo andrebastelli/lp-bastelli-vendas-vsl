@@ -1697,7 +1697,30 @@ function Momento({
    9. OFERTA
 ============================================================ */
 function Oferta() {
-  const carouselRef = useAutoScrollCarousel<HTMLDivElement>(3, 5000);
+  const carouselRef = useRef<HTMLDivElement>(null);
+  const [activeIdx, setActiveIdx] = useState(0);
+  const TOTAL = 3;
+
+  const scrollTo = (idx: number) => {
+    const el = carouselRef.current;
+    if (!el) return;
+    const itemWidth = el.clientWidth;
+    el.scrollTo({ left: idx * (itemWidth + 16), behavior: "smooth" });
+    setActiveIdx(idx);
+  };
+
+  useEffect(() => {
+    const el = carouselRef.current;
+    if (!el) return;
+    const onScroll = () => {
+      const itemWidth = el.clientWidth;
+      const idx = Math.round(el.scrollLeft / (itemWidth + 16));
+      setActiveIdx(Math.min(idx, TOTAL - 1));
+    };
+    el.addEventListener("scroll", onScroll, { passive: true });
+    return () => el.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
     <section id="oferta" className="bg-bastelli-paper">
       <div className="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-28">
@@ -1728,7 +1751,7 @@ function Oferta() {
           <div className="min-w-0 md:col-span-7">
             <div
               ref={carouselRef}
-              className="-mx-5 flex snap-x snap-mandatory items-start gap-4 overflow-x-auto px-5 pb-4 md:mx-0 md:block md:space-y-20 md:overflow-visible md:px-0 md:pb-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+              className="-mx-5 flex snap-x snap-mandatory items-start gap-4 overflow-x-auto px-5 pb-0 md:mx-0 md:block md:space-y-20 md:overflow-visible md:px-0 md:pb-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
             >
             {/* Item 01 — dominante, foto grande em cima */}
             <article className="w-[calc(100vw-2.5rem)] shrink-0 snap-center md:w-auto md:shrink md:snap-none">
@@ -1837,6 +1860,44 @@ function Oferta() {
                 </dl>
               </div>
             </article>
+            </div>
+
+            {/* Dots de navegação — mobile only */}
+            <div className="mt-5 flex items-center justify-between md:hidden">
+              <div className="flex gap-2">
+                {Array.from({ length: TOTAL }).map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => scrollTo(i)}
+                    aria-label={`Item ${i + 1}`}
+                    className={`h-2 rounded-full transition-all duration-200 ${
+                      i === activeIdx
+                        ? "w-6 bg-bastelli-orange"
+                        : "w-2 bg-bastelli-navy/25 hover:bg-bastelli-navy/50"
+                    }`}
+                  />
+                ))}
+              </div>
+              <div className="flex gap-2">
+                <button
+                  type="button"
+                  onClick={() => scrollTo(Math.max(0, activeIdx - 1))}
+                  disabled={activeIdx === 0}
+                  aria-label="Item anterior"
+                  className="grid h-9 w-9 place-items-center rounded-md border-2 border-bastelli-orange text-bastelli-orange transition hover:bg-bastelli-orange hover:text-white disabled:opacity-30"
+                >
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6" /></svg>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => scrollTo(Math.min(TOTAL - 1, activeIdx + 1))}
+                  disabled={activeIdx === TOTAL - 1}
+                  aria-label="Próximo item"
+                  className="grid h-9 w-9 place-items-center rounded-md border-2 border-bastelli-orange text-bastelli-orange transition hover:bg-bastelli-orange hover:text-white disabled:opacity-30"
+                >
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18l6-6-6-6" /></svg>
+                </button>
+              </div>
             </div>
           </div>
 
