@@ -1761,36 +1761,36 @@ function Oferta() {
                   </span>
                 </div>
 
-                <dl className="mt-5 space-y-4 text-[13px] text-bastelli-navy/80">
+                <dl className="mt-5 space-y-4 text-[13px] text-bastelli-navy">
                   <div className="flex items-baseline justify-between gap-4">
-                    <dt className="font-mono text-[11px] uppercase tracking-[0.18em] text-bastelli-navy/50">
+                    <dt className="font-mono text-[11px] uppercase tracking-[0.18em] text-bastelli-navy/70">
                       Curso
                     </dt>
-                    <dd className="text-right">12 módulos · 24 aulas · 4h28</dd>
+                    <dd className="text-right font-medium">12 módulos · 24 aulas · 4h28</dd>
                   </div>
                   <div className="flex items-baseline justify-between gap-4">
-                    <dt className="font-mono text-[11px] uppercase tracking-[0.18em] text-bastelli-navy/50">
+                    <dt className="font-mono text-[11px] uppercase tracking-[0.18em] text-bastelli-navy/70">
                       E-book
                     </dt>
-                    <dd className="text-right">Roda do E-commerce</dd>
+                    <dd className="text-right font-medium">Roda do E-commerce</dd>
                   </div>
                   <div className="flex items-baseline justify-between gap-4">
-                    <dt className="font-mono text-[11px] uppercase tracking-[0.18em] text-bastelli-navy/50">
+                    <dt className="font-mono text-[11px] uppercase tracking-[0.18em] text-bastelli-navy/70">
                       Manual
                     </dt>
-                    <dd className="text-right">Boas práticas por etapa</dd>
+                    <dd className="text-right font-medium">Boas práticas por etapa</dd>
                   </div>
                   <div className="flex items-baseline justify-between gap-4">
-                    <dt className="font-mono text-[11px] uppercase tracking-[0.18em] text-bastelli-navy/50">
+                    <dt className="font-mono text-[11px] uppercase tracking-[0.18em] text-bastelli-navy/70">
                       Plataforma
                     </dt>
-                    <dd className="text-right">Área oficial da Bastelli</dd>
+                    <dd className="text-right font-medium">Hotmart</dd>
                   </div>
                   <div className="flex items-baseline justify-between gap-4">
-                    <dt className="font-mono text-[11px] uppercase tracking-[0.18em] text-bastelli-navy/50">
+                    <dt className="font-mono text-[11px] uppercase tracking-[0.18em] text-bastelli-navy/70">
                       Certificado
                     </dt>
-                    <dd className="text-right text-bastelli-navy/80">
+                    <dd className="text-right font-medium">
                       Incluso
                     </dd>
                   </div>
@@ -1805,7 +1805,9 @@ function Oferta() {
                       R$ 197,00
                     </span>
                   </div>
-                  <CTA className="w-full">Ir para o checkout Hotmart</CTA>
+                  <div className="flex justify-center">
+                    <CTA className="w-full max-w-xs">Ir para o checkout Hotmart</CTA>
+                  </div>
                   <div className="mt-3 flex items-center justify-center gap-2">
                     <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-bastelli-navy/40"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
                     <p className="text-center font-mono text-[10px] uppercase tracking-[0.24em] text-bastelli-navy/40">
@@ -2205,6 +2207,15 @@ function Footer() {
               <br />
               Suporte: (19) 97114-9592
             </p>
+            <a
+              href="https://instagram.com/bastelliconsultoriaecommerce"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-3 inline-flex items-center gap-2 font-mono text-[12px] text-bastelli-navy/70 transition-colors hover:text-bastelli-orange"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+              @bastelliconsultoriaecommerce
+            </a>
           </div>
         </div>
 
