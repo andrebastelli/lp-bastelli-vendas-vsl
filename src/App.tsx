@@ -723,8 +723,8 @@ function QuebraDeCrenca() {
             <li
               key={p.mito}
               className={`border-t border-white/10 py-8 md:py-12
-                ${i === 1 ? "pl-6 md:pl-12" : ""}
-                ${i === 2 ? "pl-12 md:pl-24" : ""}
+                ${i === 1 ? "md:pl-12" : ""}
+                ${i === 2 ? "md:pl-24" : ""}
               `}
             >
               {/* Mobile: número em cima, texto embaixo */}
@@ -1532,7 +1532,7 @@ function SobreBruno() {
           </div>
 
           <div className="min-w-0 md:col-span-8 md:order-1 relative md:pr-16 md:before:content-[''] md:before:absolute md:before:top-3 md:before:bottom-3 md:before:right-6 md:before:w-px md:before:border-l md:before:border-dashed md:before:border-bastelli-orange/50">
-            <div ref={scrollRef} className="flex w-full max-w-full snap-x snap-mandatory gap-4 overflow-x-auto pb-0 md:block md:snap-none md:overflow-visible md:gap-0 md:pb-0 [&>article]:snap-center [&>article]:shrink-0 [&>article]:w-[82vw] [&>article]:max-w-[300px] [&>article]:rounded-lg [&>article]:border [&>article]:border-bastelli-navy/15 [&>article]:bg-white [&>article]:p-5 [&>article]:self-start md:[&>article]:w-auto md:[&>article]:max-w-none md:[&>article]:border-0 md:[&>article]:rounded-none md:[&>article]:bg-transparent md:[&>article]:p-0">
+            <div ref={scrollRef} className="flex w-full items-start snap-x snap-mandatory gap-0 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:block md:snap-none md:overflow-visible [&>article]:snap-start [&>article]:shrink-0 [&>article]:w-full [&>article]:rounded-lg [&>article]:border [&>article]:border-bastelli-navy/15 [&>article]:bg-white [&>article]:p-5 md:[&>article]:w-auto md:[&>article]:border-0 md:[&>article]:rounded-none md:[&>article]:bg-transparent md:[&>article]:p-0">
             <Momento
               n="01"
               year="2007"
@@ -1586,14 +1586,14 @@ function SobreBruno() {
             {/* Navegação mobile — setas inline */}
             <div className="mt-4 flex items-center justify-between gap-3 md:hidden">
               <span className="font-mono text-[11px] text-bastelli-navy/40 uppercase tracking-widest">
-                Role para ver mais
+                Deslize para ver mais
               </span>
               <div className="flex gap-2">
               <button
                 type="button"
                 onClick={() =>
                   scrollRef.current?.scrollBy({
-                    left: -(scrollRef.current.clientWidth * 0.85),
+                    left: -scrollRef.current.clientWidth,
                     behavior: "smooth",
                   })
                 }
@@ -1608,7 +1608,7 @@ function SobreBruno() {
                 type="button"
                 onClick={() =>
                   scrollRef.current?.scrollBy({
-                    left: scrollRef.current.clientWidth * 0.85,
+                    left: scrollRef.current.clientWidth,
                     behavior: "smooth",
                   })
                 }
@@ -1648,7 +1648,7 @@ function Momento({
 
   return (
     <article
-      className="relative md:mt-24 md:first:mt-0 md:before:absolute md:before:inset-x-0 md:before:-top-12 md:before:h-px md:before:bg-bastelli-navy/10 md:before:content-[''] md:first:before:hidden"
+      className="relative self-start md:mt-24 md:first:mt-0 md:before:absolute md:before:inset-x-0 md:before:-top-12 md:before:h-px md:before:bg-bastelli-navy/10 md:before:content-[''] md:first:before:hidden"
     >
       <span
         aria-hidden
@@ -1697,7 +1697,30 @@ function Momento({
    9. OFERTA
 ============================================================ */
 function Oferta() {
-  const carouselRef = useAutoScrollCarousel<HTMLDivElement>(3, 5000);
+  const carouselRef = useRef<HTMLDivElement>(null);
+  const [activeIdx, setActiveIdx] = useState(0);
+  const TOTAL = 3;
+
+  const scrollTo = (idx: number) => {
+    const el = carouselRef.current;
+    if (!el) return;
+    const itemWidth = el.clientWidth;
+    el.scrollTo({ left: idx * (itemWidth + 16), behavior: "smooth" });
+    setActiveIdx(idx);
+  };
+
+  useEffect(() => {
+    const el = carouselRef.current;
+    if (!el) return;
+    const onScroll = () => {
+      const itemWidth = el.clientWidth;
+      const idx = Math.round(el.scrollLeft / (itemWidth + 16));
+      setActiveIdx(Math.min(idx, TOTAL - 1));
+    };
+    el.addEventListener("scroll", onScroll, { passive: true });
+    return () => el.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
     <section id="oferta" className="bg-bastelli-paper">
       <div className="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-28">
@@ -1728,7 +1751,7 @@ function Oferta() {
           <div className="min-w-0 md:col-span-7">
             <div
               ref={carouselRef}
-              className="-mx-5 flex snap-x snap-mandatory items-start gap-4 overflow-x-auto px-5 pb-4 md:mx-0 md:block md:space-y-20 md:overflow-visible md:px-0 md:pb-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+              className="-mx-5 flex snap-x snap-mandatory items-start gap-4 overflow-x-auto px-5 pb-0 md:mx-0 md:block md:space-y-20 md:overflow-visible md:px-0 md:pb-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
             >
             {/* Item 01 — dominante, foto grande em cima */}
             <article className="w-[calc(100vw-2.5rem)] shrink-0 snap-center md:w-auto md:shrink md:snap-none">
@@ -1837,6 +1860,44 @@ function Oferta() {
                 </dl>
               </div>
             </article>
+            </div>
+
+            {/* Dots de navegação — mobile only */}
+            <div className="mt-5 flex items-center justify-between md:hidden">
+              <div className="flex gap-2">
+                {Array.from({ length: TOTAL }).map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => scrollTo(i)}
+                    aria-label={`Item ${i + 1}`}
+                    className={`h-2 rounded-full transition-all duration-200 ${
+                      i === activeIdx
+                        ? "w-6 bg-bastelli-orange"
+                        : "w-2 bg-bastelli-navy/25 hover:bg-bastelli-navy/50"
+                    }`}
+                  />
+                ))}
+              </div>
+              <div className="flex gap-2">
+                <button
+                  type="button"
+                  onClick={() => scrollTo(Math.max(0, activeIdx - 1))}
+                  disabled={activeIdx === 0}
+                  aria-label="Item anterior"
+                  className="grid h-9 w-9 place-items-center rounded-md border-2 border-bastelli-orange text-bastelli-orange transition hover:bg-bastelli-orange hover:text-white disabled:opacity-30"
+                >
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6" /></svg>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => scrollTo(Math.min(TOTAL - 1, activeIdx + 1))}
+                  disabled={activeIdx === TOTAL - 1}
+                  aria-label="Próximo item"
+                  className="grid h-9 w-9 place-items-center rounded-md border-2 border-bastelli-orange text-bastelli-orange transition hover:bg-bastelli-orange hover:text-white disabled:opacity-30"
+                >
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18l6-6-6-6" /></svg>
+                </button>
+              </div>
             </div>
           </div>
 
