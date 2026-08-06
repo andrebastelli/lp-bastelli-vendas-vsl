@@ -250,7 +250,7 @@ function Nav() {
               key={a.href}
               href={a.href}
               onClick={scrollTo(a.href.slice(1))}
-              className="text-[11px] uppercase tracking-[0.22em] text-bastelli-navy/55 transition-colors hover:text-bastelli-navy"
+              className="text-[11px] uppercase tracking-[0.22em] text-bastelli-navy/90 transition-colors hover:text-bastelli-navy"
             >
               {a.label}
             </a>
