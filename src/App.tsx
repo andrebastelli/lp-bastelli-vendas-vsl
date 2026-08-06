@@ -628,7 +628,7 @@ function Identificacao() {
               qualquer decisão vira tentativa
             </span>
             . Enquanto isso, empresas que entendem a operação de verdade de
-            um e-commerce vendem todo dia — e você fica se perguntando o
+            um e-commerce vendem todo dia, e você fica se perguntando o
             que elas sabem e você não.
           </p>
           <p className="md:col-span-3 md:pt-2 font-mono text-[12px] uppercase tracking-[0.22em] text-bastelli-navy/55">
@@ -738,7 +738,7 @@ function RodaDoEcommerce() {
       n: "02",
       title: "Loja Virtual",
       desc:
-        "O caminho do produto até o checkout — foto, descrição, filtro, frete, SEO. É onde a venda acontece ou trava.",
+            "O caminho do produto até o checkout: foto, descrição, filtro, frete, SEO. É onde a venda acontece ou trava.",
     },
     {
       n: "03",
@@ -828,8 +828,7 @@ function RodaDoEcommerce() {
 
         <div className="mt-8 flex flex-col items-start gap-4 md:mt-14 md:flex-row md:items-center md:gap-8">
           <p className="max-w-[36ch] font-display text-[20px] font-light leading-[1.2] text-bastelli-navy md:text-[24px]">
-            No curso, você vê como as quatro giram juntas{" "}
-            <span className="text-bastelli-orange">na sua loja</span>.
+            No Curso Online Introdução ao E-commerce.
           </p>
           <CTA />
         </div>
@@ -952,7 +951,7 @@ function ApresentacaoCurso() {
     { k: "Aulas", v: "24, curtas e sem enrolação" },
     { k: "Duração", v: "4h28 no total" },
     { k: "Formato", v: "vídeo sob demanda, assiste no seu tempo" },
-    { k: "Nível", v: "introdução — serve pra quem tá começando e pra quem já opera" },
+    { k: "Nível", v: "introdução, serve pra quem tá começando e pra quem já opera" },
     { k: "Entrega", v: "uma visão inteira da operação, do topo ao pós-venda" },
   ];
   return (
@@ -976,7 +975,7 @@ function ApresentacaoCurso() {
             </h2>
             <p className="mt-8 max-w-xl text-[17px] leading-[1.55] text-bastelli-navy/75 md:text-[19px]">
               É um Curso Online de Introdução ao E-commerce com Bruno Bastelli. Você senta, assiste
-              em alguns dias e sai enxergando a loja como um sistema — não
+              em alguns dias e sai enxergando a loja como um sistema, não
               como uma pilha de tarefas soltas.
             </p>
             <p className="mt-5 max-w-lg text-[15px] leading-relaxed text-bastelli-navy/60 md:pl-10">
@@ -1035,7 +1034,7 @@ function OQueVaiAprender() {
     {
       n: "01",
       t: "Planejamento e metas",
-      d: "Objetivo, calendário e indicadores que cabem no tamanho da sua loja — não no template de agência.",
+      d: "Objetivo, calendário e indicadores que cabem no tamanho da sua loja. Não no template de agência.",
       out: [
         "Montar o calendário de Black Friday sem improviso de última hora",
         "Definir meta de faturamento a partir de margem, não de vontade",
@@ -1045,7 +1044,7 @@ function OQueVaiAprender() {
     {
       n: "02",
       t: "Plataformas e estrutura da loja",
-      d: "O que uma loja precisa ter de verdade — e o que só parece importante no vídeo do YouTube.",
+      d: "O que uma loja precisa ter de verdade. E o que só parece importante no vídeo do YouTube.",
       out: [
         "Escolher entre Shopify, Nuvemshop, VTEX e Tray sem achismo",
         "Saber quando trocar de plataforma (e quando é só desculpa)",
@@ -1057,7 +1056,7 @@ function OQueVaiAprender() {
       t: "Produtos, fotos, descrições e experiência de compra",
       d: "O que decide, em 4 segundos, se a pessoa confia na loja ou fecha a aba.",
       out: [
-        "Refazer uma ficha de produto sem parecer marketplace genérico",
+        "Fazer um cadastro de produtos sem parecer marketplace genérico",
         "Organizar categorias para o visitante achar sozinho",
         "Ajustar fotos e descrição sem contratar estúdio",
       ],
@@ -1065,7 +1064,7 @@ function OQueVaiAprender() {
     {
       n: "04",
       t: "Pagamentos, frete, logística e operação",
-      d: "A parte chata que sustenta a loja em pé — pagamento, frete, estoque, expedição, antifraude.",
+      d: "A parte chata que sustenta a loja em pé: pagamento, frete, estoque, expedição, antifraude.",
       out: [
         "Configurar frete sem comer margem no CEP errado",
         "Reduzir chargeback ajustando as regras de antifraude",
@@ -1085,7 +1084,7 @@ function OQueVaiAprender() {
     {
       n: "06",
       t: "Atendimento, retenção e crescimento",
-      d: "O que faz o cliente voltar — e o que faz ele sumir depois da primeira compra.",
+        d: "O que faz o cliente voltar e o que faz ele sumir depois da primeira compra.",
       out: [
         "Atender WhatsApp sem virar SAC de reclamação",
         "Montar um fluxo de recompra simples (sem CRM caro)",
@@ -1115,7 +1114,7 @@ function OQueVaiAprender() {
                 Uma operação<br />inteira.
               </h2>
               <p className="mt-6 max-w-sm text-[15px] leading-relaxed text-bastelli-navy/70">
-                Cada bloco cobre uma parte da loja — e conversa com as outras. Nada aqui vive isolado.
+                Cada bloco cobre uma parte da loja e conversa com as outras. Nada aqui vive isolado.
               </p>
               <dl className="mt-8 space-y-2 border-t border-bastelli-navy/15 pt-6 font-mono text-[12px] uppercase tracking-[0.18em] text-bastelli-navy/60">
                 <div className="flex justify-between"><dt>Módulos</dt><dd className="text-bastelli-navy">12</dd></div>
@@ -1254,37 +1253,37 @@ function Accordion({
 function Bonus() {
   const itens = [
   {
-    title: "Curso principal",
-    desc: "Curso Online de Introdução ao E-commerce com Bruno Bastelli.",
+    title: "Curso Online Introdução E-commerce",
+    desc: "Com diversos bônus e materiais extras.",
     img: img01,
   },
   {
-    title: "Roda do E-commerce",
+    title: "Planilha/PDF com a Roda do E-commerce",
     desc: "A metodologia completa de decisão.",
     img: img07,
   },
   {
-    title: "Boas práticas",
+    title: "Boas Práticas de Banners",
     desc: "Checklist prático para execução.",
     img: img02,
   },
   {
-    title: "Introdução ao E-commerce",
+    title: "E-book Introdução E-commerce",
     desc: "Base para estruturar sua loja corretamente.",
     img: img03,
   },
   {
-    title: "Metas inteligentes",
+    title: "Planilha Para Definição de Metas",
     desc: "Defina metas claras e mensuráveis.",
     img: img05,
   },
   {
-    title: "Ofertas validadas",
-    desc: "Planilha com mais de 50 ideias de ofertas.",
+    title: "Planilha com Ideias de Ofertas",
+    desc: "Planilha com mais de 50 ideias de ofertas validadas.",
     img: img06,
   },
   {
-    title: "Campanhas e ações",
+    title: "Trello com Planejamento de Ações",
     desc: "Organize campanhas e vendas.",
     img: img08,
   },
@@ -1451,7 +1450,7 @@ function SobreBruno() {
               year="2007"
               chapter="Recomeço"
               title="O futebol acabou antes da hora. Precisei recomeçar longe do campo."
-              body="Problemas de saúde encerraram a carreira no futebol. Foi ali que a vida profissional recomeçou — dessa vez, atrás de uma tela."
+              body="Problemas de saúde encerraram a carreira no futebol. Foi ali que a vida profissional recomeçou, dessa vez atrás de uma tela."
               img={BrunoSantos}
             />
             <Momento
@@ -1467,7 +1466,7 @@ function SobreBruno() {
               year="2012–2018"
               chapter="Aprofundamento"
               title="Dev, UX, expedição, integrações, tráfego, Analytics."
-              body="Sete anos passando por área diferente a cada ciclo. Cada uma resolveu uma parte do quebra-cabeça — e mostrou como as partes se travam entre si quando ninguém olha o conjunto."
+              body="Sete anos passando por área diferente a cada ciclo. Cada uma resolveu uma parte do quebra-cabeça e mostrou como as partes se travam entre si quando ninguém olha o conjunto."
               img={BrunoDev}
             />
             <Momento
@@ -1475,7 +1474,7 @@ function SobreBruno() {
               year="2019"
               chapter="Bastelli"
               title="Abri a Bastelli pra fazer o que nenhuma agência fazia."
-              body="Consultoria que olha a loja inteira — não só o anúncio. Estruturação de operação, performance, tráfego, dados. Sem terceirizar a decisão que é do dono."
+              body="Consultoria que olha a loja inteira, não só o anúncio. Estruturação de operação, performance, tráfego, dados. Sem terceirizar a decisão que é do dono."
               img={BrunoAgencia}
             />
             <Momento
@@ -1697,7 +1696,7 @@ function Oferta() {
                 </h3>
                 <p className="mt-4 text-[14px] leading-relaxed text-bastelli-navy/75 md:text-[15px]">
                   A metodologia da Bastelli traduzida num guia curto pra você
-                  consultar antes de tomar decisão — troca de plataforma,
+                  consultar antes de tomar decisão: troca de plataforma,
                   reajuste de preço, briefing de agência.
                 </p>
                 <dl className="mt-5 grid grid-cols-2 gap-y-2 font-mono text-[11px] text-bastelli-navy/55">
@@ -1737,7 +1736,7 @@ function Oferta() {
                   .
                 </h3>
                 <p className="mt-4 text-[14px] leading-relaxed text-bastelli-navy/75 md:text-[15px]">
-                  Checklist por etapa da Roda — o que revisar antes de subir
+                  Checklist por etapa da Roda: o que revisar antes de subir
                   produto novo, o que testar antes de rodar campanha, o que
                   perguntar antes de fechar contrato com fornecedor. Pra você
                   aplicar sem precisar terceirizar.
@@ -1943,11 +1942,11 @@ function FAQ() {
       items: [
         {
           q: "É pra quem tá começando do zero?",
-          a: "É. Foi feito pra quem quer entender antes de gastar. Se você nunca abriu loja, começa por aqui — o curso te dá vocabulário e critério pra tomar as primeiras decisões sem chutar.",
+          a: "É. Foi feito pra quem quer entender antes de gastar. Se você nunca abriu loja, começa por aqui: o curso te dá vocabulário e critério pra tomar as primeiras decisões sem chutar.",
         },
         {
           q: "E se eu já tenho loja rodando?",
-          a: "Também serve. Na prática, quem já opera costuma travar em planejamento, dado ou experiência — não em anúncio. O curso ajuda a enxergar onde tá o gargalo real.",
+          a: "Também serve. Na prática, quem já opera costuma travar em planejamento, dado ou experiência, não em anúncio. O curso ajuda a enxergar onde tá o gargalo real.",
         },
         {
           q: "Preciso ter loja pra fazer?",
@@ -1973,7 +1972,7 @@ function FAQ() {
         },
         {
           q: "Por quanto tempo tenho acesso?",
-          a: "Sem prazo para consumir. O acesso é vitalício — você entra quando conseguir e revisita quando precisar.",
+          a: "Sem prazo para consumir. O acesso é vitalício: você entra quando conseguir e revisita quando precisar.",
         },
         {
           q: "Tem certificado no final?",
@@ -1987,11 +1986,11 @@ function FAQ() {
       items: [
         {
           q: "Vou vender mais depois de fazer?",
-          a: "Não prometo isso. Ninguém honesto promete. O curso te ensina a decidir melhor — o que acontece com a loja depende do que você faz com essas decisões.",
+          a: "Não prometo isso. Ninguém honesto promete. O curso te ensina a decidir melhor. O que acontece com a loja depende do que você faz com essas decisões.",
         },
         {
           q: "Tem garantia se eu não gostar?",
-          a: "Tem. Arrependeu, devolve — 7 dias a partir da compra, sem gatilho e sem contagem regressiva.",
+          a: "Tem. Arrependeu, devolve. 7 dias a partir da compra, sem gatilho e sem contagem regressiva.",
         },
       ],
     },
