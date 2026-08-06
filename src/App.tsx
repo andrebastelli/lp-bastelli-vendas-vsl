@@ -1648,7 +1648,7 @@ function Momento({
 
   return (
     <article
-      className="relative md:mt-24 md:first:mt-0 md:before:absolute md:before:inset-x-0 md:before:-top-12 md:before:h-px md:before:bg-bastelli-navy/10 md:before:content-[''] md:first:before:hidden"
+      className="relative self-start md:mt-24 md:first:mt-0 md:before:absolute md:before:inset-x-0 md:before:-top-12 md:before:h-px md:before:bg-bastelli-navy/10 md:before:content-[''] md:first:before:hidden"
     >
       <span
         aria-hidden
