@@ -1503,7 +1503,58 @@ function Bonus() {
    8. SOBRE BRUNO
 ============================================================ */
 function SobreBruno() {
-  const scrollRef = useAutoScrollCarousel<HTMLDivElement>(6, 5000);
+  const momentos = [
+    {
+      n: "01",
+      year: "2007",
+      chapter: "Recomeço",
+      title: "O futebol acabou antes da hora. Precisei recomeçar longe do campo.",
+      body: "Problemas de saúde encerraram a carreira no futebol. Foi ali que a vida profissional recomeçou, dessa vez atrás de uma tela.",
+      img: BrunoSantos,
+    },
+    {
+      n: "02",
+      year: "2010",
+      chapter: "KaBuM",
+      title: "Entrei atendendo cliente na KaBuM. Saí entendendo a loja por dentro.",
+      body: "No atendimento dá pra ver tudo: pedido travado, cobrança errada, entrega atrasada, promessa que a loja não cumpre. Foi a melhor escola que eu poderia ter tido.",
+      img: BrunoKabum,
+    },
+    {
+      n: "03",
+      year: "2012–2018",
+      chapter: "Aprofundamento",
+      title: "Dev, UX, expedição, integrações, tráfego, Analytics.",
+      body: "Sete anos passando por área diferente a cada ciclo. Cada uma resolveu uma parte do quebra-cabeça e mostrou como as partes se travam entre si quando ninguém olha o conjunto.",
+      img: BrunoDev,
+    },
+    {
+      n: "04",
+      year: "2019",
+      chapter: "Bastelli",
+      title: "Abri a Bastelli pra fazer o que nenhuma agência fazia.",
+      body: "Consultoria que olha a loja inteira, não só o anúncio. Estruturação de operação, performance, tráfego, dados. Sem terceirizar a decisão que é do dono.",
+      img: BrunoAgencia,
+    },
+    {
+      n: "05",
+      year: "2020–2024",
+      chapter: "Clientes",
+      title: "200+ lojas atendidas. Um prêmio no meio do caminho.",
+      body: "Projetos entregues em moda, cosméticos, pet, casa, nichos técnicos. Em 2023, a ABComm reconheceu como Melhor Profissional de E-commerce do Interior de SP.",
+      img: BrunoClientes,
+    },
+    {
+      n: "06",
+      year: "2025",
+      chapter: "O curso",
+      title: "A gente precisa ajudar mais pessoas com o Curso.",
+      body: "Dava pra condensar 16 anos de operação em algo que qualquer lojista pudesse assistir e começar a decidir melhor. Foi o que fiz, trouxe o curso exclusivo e amado por nossos clientes, para todos os empresários que precisam vender na internet na forma certa, com a metodologia que nos premiou no Prêmio ABComm.",
+      img: BrunoAbcomm,
+    },
+  ];
+  const [active, setActive] = useState(0);
+  const TOTAL = momentos.length;
   return (
     <section id="bruno" className="bg-white">
       <div className="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-32">
@@ -1532,93 +1583,58 @@ function SobreBruno() {
           </div>
 
           <div className="min-w-0 md:col-span-8 md:order-1 relative md:pr-16 md:before:content-[''] md:before:absolute md:before:top-3 md:before:bottom-3 md:before:right-6 md:before:w-px md:before:border-l md:before:border-dashed md:before:border-bastelli-orange/50">
-            <div ref={scrollRef} className="flex w-full items-start snap-x snap-mandatory gap-0 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:block md:snap-none md:overflow-visible [&>article]:snap-start [&>article]:shrink-0 [&>article]:w-full [&>article]:rounded-lg [&>article]:border [&>article]:border-bastelli-navy/15 [&>article]:bg-white [&>article]:p-5 md:[&>article]:w-auto md:[&>article]:border-0 md:[&>article]:rounded-none md:[&>article]:bg-transparent md:[&>article]:p-0">
-            <Momento
-              n="01"
-              year="2007"
-              chapter="Recomeço"
-              title="O futebol acabou antes da hora. Precisei recomeçar longe do campo."
-              body="Problemas de saúde encerraram a carreira no futebol. Foi ali que a vida profissional recomeçou, dessa vez atrás de uma tela."
-              img={BrunoSantos}
-            />
-            <Momento
-              n="02"
-              year="2010"
-              chapter="KaBuM"
-              title="Entrei atendendo cliente na KaBuM. Saí entendendo a loja por dentro."
-              body="No atendimento dá pra ver tudo: pedido travado, cobrança errada, entrega atrasada, promessa que a loja não cumpre. Foi a melhor escola que eu poderia ter tido."
-              img={BrunoKabum}
-            />
-            <Momento
-              n="03"
-              year="2012–2018"
-              chapter="Aprofundamento"
-              title="Dev, UX, expedição, integrações, tráfego, Analytics."
-              body="Sete anos passando por área diferente a cada ciclo. Cada uma resolveu uma parte do quebra-cabeça e mostrou como as partes se travam entre si quando ninguém olha o conjunto."
-              img={BrunoDev}
-            />
-            <Momento
-              n="04"
-              year="2019"
-              chapter="Bastelli"
-              title="Abri a Bastelli pra fazer o que nenhuma agência fazia."
-              body="Consultoria que olha a loja inteira, não só o anúncio. Estruturação de operação, performance, tráfego, dados. Sem terceirizar a decisão que é do dono."
-              img={BrunoAgencia}
-            />
-            <Momento
-              n="05"
-              year="2020–2024"
-              chapter="Clientes"
-              title="200+ lojas atendidas. Um prêmio no meio do caminho."
-              body="Projetos entregues em moda, cosméticos, pet, casa, nichos técnicos. Em 2023, a ABComm reconheceu como Melhor Profissional de E-commerce do Interior de SP."
-              img={BrunoClientes}
-            />
-            <Momento
-              n="06"
-              year="2025"
-              chapter="O curso"
-              title="A gente precisa ajudar mais pessoas com o Curso."
-              body="Dava pra condensar 16 anos de operação em algo que qualquer lojista pudesse assistir e começar a decidir melhor. Foi o que fiz, trouxe o curso exclusivo e amado por nossos clientes, para todos os empresários que precisam vender na internet na forma certa, com a metodologia que nos premiou no Prêmio ABComm."
-              img={BrunoAbcomm}
-            />
+            <div className="md:block [&>article]:rounded-lg [&>article]:border [&>article]:border-bastelli-navy/15 [&>article]:bg-white [&>article]:p-5 md:[&>article]:border-0 md:[&>article]:rounded-none md:[&>article]:bg-transparent md:[&>article]:p-0">
+              {momentos.map((m, i) => (
+                <Momento
+                  key={m.n}
+                  n={m.n}
+                  year={m.year}
+                  chapter={m.chapter}
+                  title={m.title}
+                  body={m.body}
+                  img={m.img}
+                  className={i === active ? "block" : "hidden md:block"}
+                />
+              ))}
             </div>
 
-            {/* Navegação mobile — setas inline */}
+            {/* Navegação mobile — setas + dots */}
             <div className="mt-4 flex items-center justify-between gap-3 md:hidden">
-              <span className="font-mono text-[11px] text-bastelli-navy/40 uppercase tracking-widest">
-                Deslize para ver mais
-              </span>
+              <div className="flex items-center gap-2">
+                {momentos.map((m, i) => (
+                  <button
+                    key={m.n}
+                    onClick={() => setActive(i)}
+                    aria-label={`Momento ${i + 1}`}
+                    className={`h-2 rounded-full transition-all duration-200 ${
+                      i === active ? "w-6 bg-bastelli-orange" : "w-2 bg-bastelli-navy/25"
+                    }`}
+                  />
+                ))}
+              </div>
               <div className="flex gap-2">
-              <button
-                type="button"
-                onClick={() =>
-                  scrollRef.current?.scrollBy({
-                    left: -scrollRef.current.clientWidth,
-                    behavior: "smooth",
-                  })
-                }
-                aria-label="Momento anterior"
-                className="grid h-9 w-9 place-items-center rounded-md border-2 border-bastelli-orange text-bastelli-orange transition hover:bg-bastelli-orange hover:text-white"
-              >
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M15 18l-6-6 6-6" />
-                </svg>
-              </button>
-              <button
-                type="button"
-                onClick={() =>
-                  scrollRef.current?.scrollBy({
-                    left: scrollRef.current.clientWidth,
-                    behavior: "smooth",
-                  })
-                }
-                aria-label="Próximo momento"
-                className="grid h-9 w-9 place-items-center rounded-md border-2 border-bastelli-orange text-bastelli-orange transition hover:bg-bastelli-orange hover:text-white"
-              >
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M9 18l6-6-6-6" />
-                </svg>
-              </button>
+                <button
+                  type="button"
+                  onClick={() => setActive((a) => Math.max(0, a - 1))}
+                  disabled={active === 0}
+                  aria-label="Momento anterior"
+                  className="grid h-9 w-9 place-items-center rounded-md border-2 border-bastelli-orange text-bastelli-orange transition hover:bg-bastelli-orange hover:text-white disabled:opacity-30"
+                >
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M15 18l-6-6 6-6" />
+                  </svg>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setActive((a) => Math.min(TOTAL - 1, a + 1))}
+                  disabled={active === TOTAL - 1}
+                  aria-label="Próximo momento"
+                  className="grid h-9 w-9 place-items-center rounded-md border-2 border-bastelli-orange text-bastelli-orange transition hover:bg-bastelli-orange hover:text-white disabled:opacity-30"
+                >
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M9 18l6-6-6-6" />
+                  </svg>
+                </button>
               </div>
             </div>
           </div>
@@ -1635,6 +1651,7 @@ function Momento({
   title,
   body,
   img,
+  className = "",
 }: {
   n: string;
   year: string;
@@ -1642,13 +1659,14 @@ function Momento({
   title: string;
   body: string;
   img: string;
+  className?: string;
 }) {
   const isEven = parseInt(n, 10) % 2 === 0;
   const isPlaceholder = img.startsWith("[[");
 
   return (
     <article
-      className="relative self-start md:mt-24 md:first:mt-0 md:before:absolute md:before:inset-x-0 md:before:-top-12 md:before:h-px md:before:bg-bastelli-navy/10 md:before:content-[''] md:first:before:hidden"
+      className={`relative md:mt-24 md:first:mt-0 md:before:absolute md:before:inset-x-0 md:before:-top-12 md:before:h-px md:before:bg-bastelli-navy/10 md:before:content-[''] md:first:before:hidden ${className}`}
     >
       <span
         aria-hidden
