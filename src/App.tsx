@@ -67,7 +67,7 @@ function useAutoScrollCarousel<T extends HTMLElement>(itemCount: number, interva
 
 
 const CHECKOUT_URL =
-  "https://pay.hotmart.com/G100638464G?off=fvkwnua1&checkoutMode=10&bid=1784646336100";
+  "https://pay.hotmart.com/G100638464G?off=fvkwnua1&checkoutMode=10&bid=1780434842803";
 const CTA_LABEL = "Quero entender meu e-commerce de verdade";
 
 function CTA({
@@ -108,13 +108,9 @@ function CTA({
   }
   return (
     <a
-      href="#checkout-final"
-      onClick={(e) => {
-        e.preventDefault();
-        document
-          .getElementById("checkout-final")
-          ?.scrollIntoView({ behavior: "smooth", block: "center" });
-      }}
+      href={CHECKOUT_URL}
+      target="_blank"
+      rel="noopener noreferrer"
       className={`${base} ${styles} ${className}`}
     >
       <span className="flex-1 sm:flex-none">{children}</span>
@@ -156,6 +152,45 @@ function Placeholder({
   );
 }
 
+function BackToTop() {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setVisible(window.scrollY > 400);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
+
+  return (
+    <button
+      onClick={scrollToTop}
+      aria-label="Voltar ao topo"
+      className={[
+        "fixed bottom-6 right-6 z-50 flex h-11 w-11 items-center justify-center rounded-full bg-bastelli-navy shadow-lg transition-all duration-300",
+        "hover:bg-bastelli-orange focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-bastelli-orange focus-visible:ring-offset-2",
+        visible ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-4 opacity-0",
+      ].join(" ")}
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="18"
+        height="18"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="white"
+        strokeWidth="2.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden
+      >
+        <path d="m18 15-6-6-6 6" />
+      </svg>
+    </button>
+  );
+}
+
 function Index() {
   return (
     <main className="bg-white font-sans text-bastelli-ink antialiased">
@@ -173,6 +208,7 @@ function Index() {
       <FAQ />
       <CtaFinal />
       <Footer />
+      <BackToTop />
     </main>
   );
 }
@@ -198,7 +234,7 @@ function Nav() {
           <img
             src={bastelliLogo}
             alt="Bastelli — Consultoria em E-commerce e Performance"
-            className="h-7 w-auto md:h-8"
+            className="h-6 w-auto max-w-[130px] object-contain md:h-8 md:max-w-[160px]"
           />
         </a>
 
@@ -210,7 +246,7 @@ function Nav() {
               key={a.href}
               href={a.href}
               onClick={scrollTo(a.href.slice(1))}
-              className="text-[11px] uppercase tracking-[0.22em] text-bastelli-navy/55 transition-colors hover:text-bastelli-navy"
+              className="text-[11px] uppercase tracking-[0.22em] text-bastelli-navy/90 transition-colors hover:text-bastelli-navy"
             >
               {a.label}
             </a>
@@ -222,8 +258,8 @@ function Nav() {
           onClick={(e) => {
             e.preventDefault();
             document
-              .getElementById("checkout-final")
-              ?.scrollIntoView({ behavior: "smooth", block: "center" });
+              .getElementById("oferta")
+              ?.scrollIntoView({ behavior: "smooth", block: "start" });
           }}
           className="group inline-flex items-baseline gap-2 text-[13px] font-semibold text-bastelli-navy"
         >
@@ -307,16 +343,16 @@ function Hero() {
       />
 
       <div className="relative mx-auto max-w-6xl px-5 pb-20 pt-14 md:px-8 md:pb-28 md:pt-20">
-        <div className="mb-6 flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-[10px] uppercase tracking-[0.24em] text-white/60 md:mb-8 md:flex-nowrap md:whitespace-nowrap md:text-[11px]">
-  <span className="inline-flex items-center gap-2 whitespace-nowrap rounded-sm border border-bastelli-orange/50 bg-bastelli-orange/10 px-2.5 py-1 font-mono font-bold text-bastelli-orange">
-    <span className="relative inline-flex h-1.5 w-1.5">
-      <span className="absolute inset-0 animate-ping rounded-full bg-bastelli-orange/70" />
-      <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-bastelli-orange" />
-    </span>
-    Curso Online de Introdução ao E-commerce
-  </span>
-  <span className="whitespace-nowrap text-white/70">com Bruno Bastelli</span>
-</div>
+        <div className="mb-6 flex flex-col items-center gap-y-2 text-[10px] uppercase tracking-[0.24em] text-white/60 md:mb-8 md:flex-row md:flex-wrap md:justify-center md:gap-x-3 md:text-[11px]">
+          <span className="inline-flex items-center gap-2 rounded-sm border border-bastelli-orange/50 bg-bastelli-orange/10 px-2.5 py-1 font-mono font-bold text-bastelli-orange text-center">
+            <span className="relative inline-flex h-1.5 w-1.5 shrink-0">
+              <span className="absolute inset-0 animate-ping rounded-full bg-bastelli-orange/70" />
+              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-bastelli-orange" />
+            </span>
+            Curso Online de Introdução ao E-commerce
+          </span>
+          <span className="text-white/70">com Bruno Bastelli</span>
+        </div>
 
         <h1 className="mx-auto max-w-5xl text-center font-display text-[38px] font-semibold leading-[1.02] tracking-[-0.025em] md:text-[80px]">
           Os{" "}
@@ -628,7 +664,7 @@ function Identificacao() {
               qualquer decisão vira tentativa
             </span>
             . Enquanto isso, empresas que entendem a operação de verdade de
-            um e-commerce vendem todo dia — e você fica se perguntando o
+            um e-commerce vendem todo dia, e você fica se perguntando o
             que elas sabem e você não.
           </p>
           <p className="md:col-span-3 md:pt-2 font-mono text-[12px] uppercase tracking-[0.22em] text-bastelli-navy/55">
@@ -686,24 +722,40 @@ function QuebraDeCrenca() {
           {pares.map((p, i) => (
             <li
               key={p.mito}
-              className={`grid grid-cols-[110px_1fr] gap-4 md:gap-8 border-t border-white/10 py-8 md:py-12
+              className={`border-t border-white/10 py-8 md:py-12
                 ${i === 1 ? "pl-6 md:pl-12" : ""}
                 ${i === 2 ? "pl-12 md:pl-24" : ""}
               `}
             >
-              <div className="relative flex items-start">
-                <span className="font-display font-semibold text-[48px] leading-none text-bastelli-orange md:text-[72px]">
+              {/* Mobile: número em cima, texto embaixo */}
+              <div className="flex flex-col gap-3 md:hidden">
+                <span className="font-display font-semibold text-[40px] leading-none text-bastelli-orange">
                   {String(i + 1).padStart(2, "0")}
                 </span>
+                <div>
+                  <p className="font-display text-[19px] leading-[1.25] text-white/55">
+                    {p.mito}
+                  </p>
+                  <p className="mt-3 text-[15px] leading-[1.55] text-white">
+                    {p.verdade}
+                  </p>
+                </div>
               </div>
-
-              <div>
-                <p className="font-display text-[20px] leading-[1.25] text-white/55 md:text-[28px]">
-                  {p.mito}
-                </p>
-                <p className="mt-3 max-w-[62ch] text-[16px] leading-[1.55] text-white md:mt-4 md:text-[18px]">
-                  {p.verdade}
-                </p>
+              {/* Desktop: lado a lado */}
+              <div className="hidden md:grid md:grid-cols-[110px_1fr] md:gap-8">
+                <div className="flex items-start">
+                  <span className="font-display font-semibold text-[72px] leading-none text-bastelli-orange">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                </div>
+                <div>
+                  <p className="font-display text-[28px] leading-[1.25] text-white/55">
+                    {p.mito}
+                  </p>
+                  <p className="mt-4 max-w-[62ch] text-[18px] leading-[1.55] text-white">
+                    {p.verdade}
+                  </p>
+                </div>
               </div>
             </li>
           ))}
@@ -732,13 +784,13 @@ function RodaDoEcommerce() {
       n: "01",
       title: "Planejamento",
       desc:
-        "Meta do mês, calendário de campanha e onde apostar ficha no próximo trimestre. Sem isso, o resto vira reação.",
+        "Meta do mês, calendário de campanha e onde apostar ficha no próximo trimestre. Sem isso, você lojista não sabe para onde ir.",
     },
     {
       n: "02",
       title: "Loja Virtual",
       desc:
-        "O caminho do produto até o checkout — foto, descrição, filtro, frete, SEO. É onde a venda acontece ou trava.",
+            "O caminho do produto até o checkout: foto, descrição, filtro, frete, SEO. É onde a venda acontece ou trava.",
     },
     {
       n: "03",
@@ -761,7 +813,7 @@ function RodaDoEcommerce() {
         <div className="grid grid-cols-12 items-center gap-4 md:gap-6">
           <div className="col-span-12 md:col-span-6">
             <span className="font-mono text-[11px] uppercase tracking-[0.28em] text-bastelli-orange">
-              Metodologia Bastelli
+              Metodologia Exclusiva da Bastelli
             </span>
             <h2 className="mt-4 font-display text-[38px] font-light leading-[0.98] tracking-[-0.02em] text-bastelli-navy md:text-[68px]">
               Quatro engrenagens.
@@ -828,8 +880,7 @@ function RodaDoEcommerce() {
 
         <div className="mt-8 flex flex-col items-start gap-4 md:mt-14 md:flex-row md:items-center md:gap-8">
           <p className="max-w-[36ch] font-display text-[20px] font-light leading-[1.2] text-bastelli-navy md:text-[24px]">
-            No curso, você vê como as quatro giram juntas{" "}
-            <span className="text-bastelli-orange">na sua loja</span>.
+            No Curso Online Introdução ao E-commerce.
           </p>
           <CTA />
         </div>
@@ -952,7 +1003,7 @@ function ApresentacaoCurso() {
     { k: "Aulas", v: "24, curtas e sem enrolação" },
     { k: "Duração", v: "4h28 no total" },
     { k: "Formato", v: "vídeo sob demanda, assiste no seu tempo" },
-    { k: "Nível", v: "introdução — serve pra quem tá começando e pra quem já opera" },
+    { k: "Nível", v: "introdução, serve pra quem tá começando e pra quem já opera" },
     { k: "Entrega", v: "uma visão inteira da operação, do topo ao pós-venda" },
   ];
   return (
@@ -962,7 +1013,7 @@ function ApresentacaoCurso() {
         <div className="flex items-center gap-4">
           <div className="h-px flex-1 bg-bastelli-navy/15" />
           <span className="text-[11px] uppercase tracking-[0.28em] text-bastelli-navy/50">
-            Ficha do curso
+            Sobre o Curso
           </span>
         </div>
 
@@ -974,9 +1025,9 @@ function ApresentacaoCurso() {
               <br />
               <span className="italic text-bastelli-orange">Uma visão 360º.</span>
             </h2>
-            <p className="mt-8 max-w-xl text-[17px] leading-[1.55] text-bastelli-navy/75 md:text-[19px]">
+            <p className="mt-8 max-w-xl text-[17px] leading-[1.55] text-bastelli-navy/90 md:text-[19px]">
               É um Curso Online de Introdução ao E-commerce com Bruno Bastelli. Você senta, assiste
-              em alguns dias e sai enxergando a loja como um sistema — não
+              em alguns dias e sai enxergando a loja como um sistema, não
               como uma pilha de tarefas soltas.
             </p>
             <p className="mt-5 max-w-lg text-[15px] leading-relaxed text-bastelli-navy/60 md:pl-10">
@@ -1035,7 +1086,7 @@ function OQueVaiAprender() {
     {
       n: "01",
       t: "Planejamento e metas",
-      d: "Objetivo, calendário e indicadores que cabem no tamanho da sua loja — não no template de agência.",
+      d: "Objetivo, calendário e indicadores que cabem no tamanho da sua loja. Não no template de agência.",
       out: [
         "Montar o calendário de Black Friday sem improviso de última hora",
         "Definir meta de faturamento a partir de margem, não de vontade",
@@ -1045,7 +1096,7 @@ function OQueVaiAprender() {
     {
       n: "02",
       t: "Plataformas e estrutura da loja",
-      d: "O que uma loja precisa ter de verdade — e o que só parece importante no vídeo do YouTube.",
+      d: "O que uma loja precisa ter de verdade. E o que só parece importante no vídeo do YouTube.",
       out: [
         "Escolher entre Shopify, Nuvemshop, VTEX e Tray sem achismo",
         "Saber quando trocar de plataforma (e quando é só desculpa)",
@@ -1057,7 +1108,7 @@ function OQueVaiAprender() {
       t: "Produtos, fotos, descrições e experiência de compra",
       d: "O que decide, em 4 segundos, se a pessoa confia na loja ou fecha a aba.",
       out: [
-        "Refazer uma ficha de produto sem parecer marketplace genérico",
+        "Fazer um cadastro de produtos sem parecer marketplace genérico",
         "Organizar categorias para o visitante achar sozinho",
         "Ajustar fotos e descrição sem contratar estúdio",
       ],
@@ -1065,7 +1116,7 @@ function OQueVaiAprender() {
     {
       n: "04",
       t: "Pagamentos, frete, logística e operação",
-      d: "A parte chata que sustenta a loja em pé — pagamento, frete, estoque, expedição, antifraude.",
+      d: "A parte chata que sustenta a loja em pé: pagamento, frete, estoque, expedição, antifraude.",
       out: [
         "Configurar frete sem comer margem no CEP errado",
         "Reduzir chargeback ajustando as regras de antifraude",
@@ -1085,7 +1136,7 @@ function OQueVaiAprender() {
     {
       n: "06",
       t: "Atendimento, retenção e crescimento",
-      d: "O que faz o cliente voltar — e o que faz ele sumir depois da primeira compra.",
+        d: "O que faz o cliente voltar e o que faz ele sumir depois da primeira compra.",
       out: [
         "Atender WhatsApp sem virar SAC de reclamação",
         "Montar um fluxo de recompra simples (sem CRM caro)",
@@ -1115,7 +1166,7 @@ function OQueVaiAprender() {
                 Uma operação<br />inteira.
               </h2>
               <p className="mt-6 max-w-sm text-[15px] leading-relaxed text-bastelli-navy/70">
-                Cada bloco cobre uma parte da loja — e conversa com as outras. Nada aqui vive isolado.
+                Cada bloco cobre uma parte da loja e conversa com as outras. Nada aqui vive isolado.
               </p>
               <dl className="mt-8 space-y-2 border-t border-bastelli-navy/15 pt-6 font-mono text-[12px] uppercase tracking-[0.18em] text-bastelli-navy/60">
                 <div className="flex justify-between"><dt>Módulos</dt><dd className="text-bastelli-navy">12</dd></div>
@@ -1127,7 +1178,7 @@ function OQueVaiAprender() {
 
           {/* Coluna direita — lista de blocos */}
           <div className="min-w-0 md:col-span-8">
-            <ol ref={scrollRef} className="flex w-full max-w-full snap-x snap-mandatory gap-4 overflow-x-auto pb-4 md:block md:snap-none md:overflow-visible md:gap-0 md:pb-0 md:divide-y md:divide-bastelli-navy/15 md:border-y md:border-bastelli-navy/15 [&>li]:snap-center [&>li]:shrink-0 [&>li]:w-[80vw] [&>li]:max-w-[320px] [&>li]:border [&>li]:border-bastelli-navy/15 [&>li]:rounded-lg [&>li]:bg-white [&>li]:px-4 md:[&>li]:w-auto md:[&>li]:max-w-none md:[&>li]:border-0 md:[&>li]:rounded-none md:[&>li]:bg-transparent md:[&>li]:px-0">
+            <ol ref={scrollRef} className="flex w-full max-w-full snap-x snap-mandatory gap-4 overflow-x-auto pb-0 md:block md:snap-none md:overflow-visible md:gap-0 md:pb-0 md:divide-y md:divide-bastelli-navy/15 md:border-y md:border-bastelli-navy/15 [&>li]:snap-center [&>li]:shrink-0 [&>li]:w-[82vw] [&>li]:max-w-[340px] [&>li]:border [&>li]:border-bastelli-navy/15 [&>li]:rounded-lg [&>li]:bg-white [&>li]:px-4 md:[&>li]:w-auto md:[&>li]:max-w-none md:[&>li]:border-0 md:[&>li]:rounded-none md:[&>li]:bg-transparent md:[&>li]:px-0">
               {blocos.map((b) => (
                 <Accordion key={b.n} n={b.n} title={b.t} outcomes={b.out}>
                   {b.d}
@@ -1135,38 +1186,43 @@ function OQueVaiAprender() {
               ))}
             </ol>
 
-            {/* Navegação mobile — setas prev/next */}
-            <div className="mt-3 flex items-center justify-end gap-3 md:hidden">
-              <button
-                type="button"
-                onClick={() =>
-                  scrollRef.current?.scrollBy({
-                    left: -(scrollRef.current.clientWidth * 0.85),
-                    behavior: "smooth",
-                  })
-                }
-                aria-label="Módulo anterior"
-                className="grid h-11 w-11 place-items-center rounded-md border-2 border-bastelli-orange text-bastelli-orange transition hover:bg-bastelli-orange hover:text-white"
-              >
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M15 18l-6-6 6-6" />
-                </svg>
-              </button>
-              <button
-                type="button"
-                onClick={() =>
-                  scrollRef.current?.scrollBy({
-                    left: scrollRef.current.clientWidth * 0.85,
-                    behavior: "smooth",
-                  })
-                }
-                aria-label="Próximo módulo"
-                className="grid h-11 w-11 place-items-center rounded-md border-2 border-bastelli-orange text-bastelli-orange transition hover:bg-bastelli-orange hover:text-white"
-              >
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M9 18l6-6-6-6" />
-                </svg>
-              </button>
+            {/* Navegação mobile — setas inline */}
+            <div className="mt-4 flex items-center justify-between gap-3 md:hidden">
+              <span className="font-mono text-[11px] text-bastelli-navy/40 uppercase tracking-widest">
+                Role para ver módulos
+              </span>
+              <div className="flex gap-2">
+                <button
+                  type="button"
+                  onClick={() =>
+                    scrollRef.current?.scrollBy({
+                      left: -(scrollRef.current.clientWidth * 0.85),
+                      behavior: "smooth",
+                    })
+                  }
+                  aria-label="Módulo anterior"
+                  className="grid h-9 w-9 place-items-center rounded-md border-2 border-bastelli-orange text-bastelli-orange transition hover:bg-bastelli-orange hover:text-white"
+                >
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M15 18l-6-6 6-6" />
+                  </svg>
+                </button>
+                <button
+                  type="button"
+                  onClick={() =>
+                    scrollRef.current?.scrollBy({
+                      left: scrollRef.current.clientWidth * 0.85,
+                      behavior: "smooth",
+                    })
+                  }
+                  aria-label="Próximo módulo"
+                  className="grid h-9 w-9 place-items-center rounded-md border-2 border-bastelli-orange text-bastelli-orange transition hover:bg-bastelli-orange hover:text-white"
+                >
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M9 18l6-6-6-6" />
+                  </svg>
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -1180,41 +1236,72 @@ function Accordion({
   title,
   children,
   outcomes,
+  defaultOpen = true,
 }: {
   n: string;
   title: string;
   children: React.ReactNode;
   outcomes?: string[];
+  defaultOpen?: boolean;
 }) {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(defaultOpen);
   return (
     <li className="list-none">
       <button
         onClick={() => setOpen((o) => !o)}
-        className="group grid w-full grid-cols-[auto_1fr_auto] items-baseline gap-6 py-7 text-left md:gap-8"
+        className="group w-full py-5 text-left md:py-7"
         aria-expanded={open}
       >
-        <span
-          className={`font-display text-[42px] font-light leading-none tracking-tight md:text-[56px] ${
-            open ? "text-bastelli-orange" : "text-bastelli-navy/25"
-          } transition-colors group-hover:text-bastelli-orange`}
-          aria-hidden
-        >
-          {n}
-        </span>
-        <span className="font-display text-[20px] font-medium leading-tight text-bastelli-navy md:text-[26px]">
-          {title}
-        </span>
-        <span
-          className={`grid h-9 w-9 shrink-0 place-items-center rounded-full border text-[13px] transition-all ${
-            open
-              ? "rotate-45 border-bastelli-orange bg-bastelli-orange text-white"
-              : "border-bastelli-navy/30 text-bastelli-navy group-hover:border-bastelli-navy"
-          }`}
-          aria-hidden
-        >
-          +
-        </span>
+        {/* Mobile: número em cima, título + botão na linha debaixo */}
+        <div className="flex items-start justify-between gap-3 md:hidden">
+          <div className="flex flex-col gap-1">
+            <span
+              className={`font-display text-[28px] font-light leading-none tracking-tight ${
+                open ? "text-bastelli-orange" : "text-bastelli-navy/25"
+              } transition-colors group-hover:text-bastelli-orange`}
+              aria-hidden
+            >
+              {n}
+            </span>
+            <span className="font-display text-[16px] font-medium leading-snug text-bastelli-navy">
+              {title}
+            </span>
+          </div>
+          <span
+            className={`mt-1 grid h-9 w-9 shrink-0 place-items-center rounded-full border text-[13px] transition-all ${
+              open
+                ? "rotate-45 border-bastelli-orange bg-bastelli-orange text-white"
+                : "border-bastelli-navy/30 text-bastelli-navy group-hover:border-bastelli-navy"
+            }`}
+            aria-hidden
+          >
+            +
+          </span>
+        </div>
+        {/* Desktop: grid horizontal */}
+        <div className="hidden md:grid md:grid-cols-[auto_1fr_auto] md:items-baseline md:gap-8">
+          <span
+            className={`font-display text-[56px] font-light leading-none tracking-tight ${
+              open ? "text-bastelli-orange" : "text-bastelli-navy/25"
+            } transition-colors group-hover:text-bastelli-orange`}
+            aria-hidden
+          >
+            {n}
+          </span>
+          <span className="font-display text-[26px] font-medium leading-tight text-bastelli-navy">
+            {title}
+          </span>
+          <span
+            className={`grid h-9 w-9 shrink-0 place-items-center rounded-full border text-[13px] transition-all ${
+              open
+                ? "rotate-45 border-bastelli-orange bg-bastelli-orange text-white"
+                : "border-bastelli-navy/30 text-bastelli-navy group-hover:border-bastelli-navy"
+            }`}
+            aria-hidden
+          >
+            +
+          </span>
+        </div>
       </button>
       {open && (
         <div className="grid grid-cols-[auto_1fr] gap-6 pb-8 md:gap-8">
@@ -1254,37 +1341,37 @@ function Accordion({
 function Bonus() {
   const itens = [
   {
-    title: "Curso principal",
-    desc: "Curso Online de Introdução ao E-commerce com Bruno Bastelli.",
+    title: "Curso Online Introdução E-commerce",
+    desc: "Com diversos bônus e materiais extras.",
     img: img01,
   },
   {
-    title: "Roda do E-commerce",
+    title: "Planilha/PDF com a Roda do E-commerce",
     desc: "A metodologia completa de decisão.",
     img: img07,
   },
   {
-    title: "Boas práticas",
+    title: "Boas Práticas de Banners",
     desc: "Checklist prático para execução.",
     img: img02,
   },
   {
-    title: "Introdução ao E-commerce",
+    title: "E-book Introdução E-commerce",
     desc: "Base para estruturar sua loja corretamente.",
     img: img03,
   },
   {
-    title: "Metas inteligentes",
+    title: "Planilha Para Definição de Metas",
     desc: "Defina metas claras e mensuráveis.",
     img: img05,
   },
   {
-    title: "Ofertas validadas",
-    desc: "Planilha com mais de 50 ideias de ofertas.",
+    title: "Planilha com Ideias de Ofertas",
+    desc: "Planilha com mais de 50 ideias de ofertas validadas.",
     img: img06,
   },
   {
-    title: "Campanhas e ações",
+    title: "Trello com Planejamento de Ações",
     desc: "Organize campanhas e vendas.",
     img: img08,
   },
@@ -1426,7 +1513,7 @@ function SobreBruno() {
               <div className="flex items-center gap-3">
                 <span className="h-px w-8 bg-bastelli-orange" />
                 <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-bastelli-orange">
-                  Quem escreveu isso
+                  Com Quem Você Vai Aprender
                 </span>
               </div>
               <h2 className="mt-6 font-display text-[44px] font-light leading-[0.95] text-bastelli-navy md:text-[68px]">
@@ -1439,19 +1526,19 @@ function SobreBruno() {
               <dl className="mt-8 space-y-2 border-t border-bastelli-navy/15 pt-6 font-mono text-[12px] uppercase tracking-[0.18em] text-bastelli-navy/55">
                 <div className="flex justify-between"><dt>No e-commerce</dt><dd className="text-bastelli-navy">16 anos</dd></div>
                 <div className="flex justify-between"><dt>Clientes</dt><dd className="text-bastelli-navy">200+</dd></div>
-                <div className="flex justify-between"><dt>ABComm</dt><dd className="text-bastelli-navy">2023</dd></div>
+                <div className="flex flex-col gap-0.5"><dt>ABComm</dt><dd className="text-bastelli-navy normal-case tracking-normal text-[11px]">Vencedor do Prêmio ABComm Consultoria em E-commerce</dd></div>
               </dl>
             </div>
           </div>
 
           <div className="min-w-0 md:col-span-8 md:order-1 relative md:pr-16 md:before:content-[''] md:before:absolute md:before:top-3 md:before:bottom-3 md:before:right-6 md:before:w-px md:before:border-l md:before:border-dashed md:before:border-bastelli-orange/50">
-            <div ref={scrollRef} className="flex w-full max-w-full snap-x snap-mandatory gap-4 overflow-x-auto pb-4 md:block md:snap-none md:overflow-visible md:gap-0 md:pb-0 [&>article]:snap-center [&>article]:shrink-0 [&>article]:w-[80vw] [&>article]:max-w-[320px] [&>article]:rounded-lg [&>article]:border [&>article]:border-bastelli-navy/15 [&>article]:bg-white [&>article]:p-5 md:[&>article]:w-auto md:[&>article]:max-w-none md:[&>article]:border-0 md:[&>article]:rounded-none md:[&>article]:bg-transparent md:[&>article]:p-0">
+            <div ref={scrollRef} className="flex w-full max-w-full snap-x snap-mandatory gap-4 overflow-x-auto pb-0 md:block md:snap-none md:overflow-visible md:gap-0 md:pb-0 [&>article]:snap-center [&>article]:shrink-0 [&>article]:w-[82vw] [&>article]:max-w-[300px] [&>article]:rounded-lg [&>article]:border [&>article]:border-bastelli-navy/15 [&>article]:bg-white [&>article]:p-5 [&>article]:self-start md:[&>article]:w-auto md:[&>article]:max-w-none md:[&>article]:border-0 md:[&>article]:rounded-none md:[&>article]:bg-transparent md:[&>article]:p-0">
             <Momento
               n="01"
               year="2007"
               chapter="Recomeço"
               title="O futebol acabou antes da hora. Precisei recomeçar longe do campo."
-              body="Problemas de saúde encerraram a carreira no futebol. Foi ali que a vida profissional recomeçou — dessa vez, atrás de uma tela."
+              body="Problemas de saúde encerraram a carreira no futebol. Foi ali que a vida profissional recomeçou, dessa vez atrás de uma tela."
               img={BrunoSantos}
             />
             <Momento
@@ -1467,7 +1554,7 @@ function SobreBruno() {
               year="2012–2018"
               chapter="Aprofundamento"
               title="Dev, UX, expedição, integrações, tráfego, Analytics."
-              body="Sete anos passando por área diferente a cada ciclo. Cada uma resolveu uma parte do quebra-cabeça — e mostrou como as partes se travam entre si quando ninguém olha o conjunto."
+              body="Sete anos passando por área diferente a cada ciclo. Cada uma resolveu uma parte do quebra-cabeça e mostrou como as partes se travam entre si quando ninguém olha o conjunto."
               img={BrunoDev}
             />
             <Momento
@@ -1475,7 +1562,7 @@ function SobreBruno() {
               year="2019"
               chapter="Bastelli"
               title="Abri a Bastelli pra fazer o que nenhuma agência fazia."
-              body="Consultoria que olha a loja inteira — não só o anúncio. Estruturação de operação, performance, tráfego, dados. Sem terceirizar a decisão que é do dono."
+              body="Consultoria que olha a loja inteira, não só o anúncio. Estruturação de operação, performance, tráfego, dados. Sem terceirizar a decisão que é do dono."
               img={BrunoAgencia}
             />
             <Momento
@@ -1490,14 +1577,18 @@ function SobreBruno() {
               n="06"
               year="2025"
               chapter="O curso"
-              title="Aí veio o curso. Fundamentos abertos, sem enrolação."
-              body="Dava pra condensar 16 anos de operação em algo que qualquer lojista pudesse assistir e começar a decidir melhor. Foi o que fiz."
+              title="A gente precisa ajudar mais pessoas com o Curso."
+              body="Dava pra condensar 16 anos de operação em algo que qualquer lojista pudesse assistir e começar a decidir melhor. Foi o que fiz, trouxe o curso exclusivo e amado por nossos clientes, para todos os empresários que precisam vender na internet na forma certa, com a metodologia que nos premiou no Prêmio ABComm."
               img={BrunoAbcomm}
             />
             </div>
 
-            {/* Navegação mobile — setas prev/next */}
-            <div className="mt-3 flex items-center justify-end gap-3 md:hidden">
+            {/* Navegação mobile — setas inline */}
+            <div className="mt-4 flex items-center justify-between gap-3 md:hidden">
+              <span className="font-mono text-[11px] text-bastelli-navy/40 uppercase tracking-widest">
+                Role para ver mais
+              </span>
+              <div className="flex gap-2">
               <button
                 type="button"
                 onClick={() =>
@@ -1507,9 +1598,9 @@ function SobreBruno() {
                   })
                 }
                 aria-label="Momento anterior"
-                className="grid h-11 w-11 place-items-center rounded-md border-2 border-bastelli-orange text-bastelli-orange transition hover:bg-bastelli-orange hover:text-white"
+                className="grid h-9 w-9 place-items-center rounded-md border-2 border-bastelli-orange text-bastelli-orange transition hover:bg-bastelli-orange hover:text-white"
               >
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M15 18l-6-6 6-6" />
                 </svg>
               </button>
@@ -1522,12 +1613,13 @@ function SobreBruno() {
                   })
                 }
                 aria-label="Próximo momento"
-                className="grid h-11 w-11 place-items-center rounded-md border-2 border-bastelli-orange text-bastelli-orange transition hover:bg-bastelli-orange hover:text-white"
+                className="grid h-9 w-9 place-items-center rounded-md border-2 border-bastelli-orange text-bastelli-orange transition hover:bg-bastelli-orange hover:text-white"
               >
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M9 18l6-6-6-6" />
                 </svg>
               </button>
+              </div>
             </div>
           </div>
         </div>
@@ -1613,11 +1705,9 @@ function Oferta() {
         <div className="grid gap-6 md:grid-cols-12 md:gap-10">
           <div className="md:col-span-3 md:pt-3">
             <div className="font-mono text-[11px] uppercase tracking-[0.24em] text-bastelli-orange">
-              Composição do acesso
+              O que você vai receber
             </div>
-            <div className="mt-2 font-mono text-[11px] text-bastelli-navy/45">
-              03 entregáveis · 01 acesso
-            </div>
+
           </div>
           <div className="md:col-span-9">
             <h2 className="font-display text-[38px] font-light leading-[0.98] tracking-tight text-bastelli-navy md:text-[64px]">
@@ -1627,12 +1717,8 @@ function Oferta() {
               </em>
             </h2>
             <p className="mt-5 max-w-[54ch] text-[15px] leading-relaxed text-bastelli-navy/70 md:text-[17px]">
-              Um curso principal e dois materiais que ficam do lado do
-              computador enquanto você opera. Nada de bônus inflado pra
-              justificar preço.{" "}
-              <span className="font-mono text-[11px] text-bastelli-orange">
-                [[VALIDAR: OFERTA_FINAL_CONFIRMADA]]
-              </span>
+              Confira todos os itens que estão inclusos junto com o Curso
+              Online Introdução ao E-commerce.
             </p>
           </div>
         </div>
@@ -1648,18 +1734,15 @@ function Oferta() {
             <article className="w-[calc(100vw-2.5rem)] shrink-0 snap-center md:w-auto md:shrink md:snap-none">
               <div className="flex items-baseline gap-3">
                 <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-bastelli-orange">
-                  01 · Curso principal
+                  01 · Curso Online de Introdução ao E-commerce
                 </span>
                 <span aria-hidden className="h-px flex-1 bg-bastelli-navy/15" />
-                <span className="font-mono text-[10px] text-bastelli-navy/40">
-                  peça central
-                </span>
               </div>
-              <div className="mt-6">
-                <Placeholder
-                  label="Frame real das aulas — dashboard do curso"
-                  ratio="16/9"
-                  tone="paper"
+              <div className="mt-6 overflow-hidden rounded-md">
+                <img
+                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/hotmart_edit2-Mk318cTyI75Jtoycnwmtk4QL5Z4D4Z.png"
+                  alt="Dashboard do Curso Online de Introdução ao E-commerce na Hotmart"
+                  className="w-full h-auto object-contain"
                 />
               </div>
               <h3 className="mt-6 font-display text-[30px] font-light leading-[1.02] tracking-tight text-bastelli-navy md:text-[44px]">
@@ -1675,10 +1758,10 @@ function Oferta() {
             {/* Item 02 — split horizontal, foto à direita, texto respirando */}
             <article className="flex w-[calc(100vw-2.5rem)] shrink-0 snap-center flex-col gap-6 md:grid md:w-auto md:shrink md:snap-none md:grid-cols-[1.2fr_1fr] md:items-center md:gap-10">
               <div className="md:order-2">
-                <Placeholder
-                  label="Mockup real do e-book — capa e páginas internas"
-                  ratio="16/10"
-                  tone="paper"
+                <img
+                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/roda_do_e-commerce_edit-EEhGVuHShdpjyoX51SZ1FqdKyOUUgQ.png"
+                  alt="Planilha Roda do E-commerce — mockup em desktop e tablet"
+                  className="w-full h-auto object-contain"
                 />
               </div>
               <div className="md:order-1">
@@ -1697,7 +1780,7 @@ function Oferta() {
                 </h3>
                 <p className="mt-4 text-[14px] leading-relaxed text-bastelli-navy/75 md:text-[15px]">
                   A metodologia da Bastelli traduzida num guia curto pra você
-                  consultar antes de tomar decisão — troca de plataforma,
+                  consultar antes de tomar decisão: troca de plataforma,
                   reajuste de preço, briefing de agência.
                 </p>
                 <dl className="mt-5 grid grid-cols-2 gap-y-2 font-mono text-[11px] text-bastelli-navy/55">
@@ -1716,10 +1799,10 @@ function Oferta() {
             {/* Item 03 — mesmo formato do 02, com imagem à esquerda pra alternar o ritmo */}
             <article className="flex w-[calc(100vw-2.5rem)] shrink-0 snap-center flex-col gap-6 md:grid md:w-auto md:shrink md:snap-none md:grid-cols-[1.2fr_1fr] md:items-center md:gap-10">
               <div>
-                <Placeholder
-                  label="Mockup real do manual — capa e páginas internas"
-                  ratio="16/10"
-                  tone="paper"
+                <img
+                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/boas_praticas_edit-RsUmpNvBQfIFTJv4SjaQywFT3eiPnx.png"
+                  alt="Planilha de Ideias de Ofertas — mockup em desktop e tablet"
+                  className="w-full h-auto object-contain"
                 />
               </div>
               <div>
@@ -1737,7 +1820,7 @@ function Oferta() {
                   .
                 </h3>
                 <p className="mt-4 text-[14px] leading-relaxed text-bastelli-navy/75 md:text-[15px]">
-                  Checklist por etapa da Roda — o que revisar antes de subir
+                  Checklist por etapa da Roda: o que revisar antes de subir
                   produto novo, o que testar antes de rodar campanha, o que
                   perguntar antes de fechar contrato com fornecedor. Pra você
                   aplicar sem precisar terceirizar.
@@ -1763,61 +1846,63 @@ function Oferta() {
               <div className="border border-dashed border-bastelli-navy/25 bg-white p-6 md:p-8">
                 <div className="flex items-baseline justify-between border-b border-bastelli-navy/10 pb-4">
                   <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-bastelli-orange">
-                    Recibo do acesso
-                  </span>
-                  <span className="font-mono text-[10px] text-bastelli-navy/40">
-                    nº 001
+                    O que está incluso no valor
                   </span>
                 </div>
 
-                <dl className="mt-5 space-y-4 text-[13px] text-bastelli-navy/80">
+                <dl className="mt-5 space-y-4 text-[13px] text-bastelli-navy">
                   <div className="flex items-baseline justify-between gap-4">
-                    <dt className="font-mono text-[11px] uppercase tracking-[0.18em] text-bastelli-navy/50">
+                    <dt className="font-mono text-[11px] uppercase tracking-[0.18em] text-bastelli-navy/70">
                       Curso
                     </dt>
-                    <dd className="text-right">12 módulos · 24 aulas · 4h28</dd>
+                    <dd className="text-right font-medium">12 módulos · 24 aulas · 4h28</dd>
                   </div>
                   <div className="flex items-baseline justify-between gap-4">
-                    <dt className="font-mono text-[11px] uppercase tracking-[0.18em] text-bastelli-navy/50">
+                    <dt className="font-mono text-[11px] uppercase tracking-[0.18em] text-bastelli-navy/70">
                       E-book
                     </dt>
-                    <dd className="text-right">Roda do E-commerce</dd>
+                    <dd className="text-right font-medium">Roda do E-commerce</dd>
                   </div>
                   <div className="flex items-baseline justify-between gap-4">
-                    <dt className="font-mono text-[11px] uppercase tracking-[0.18em] text-bastelli-navy/50">
+                    <dt className="font-mono text-[11px] uppercase tracking-[0.18em] text-bastelli-navy/70">
                       Manual
                     </dt>
-                    <dd className="text-right">Boas práticas por etapa</dd>
+                    <dd className="text-right font-medium">Boas práticas por etapa</dd>
                   </div>
                   <div className="flex items-baseline justify-between gap-4">
-                    <dt className="font-mono text-[11px] uppercase tracking-[0.18em] text-bastelli-navy/50">
+                    <dt className="font-mono text-[11px] uppercase tracking-[0.18em] text-bastelli-navy/70">
                       Plataforma
                     </dt>
-                    <dd className="text-right">Área oficial da Bastelli</dd>
+                    <dd className="text-right font-medium">Hotmart</dd>
                   </div>
-                  <div className="flex items-baseline justify-between gap-4 text-bastelli-navy/50">
-                    <dt className="font-mono text-[11px] uppercase tracking-[0.18em]">
-                      Prazo
-                    </dt>
-                    <dd className="text-right font-mono text-[11px]">
-                      [[VALIDAR]]
-                    </dd>
-                  </div>
-                  <div className="flex items-baseline justify-between gap-4 text-bastelli-navy/50">
-                    <dt className="font-mono text-[11px] uppercase tracking-[0.18em]">
+                  <div className="flex items-baseline justify-between gap-4">
+                    <dt className="font-mono text-[11px] uppercase tracking-[0.18em] text-bastelli-navy/70">
                       Certificado
                     </dt>
-                    <dd className="text-right font-mono text-[11px]">
-                      [[VALIDAR]]
+                    <dd className="text-right font-medium">
+                      Incluso
                     </dd>
                   </div>
                 </dl>
 
                 <div className="mt-7 border-t border-dashed border-bastelli-navy/25 pt-6">
-                  <CTA className="w-full">Ir para o checkout Hotmart</CTA>
-                  <p className="mt-3 text-center font-mono text-[10px] uppercase tracking-[0.24em] text-bastelli-navy/40">
-                    Checkout seguro · Hotmart
-                  </p>
+                  <div className="mb-4 flex items-baseline justify-between">
+                    <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-bastelli-navy/50">
+                      Valor
+                    </span>
+                    <span className="font-display text-[28px] font-light text-bastelli-navy">
+                      R$ 197,00
+                    </span>
+                  </div>
+                  <div className="flex justify-center">
+                    <CTA className="w-full max-w-xs">Ir para o checkout Hotmart</CTA>
+                  </div>
+                  <div className="mt-3 flex items-center justify-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-bastelli-navy/40"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                    <p className="text-center font-mono text-[10px] uppercase tracking-[0.24em] text-bastelli-navy/40">
+                      Compra segura · Hotmart
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1911,7 +1996,7 @@ function Garantia() {
               <div className="mt-6 flex items-center gap-3">
                 <span className="h-px w-10 bg-bastelli-navy/40" />
                 <span className="font-mono text-[12px] tracking-wide text-bastelli-navy/70">
-                  Bruno — Bastelli
+                  Bruno Bastelli
                 </span>
               </div>
             </div>
@@ -1943,11 +2028,11 @@ function FAQ() {
       items: [
         {
           q: "É pra quem tá começando do zero?",
-          a: "É. Foi feito pra quem quer entender antes de gastar. Se você nunca abriu loja, começa por aqui — o curso te dá vocabulário e critério pra tomar as primeiras decisões sem chutar.",
+          a: "É. Foi feito pra quem quer entender antes de gastar. Se você nunca abriu loja, começa por aqui: o curso te dá vocabulário e critério pra tomar as primeiras decisões sem chutar.",
         },
         {
           q: "E se eu já tenho loja rodando?",
-          a: "Também serve. Na prática, quem já opera costuma travar em planejamento, dado ou experiência — não em anúncio. O curso ajuda a enxergar onde tá o gargalo real.",
+          a: "Também serve. Na prática, quem já opera costuma travar em planejamento, dado ou experiência, não em anúncio. O curso ajuda a enxergar onde tá o gargalo real.",
         },
         {
           q: "Preciso ter loja pra fazer?",
@@ -1965,19 +2050,19 @@ function FAQ() {
       items: [
         {
           q: "O que vem junto do curso?",
-          a: "A configuração final está em fechamento. [[VALIDAR: OFERTA_FINAL_CONFIRMADA]]",
+          a: "Está incluso o acesso na Hotmart com o Curso Online Introdução E-commerce. O curso tem 12 módulos, 24 aulas e 4 horas, 28 minutos de conteúdo, abordando temas como planejamento, Roda do E-commerce, plataformas, meios de pagamento, fraudes, ERP, logística, estoque, experiência do usuário, SEO, cadastro de produtos, atendimento, metas, análise de dados, tracking, retenção e ciclo de sucesso de uma loja virtual. Incluso o E-book Roda do E-commerce, PDF Manual de Boas Práticas Para E-commerce, entre outros materiais.",
         },
         {
           q: "Como recebo o acesso?",
-          a: "Assim que o pagamento cai na Hotmart, você recebe um e-mail com o login da plataforma da Bastelli. Direto, sem etapa intermediária.",
+          a: "Assim que o pagamento cai na Hotmart, você recebe um e-mail com o login e acesso enviado pela Hotmart com os dados que você utilizou na hora de comprar.",
         },
         {
           q: "Por quanto tempo tenho acesso?",
-          a: "Sem prazo para consumir. O acesso é vitalício — você entra quando conseguir e revisita quando precisar.",
+          a: "O Acesso ao curso e todos os materiais é válido por 1 ano, sendo necessário renovar após esse prazo. Entendemos que antes disso, você precisa concluir os módulos para ter sucesso! É imprescindível que você aplique os conhecimentos.",
         },
         {
           q: "Tem certificado no final?",
-          a: "[[VALIDAR COM O CLIENTE: CERTIFICADO]]",
+          a: "Sim, você terá acesso ao certificado dentro do ambiente da Hotmart após concluir todas as aulas.",
         },
       ],
     },
@@ -1987,11 +2072,11 @@ function FAQ() {
       items: [
         {
           q: "Vou vender mais depois de fazer?",
-          a: "Não prometo isso. Ninguém honesto promete. O curso te ensina a decidir melhor — o que acontece com a loja depende do que você faz com essas decisões.",
+          a: "Não prometo isso. Ninguém honesto promete. O curso te ensina a decidir melhor. O que acontece com a loja depende do que você faz com essas decisões.",
         },
         {
           q: "Tem garantia se eu não gostar?",
-          a: "Tem. Arrependeu, devolve — 7 dias a partir da compra, sem gatilho e sem contagem regressiva.",
+          a: "Sim, em até 7 dias você pode solicitar o cancelamento caso não tenha ficado satisfeito com a qualidade das aulas e curso.",
         },
       ],
     },
@@ -2008,10 +2093,7 @@ function FAQ() {
               <span className="font-mono text-[11px] uppercase tracking-[0.24em] text-bastelli-orange">
                 F.A.Q.
               </span>
-              <span className="h-px w-10 bg-bastelli-navy/30" />
-              <span className="font-mono text-[11px] uppercase tracking-[0.24em] text-bastelli-navy/60">
-                10 respostas
-              </span>
+
             </div>
           </div>
           <div className="col-span-12 md:col-span-9 md:pl-8">
@@ -2054,6 +2136,7 @@ function FAQ() {
                         key={it.q}
                         n={String(counter).padStart(2, "0")}
                         title={it.q}
+                        defaultOpen={false}
                       >
                         {it.a}
                       </Accordion>
@@ -2089,10 +2172,7 @@ function CtaFinal() {
         <div className="flex items-center gap-3">
           <span className="h-px w-10 bg-bastelli-orange" />
           <span className="font-mono text-[11px] uppercase tracking-[0.24em] text-bastelli-orange">
-            Fim da página
-          </span>
-          <span className="hidden font-mono text-[11px] uppercase tracking-[0.24em] text-white/40 md:inline">
-            · Última chamada honesta
+            Última Chance
           </span>
         </div>
 
@@ -2137,7 +2217,7 @@ function CtaFinal() {
                   <div className="mt-5 flex items-center gap-3">
                     <span className="h-px w-8 bg-white/40" />
                     <span className="font-mono text-[11px] tracking-wide text-white/70">
-                      Bruno — Bastelli
+                      Bruno Bastelli
                     </span>
                   </div>
                 </div>
@@ -2213,22 +2293,29 @@ function Footer() {
           {/* Meta / legal */}
           <div className="col-span-12 md:col-span-7 md:text-right">
             <p className="font-mono text-[12px] leading-relaxed text-bastelli-navy/70">
-              © {new Date().getFullYear()} Bastelli
+              © {new Date().getFullYear()} Bastelli Consultoria
               <br />
-              [[VALIDAR: suporte]]
-              <br />
-              [[VALIDAR: privacidade / termos]]
+              Suporte: (19) 97114-9592
             </p>
+            <a
+              href="https://instagram.com/bastelliconsultoriaecommerce"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-3 inline-flex items-center gap-2 font-mono text-[12px] text-bastelli-navy/70 transition-colors hover:text-bastelli-orange"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+              @bastelliconsultoriaecommerce
+            </a>
           </div>
         </div>
 
         {/* Baseline */}
         <div className="mt-12 flex flex-col gap-2 border-t border-bastelli-navy/10 pt-5 md:flex-row md:items-center md:justify-between">
           <span className="font-mono text-[10px] uppercase tracking-[0.24em] text-bastelli-navy/40">
-            Fim do documento
+            Bastelli Consultoria – Todos os direitos Reservados
           </span>
           <span className="font-mono text-[10px] uppercase tracking-[0.24em] text-bastelli-navy/40">
-            v.1 · pré-lançamento
+            CNPJ 43.747.839/0001-09
           </span>
         </div>
       </div>
