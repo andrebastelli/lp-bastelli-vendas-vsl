@@ -262,8 +262,8 @@ function Nav() {
           onClick={(e) => {
             e.preventDefault();
             document
-              .getElementById("checkout-final")
-              ?.scrollIntoView({ behavior: "smooth", block: "center" });
+              .getElementById("oferta")
+              ?.scrollIntoView({ behavior: "smooth", block: "start" });
           }}
           className="group inline-flex items-baseline gap-2 text-[13px] font-semibold text-bastelli-navy"
         >
@@ -1666,10 +1666,7 @@ function Oferta() {
             <p className="mt-5 max-w-[54ch] text-[15px] leading-relaxed text-bastelli-navy/70 md:text-[17px]">
               Um curso principal e dois materiais que ficam do lado do
               computador enquanto você opera. Nada de bônus inflado pra
-              justificar preço.{" "}
-              <span className="font-mono text-[11px] text-bastelli-orange">
-                [[VALIDAR: OFERTA_FINAL_CONFIRMADA]]
-              </span>
+              justificar preço.
             </p>
           </div>
         </div>
