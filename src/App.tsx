@@ -411,7 +411,7 @@ function VSLPlayer() {
   }, []);
 
   const showFloating = outOfView && !dismissed;
-  const embedSrc = `https://player.vimeo.com/video/${VIMEO_VIDEO_ID}?badge=0&autopause=0&player_id=0&app_id=58479`;
+  const embedSrc = `https://player.vimeo.com/video/${VIMEO_VIDEO_ID}?badge=0&autopause=0&player_id=0&app_id=58479&title=0&byline=0&portrait=0`;
 
   return (
     <div ref={anchorRef}>
