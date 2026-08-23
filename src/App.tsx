@@ -1282,49 +1282,17 @@ function Bonus() {
   },
 ];
 
-  const sectionRef = useRef<HTMLElement>(null);
   const [active, setActive] = useState(0);
+  const TOTAL = itens.length;
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const section = sectionRef.current;
-      if (!section) return;
-
-      const rect = section.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-      const totalScroll = rect.height - windowHeight;
-
-      if (totalScroll <= 0) {
-        setActive(0);
-        return;
-      }
-
-      const scrolled = Math.min(Math.max(-rect.top, 0), totalScroll);
-      const pct = scrolled / totalScroll;
-
-      const idx = Math.min(
-        itens.length - 1,
-        Math.floor(pct * itens.length)
-      );
-
-      setActive(idx);
-    };
-
-    handleScroll();
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [itens.length]);
+  const goPrev = () => setActive((a) => Math.max(0, a - 1));
+  const goNext = () => setActive((a) => Math.min(TOTAL - 1, a + 1));
 
   const current = itens[active];
 
   return (
-    <section
-      ref={sectionRef}
-      className="relative bg-white"
-      style={{ height: `${itens.length * 100}vh` }}
-    >
-      {/* STICKY */}
-      <div className="sticky top-0 flex h-screen flex-col justify-center overflow-hidden py-6">
+    <section className="relative bg-white">
+      <div className="flex flex-col justify-center overflow-hidden py-16 md:py-24">
         <div className="mx-auto w-full max-w-6xl px-5 md:px-8">
           {/* HEADER */}
           <div className="mb-4 max-w-[600px] md:mb-8">
@@ -1377,21 +1345,52 @@ function Bonus() {
                   / {String(itens.length).padStart(2, "0")}
                 </span>
               </div>
-              <div className="flex items-center gap-1.5">
-                {itens.map((it, i) => (
-                  <span
-                    key={it.title}
-                    aria-hidden
-                    className={`h-1 rounded-full transition-all duration-500 ${
-                      i === active ? "w-8 bg-bastelli-orange md:w-10" : "w-2 bg-bastelli-navy/20"
-                    }`}
-                  />
-                ))}
+              <div className="flex items-center gap-3">
+                {/* Dots clicáveis */}
+                <div className="flex items-center gap-1.5">
+                  {itens.map((it, i) => (
+                    <button
+                      key={it.title}
+                      type="button"
+                      onClick={() => setActive(i)}
+                      aria-label={`Ir para o bônus ${i + 1}`}
+                      aria-current={i === active}
+                      className={`h-1.5 rounded-full transition-all duration-300 ${
+                        i === active
+                          ? "w-8 bg-bastelli-orange md:w-10"
+                          : "w-2 bg-bastelli-navy/20 hover:bg-bastelli-navy/40"
+                      }`}
+                    />
+                  ))}
+                </div>
+
+                {/* Setas */}
+                <div className="flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={goPrev}
+                    disabled={active === 0}
+                    aria-label="Bônus anterior"
+                    className="grid h-9 w-9 place-items-center rounded-md border-2 border-bastelli-orange text-bastelli-orange transition hover:bg-bastelli-orange hover:text-white disabled:opacity-30"
+                  >
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M15 18l-6-6 6-6" />
+                    </svg>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={goNext}
+                    disabled={active === TOTAL - 1}
+                    aria-label="Próximo bônus"
+                    className="grid h-9 w-9 place-items-center rounded-md border-2 border-bastelli-orange text-bastelli-orange transition hover:bg-bastelli-orange hover:text-white disabled:opacity-30"
+                  >
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M9 18l6-6-6-6" />
+                    </svg>
+                  </button>
+                </div>
               </div>
             </div>
-            <p className="mt-2 font-mono text-[9px] uppercase tracking-[0.22em] text-bastelli-navy/40 md:mt-3 md:text-[10px]">
-              Role a página pra ver os próximos bônus
-            </p>
           </div>
         </div>
       </div>
