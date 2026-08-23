@@ -394,83 +394,19 @@ function Hero() {
 const YT_VIDEO_ID = "LRTO8jzWVT0";
 
 function VSLPlayer() {
-  const anchorRef = useRef<HTMLDivElement | null>(null);
-  const [outOfView, setOutOfView] = useState(false);
-  const [dismissed, setDismissed] = useState(false);
-
-  useEffect(() => {
-    const el = anchorRef.current;
-    if (!el) return;
-    const io = new IntersectionObserver(
-      ([entry]) => setOutOfView(!entry.isIntersecting),
-      { threshold: 0, rootMargin: "-80px 0px 0px 0px" }
-    );
-    io.observe(el);
-    return () => io.disconnect();
-  }, []);
-
-  const showFloating = outOfView && !dismissed;
   const embedSrc = `https://www.youtube.com/embed/${YT_VIDEO_ID}?rel=0&modestbranding=1`;
 
   return (
-    <div ref={anchorRef}>
-      {/* Player principal */}
-      <div className="relative w-full overflow-hidden border border-white/15 shadow-[0_30px_80px_-40px_rgba(0,0,0,0.7)]">
-        <div style={{ aspectRatio: "16/9" }} className="relative w-full bg-black">
-          <iframe
-            src={embedSrc}
-            title="Aula-convite — Bruno Bastelli"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowFullScreen
-            className="absolute inset-0 h-full w-full border-0"
-          />
-        </div>
+    <div className="relative w-full overflow-hidden border border-white/15 shadow-[0_30px_80px_-40px_rgba(0,0,0,0.7)]">
+      <div style={{ aspectRatio: "16/9" }} className="relative w-full bg-black">
+        <iframe
+          src={embedSrc}
+          title="Aula-convite — Bruno Bastelli"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowFullScreen
+          className="absolute inset-0 h-full w-full border-0"
+        />
       </div>
-
-      {/* Player flutuante */}
-      {showFloating && (
-        <div
-          className="fixed bottom-4 right-4 z-50 w-[240px] overflow-hidden rounded-lg border border-white/20 bg-black shadow-2xl sm:w-[300px] md:w-[340px]"
-          role="complementary"
-          aria-label="Vídeo flutuante"
-        >
-          <div className="flex flex-col items-center justify-center gap-1 bg-bastelli-navy px-3 py-2 pr-8 text-[10px] uppercase tracking-[0.18em] text-white/50">
-            <div className="flex flex-nowrap items-center justify-center gap-2 whitespace-nowrap">
-              <span className="inline-flex items-center gap-2 rounded-sm border border-orange-500/40 bg-orange-500/10 px-2 py-0.5 font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-orange-400">
-                <span className="relative inline-flex items-center justify-center">
-                  <span className="absolute inset-0 animate-ping rounded-sm bg-orange-500/60 opacity-75" />
-                  <span className="relative inline-flex items-center justify-center rounded-[3px] bg-orange-500 px-1 py-[1px]">
-                    <svg viewBox="0 0 24 24" className="h-2.5 w-2.5 fill-white" aria-hidden="true">
-                      <path d="M8 5v14l11-7z" />
-                    </svg>
-                  </span>
-                </span>
-                Vídeo
-              </span>
-              <span className="text-white/70">Aula-convite</span>
-            </div>
-            <span className="text-white/40">Assista antes de começar</span>
-          </div>
-          <button
-            onClick={() => setDismissed(true)}
-            aria-label="Fechar vídeo flutuante"
-            className="absolute right-1.5 top-1.5 z-10 grid h-6 w-6 place-items-center rounded-full bg-black/70 text-white/80 backdrop-blur transition hover:bg-black hover:text-white"
-          >
-            <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" strokeWidth="1.5">
-              <path d="M1 1l8 8M9 1l-8 8" />
-            </svg>
-          </button>
-          <div style={{ aspectRatio: "16/9" }} className="relative w-full bg-black">
-            <iframe
-              src={`${embedSrc}&mute=1`}
-              title="Aula-convite — miniatura flutuante"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-              className="absolute inset-0 h-full w-full border-0"
-            />
-          </div>
-        </div>
-      )}
     </div>
   );
 }
@@ -1346,49 +1282,17 @@ function Bonus() {
   },
 ];
 
-  const sectionRef = useRef<HTMLElement>(null);
   const [active, setActive] = useState(0);
+  const TOTAL = itens.length;
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const section = sectionRef.current;
-      if (!section) return;
-
-      const rect = section.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-      const totalScroll = rect.height - windowHeight;
-
-      if (totalScroll <= 0) {
-        setActive(0);
-        return;
-      }
-
-      const scrolled = Math.min(Math.max(-rect.top, 0), totalScroll);
-      const pct = scrolled / totalScroll;
-
-      const idx = Math.min(
-        itens.length - 1,
-        Math.floor(pct * itens.length)
-      );
-
-      setActive(idx);
-    };
-
-    handleScroll();
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [itens.length]);
+  const goPrev = () => setActive((a) => Math.max(0, a - 1));
+  const goNext = () => setActive((a) => Math.min(TOTAL - 1, a + 1));
 
   const current = itens[active];
 
   return (
-    <section
-      ref={sectionRef}
-      className="relative bg-white"
-      style={{ height: `${itens.length * 100}vh` }}
-    >
-      {/* STICKY */}
-      <div className="sticky top-0 flex h-screen flex-col justify-center overflow-hidden py-6">
+    <section className="relative bg-white">
+      <div className="flex flex-col justify-center overflow-hidden py-16 md:py-24">
         <div className="mx-auto w-full max-w-6xl px-5 md:px-8">
           {/* HEADER */}
           <div className="mb-4 max-w-[600px] md:mb-8">
@@ -1441,21 +1345,52 @@ function Bonus() {
                   / {String(itens.length).padStart(2, "0")}
                 </span>
               </div>
-              <div className="flex items-center gap-1.5">
-                {itens.map((it, i) => (
-                  <span
-                    key={it.title}
-                    aria-hidden
-                    className={`h-1 rounded-full transition-all duration-500 ${
-                      i === active ? "w-8 bg-bastelli-orange md:w-10" : "w-2 bg-bastelli-navy/20"
-                    }`}
-                  />
-                ))}
+              <div className="flex items-center gap-3">
+                {/* Dots clicáveis */}
+                <div className="flex items-center gap-1.5">
+                  {itens.map((it, i) => (
+                    <button
+                      key={it.title}
+                      type="button"
+                      onClick={() => setActive(i)}
+                      aria-label={`Ir para o bônus ${i + 1}`}
+                      aria-current={i === active}
+                      className={`h-1.5 rounded-full transition-all duration-300 ${
+                        i === active
+                          ? "w-8 bg-bastelli-orange md:w-10"
+                          : "w-2 bg-bastelli-navy/20 hover:bg-bastelli-navy/40"
+                      }`}
+                    />
+                  ))}
+                </div>
+
+                {/* Setas */}
+                <div className="flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={goPrev}
+                    disabled={active === 0}
+                    aria-label="Bônus anterior"
+                    className="grid h-9 w-9 place-items-center rounded-md border-2 border-bastelli-orange text-bastelli-orange transition hover:bg-bastelli-orange hover:text-white disabled:opacity-30"
+                  >
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M15 18l-6-6 6-6" />
+                    </svg>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={goNext}
+                    disabled={active === TOTAL - 1}
+                    aria-label="Próximo bônus"
+                    className="grid h-9 w-9 place-items-center rounded-md border-2 border-bastelli-orange text-bastelli-orange transition hover:bg-bastelli-orange hover:text-white disabled:opacity-30"
+                  >
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M9 18l6-6-6-6" />
+                    </svg>
+                  </button>
+                </div>
               </div>
             </div>
-            <p className="mt-2 font-mono text-[9px] uppercase tracking-[0.22em] text-bastelli-navy/40 md:mt-3 md:text-[10px]">
-              Role a página pra ver os próximos bônus
-            </p>
           </div>
         </div>
       </div>
