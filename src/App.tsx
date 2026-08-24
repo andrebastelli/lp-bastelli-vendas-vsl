@@ -2188,7 +2188,7 @@ function CtaFinal() {
                 Continuar chutando.
               </span>
               <span className="mt-2 block md:mt-3">
-                Ou parar{" "}
+                Ou estudar os{" "}
                 <span className="italic text-bastelli-orange">12 módulos</span>
                 <br className="hidden md:block" />
                 <span className="text-white/85"> pra entender.</span>
