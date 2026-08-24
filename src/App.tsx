@@ -1821,8 +1821,19 @@ function Oferta() {
           {/* Aside — "recibo" com borda tracejada */}
           <aside className="min-w-0 md:col-span-5">
             <div className="md:sticky md:top-24">
-              <div className="border border-dashed border-bastelli-navy/25 bg-white p-6 md:p-8">
-                <div className="flex items-baseline justify-between border-b border-bastelli-navy/10 pb-4">
+              <div className="relative border border-dashed border-bastelli-navy/25 bg-white p-6 md:p-8">
+                {/* Tag de destaque */}
+                <div className="absolute -top-3 left-6 md:left-8">
+                  <span className="inline-flex items-center gap-1.5 bg-bastelli-orange px-3 py-1.5 font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-white shadow-md">
+                    <span className="relative flex h-1.5 w-1.5">
+                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-white opacity-75" />
+                      <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-white" />
+                    </span>
+                    Oferta especial de lançamento
+                  </span>
+                </div>
+
+                <div className="mt-3 flex items-baseline justify-between border-b border-bastelli-navy/10 pb-4">
                   <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-bastelli-orange">
                     O que está incluso no valor
                   </span>
@@ -1864,13 +1875,28 @@ function Oferta() {
                 </dl>
 
                 <div className="mt-7 border-t border-dashed border-bastelli-navy/25 pt-6">
-                  <div className="mb-4 flex items-baseline justify-between">
-                    <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-bastelli-navy/50">
-                      Valor
-                    </span>
-                    <span className="font-display text-[28px] font-light text-bastelli-navy">
-                      R$ 197,00
-                    </span>
+                  <div className="mb-4 flex items-end justify-between gap-4">
+                    <div className="flex flex-col gap-1">
+                      <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-bastelli-navy/50">
+                        Valor
+                      </span>
+                      <span className="inline-flex w-fit bg-bastelli-orange/10 px-1.5 py-0.5 font-mono text-[10px] font-bold uppercase tracking-[0.12em] text-bastelli-orange">
+                        50% off
+                      </span>
+                    </div>
+                    <div className="flex flex-col items-end">
+                      <span className="font-mono text-[13px] text-bastelli-navy/40 line-through">
+                        R$ 397,00
+                      </span>
+                      <div className="flex items-baseline gap-1.5">
+                        <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-bastelli-navy/50">
+                          por
+                        </span>
+                        <span className="font-display text-[34px] font-light leading-none text-bastelli-navy">
+                          R$ 197,00
+                        </span>
+                      </div>
+                    </div>
                   </div>
                   <div className="flex justify-center">
                     <CTA className="w-full max-w-xs">Ir para o checkout Hotmart</CTA>
