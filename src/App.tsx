@@ -67,7 +67,7 @@ function useAutoScrollCarousel<T extends HTMLElement>(itemCount: number, interva
 
 
 const CHECKOUT_URL =
-  "https://pay.hotmart.com/P106827303T?checkoutMode=10&bid=1787055064510";
+  "https://pay.hotmart.com/P106827303T?off=elttqpev&checkoutMode=10";
 const CTA_LABEL = "Quero entender meu e-commerce de verdade";
 
 function CTA({
