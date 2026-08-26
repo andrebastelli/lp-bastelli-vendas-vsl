@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <title>Roda do E-commerce</title>
+  <!-- Coroa de 12 segmentos, 3 por quadrante, girada para iniciar no topo -->
+  <g transform="rotate(-90 50 50)" fill="none" stroke-width="15" stroke-linecap="butt">
+    <!-- LOJA VIRTUAL — laranja -->
+    <circle cx="50" cy="50" r="38" stroke="#E8641C"
+      stroke-dasharray="16.9 3 16.9 3 16.9 179.07" />
+    <!-- MARKETING — navy escuro -->
+    <circle cx="50" cy="50" r="38" stroke="#22314A"
+      stroke-dasharray="16.9 3 16.9 3 16.9 179.07"
+      transform="rotate(90 50 50)" />
+    <!-- OPERAÇÃO — vermelho -->
+    <circle cx="50" cy="50" r="38" stroke="#D93A16"
+      stroke-dasharray="16.9 3 16.9 3 16.9 179.07"
+      transform="rotate(180 50 50)" />
+    <!-- PLANEJAMENTO — azul -->
+    <circle cx="50" cy="50" r="38" stroke="#1668A8"
+      stroke-dasharray="16.9 3 16.9 3 16.9 179.07"
+      transform="rotate(270 50 50)" />
+  </g>
+  <!-- Grade radial interna -->
+  <g stroke="#22314A" stroke-width="1.4" opacity="0.55" fill="none">
+    <circle cx="50" cy="50" r="19" />
+    <path d="M50 22V78M22 50h56" />
+  </g>
+  <!-- Núcleo -->
+  <circle cx="50" cy="50" r="8.5" fill="#22314A" />
+</svg>
