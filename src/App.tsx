@@ -74,6 +74,21 @@ function useAutoScrollCarousel<T extends HTMLElement>(itemCount: number, interva
 
 const CHECKOUT_URL =
   "https://pay.hotmart.com/P106827303T?off=elttqpev&checkoutMode=10&bid=1787682378655";
+
+// UTMs por origem: mesma source/medium, campanha diferente para home e /vsl1.
+const CHECKOUT_CAMPAIGNS = {
+  home: "aula-gratuita-home",
+  vsl1: "vsl1-aula-gratis-com-dados-captura",
+} as const;
+
+function buildCheckoutUrl(campaign: string) {
+  const url = new URL(CHECKOUT_URL);
+  url.searchParams.set("utm_source", "lp");
+  url.searchParams.set("utm_medium", "pagina-venda");
+  url.searchParams.set("utm_campaign", campaign);
+  return url.toString();
+}
+
 const CTA_LABEL = "Quero entender meu e-commerce de verdade";
 
 function CTA({
@@ -87,6 +102,10 @@ function CTA({
   children?: React.ReactNode;
   href?: string;
 }) {
+  const { gated } = useLeadGate();
+  const checkoutUrl = buildCheckoutUrl(
+    gated ? CHECKOUT_CAMPAIGNS.vsl1 : CHECKOUT_CAMPAIGNS.home,
+  );
   const base =
     "group/cta relative flex w-full min-h-[60px] items-center justify-between gap-4 rounded-none px-5 py-4 text-left text-[15px] font-semibold leading-[1.15] tracking-tight transition-all duration-200 active:translate-y-[1px] sm:inline-flex sm:w-auto sm:min-h-[56px] sm:justify-center sm:gap-3 sm:px-7 sm:text-center";
   const styles =
@@ -114,7 +133,7 @@ function CTA({
   }
   return (
     <a
-      href={CHECKOUT_URL}
+      href={checkoutUrl}
       target="_blank"
       rel="noopener noreferrer"
       className={`${base} ${styles} ${className}`}
