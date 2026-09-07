@@ -223,7 +223,8 @@ export function LeadModal({
           <div>
             <input
               type="text"
-              placeholder="Nome completo"
+              required
+              placeholder="Nome completo *"
               value={lead.nome}
               onChange={(e) => update("nome", e.target.value)}
               autoFocus
@@ -234,7 +235,8 @@ export function LeadModal({
             <input
               type="email"
               inputMode="email"
-              placeholder="Seu melhor e-mail"
+              required
+              placeholder="Seu melhor e-mail *"
               value={lead.email}
               onChange={(e) => update("email", e.target.value)}
               className={`${inputBase} ${errors.email ? "border-red-400" : "border-bastelli-line"}`}
@@ -244,7 +246,8 @@ export function LeadModal({
             <input
               type="tel"
               inputMode="tel"
-              placeholder="Telefone / WhatsApp"
+              required
+              placeholder="Telefone / WhatsApp *"
               value={lead.telefone}
               onChange={(e) => update("telefone", formatPhone(e.target.value))}
               className={`${inputBase} ${errors.telefone ? "border-red-400" : "border-bastelli-line"}`}
@@ -253,14 +256,16 @@ export function LeadModal({
           <div className="grid grid-cols-2 gap-3">
             <input
               type="text"
-              placeholder="Empresa"
+              required
+              placeholder="Empresa *"
               value={lead.empresa}
               onChange={(e) => update("empresa", e.target.value)}
               className={`${inputBase} ${errors.empresa ? "border-red-400" : "border-bastelli-line"}`}
             />
             <input
               type="text"
-              placeholder="Cargo"
+              required
+              placeholder="Cargo *"
               value={lead.cargo}
               onChange={(e) => update("cargo", e.target.value)}
               className={`${inputBase} ${errors.cargo ? "border-red-400" : "border-bastelli-line"}`}
@@ -269,7 +274,7 @@ export function LeadModal({
 
           <div>
             <span className="mb-2 block text-[13px] font-medium text-bastelli-ink/70">
-              Já tem uma loja virtual?
+              Já tem uma loja virtual? *
             </span>
             <div className="grid grid-cols-2 gap-3">
               {(["sim", "nao"] as const).map((opt) => {
