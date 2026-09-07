@@ -5,9 +5,18 @@ const YT_VIDEO_ID = "LRTO8jzWVT0";
 const STORAGE_KEY = "vsl1_lead_unlocked";
 
 // Endpoint do Google Apps Script (Web App) que grava cada lead na planilha.
-// Configure em VITE_LEADS_ENDPOINT (.env) ou cole a URL /exec aqui.
-const LEADS_ENDPOINT =
-  (import.meta.env.VITE_LEADS_ENDPOINT as string | undefined) || "";
+// Configure em VITE_LEADS_ENDPOINT (.env). Aceita a URL /exec completa
+// OU apenas o token do deploy (AKfycb...), montando a URL automaticamente.
+function resolveEndpoint(raw: string | undefined): string {
+  const v = (raw || "").trim();
+  if (!v) return "";
+  if (v.startsWith("http")) return v;
+  return `https://script.google.com/macros/s/${v}/exec`;
+}
+
+const LEADS_ENDPOINT = resolveEndpoint(
+  import.meta.env.VITE_LEADS_ENDPOINT as string | undefined,
+);
 
 type Lead = {
   nome: string;
