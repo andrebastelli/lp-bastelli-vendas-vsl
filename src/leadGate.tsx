@@ -61,6 +61,22 @@ function isValidEmail(email: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
+// Data/hora no fuso de Brasília, formato "DD/MM/AAAA HH:mm:ss".
+function nowBrasilia() {
+  const parts = new Intl.DateTimeFormat("pt-BR", {
+    timeZone: "America/Sao_Paulo",
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: false,
+  }).formatToParts(new Date());
+  const get = (t: string) => parts.find((p) => p.type === t)?.value ?? "";
+  return `${get("day")}/${get("month")}/${get("year")} ${get("hour")}:${get("minute")}:${get("second")}`;
+}
+
 async function saveLead(lead: Lead) {
   const params = new URLSearchParams(window.location.search);
   const payload = {
@@ -72,7 +88,7 @@ async function saveLead(lead: Lead) {
     utm_content: params.get("utm_content") || "",
     utm_term: params.get("utm_term") || "",
     referrer: document.referrer || "",
-    data: new Date().toISOString(),
+    data: nowBrasilia(),
   };
 
   if (!LEADS_ENDPOINT) {
