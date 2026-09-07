@@ -1,4 +1,10 @@
 import { useEffect, useRef, useState } from "react";
+import {
+  LeadGateContext,
+  LeadModal,
+  useLeadGate,
+  LEAD_STORAGE_KEY,
+} from "@/leadGate";
 import bastelliLogo from "@/assets/bastelli-logo.png";
 import rodaEcommerce from "@/assets/roda-ecommerce.png";
 import BrunoSantos from "@/assets/bruno_no_santos.webp";
@@ -191,25 +197,72 @@ function BackToTop() {
   );
 }
 
-function Index() {
+function Index({ gated = false }: { gated?: boolean }) {
+  const [unlocked, setUnlocked] = useState(!gated);
+  const [modalOpen, setModalOpen] = useState(false);
+
+  // Modo gated (rota /vsl1): lê acesso salvo e marca a página como noindex.
+  useEffect(() => {
+    if (!gated) return;
+    try {
+      if (localStorage.getItem(LEAD_STORAGE_KEY) === "1") setUnlocked(true);
+    } catch {
+      /* ignore */
+    }
+    const meta = document.createElement("meta");
+    meta.name = "robots";
+    meta.content = "noindex, nofollow";
+    document.head.appendChild(meta);
+    return () => {
+      document.head.removeChild(meta);
+    };
+  }, [gated]);
+
+  useEffect(() => {
+    document.body.style.overflow = modalOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [modalOpen]);
+
+  function handleUnlock() {
+    try {
+      localStorage.setItem(LEAD_STORAGE_KEY, "1");
+    } catch {
+      /* ignore */
+    }
+    setUnlocked(true);
+    setModalOpen(false);
+  }
+
   return (
-    <main className="bg-white font-sans text-bastelli-ink antialiased">
-      <Nav />
-      <Hero />
-      <Identificacao />
-      <QuebraDeCrenca />
-      <RodaDoEcommerce />
-      <ApresentacaoCurso />
-      <OQueVaiAprender />
-      <Bonus />
-      <SobreBruno />
-      <Oferta />
-      <Garantia />
-      <FAQ />
-      <CtaFinal />
-      <Footer />
-      <BackToTop />
-    </main>
+    <LeadGateContext.Provider
+      value={{ gated, unlocked, openModal: () => setModalOpen(true) }}
+    >
+      <main className="bg-white font-sans text-bastelli-ink antialiased">
+        <Nav />
+        <Hero />
+        <Identificacao />
+        <QuebraDeCrenca />
+        <RodaDoEcommerce />
+        <ApresentacaoCurso />
+        <OQueVaiAprender />
+        <Bonus />
+        <SobreBruno />
+        <Oferta />
+        <Garantia />
+        <FAQ />
+        <CtaFinal />
+        <Footer />
+        <BackToTop />
+      </main>
+      {gated && modalOpen && (
+        <LeadModal
+          onClose={() => setModalOpen(false)}
+          onUnlock={handleUnlock}
+        />
+      )}
+    </LeadGateContext.Provider>
   );
 }
 
@@ -394,7 +447,48 @@ function Hero() {
 const YT_VIDEO_ID = "LRTO8jzWVT0";
 
 function VSLPlayer() {
-  const embedSrc = `https://www.youtube.com/embed/${YT_VIDEO_ID}?rel=0&modestbranding=1`;
+  const { gated, unlocked, openModal } = useLeadGate();
+  const locked = gated && !unlocked;
+  const embedSrc = `https://www.youtube.com/embed/${YT_VIDEO_ID}?rel=0&modestbranding=1${
+    gated ? "&autoplay=1" : ""
+  }`;
+
+  if (locked) {
+    return (
+      <button
+        type="button"
+        onClick={openModal}
+        aria-label="Liberar acesso à aula gratuita"
+        className="group relative block w-full overflow-hidden border border-white/15 shadow-[0_30px_80px_-40px_rgba(0,0,0,0.7)]"
+      >
+        <div style={{ aspectRatio: "16/9" }} className="relative w-full bg-black">
+          <img
+            src={`https://img.youtube.com/vi/${YT_VIDEO_ID}/maxresdefault.jpg`}
+            alt="Prévia da aula gratuita com Bruno Bastelli"
+            className="absolute inset-0 h-full w-full object-cover opacity-70 blur-[2px] transition group-hover:opacity-60"
+          />
+          <div className="absolute inset-0 bg-bastelli-navy/60" />
+          <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 px-6 text-center">
+            <span className="grid h-16 w-16 place-items-center rounded-full bg-bastelli-orange text-white shadow-lg transition group-hover:scale-105 md:h-20 md:w-20">
+              <svg width="22" height="24" viewBox="0 0 22 24" fill="currentColor">
+                <path d="M2 2v20l18-10L2 2z" />
+              </svg>
+            </span>
+            <span className="font-display text-[18px] font-semibold text-white md:text-[22px]">
+              Clique para liberar sua aula
+            </span>
+            <span className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.2em] text-white/60">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <rect x="3" y="11" width="18" height="11" rx="2" />
+                <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+              </svg>
+              Acesso gratuito e imediato
+            </span>
+          </div>
+        </div>
+      </button>
+    );
+  }
 
   return (
     <div className="relative w-full overflow-hidden border border-white/15 shadow-[0_30px_80px_-40px_rgba(0,0,0,0.7)]">

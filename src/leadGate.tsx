@@ -1,8 +1,6 @@
-import { useEffect, useMemo, useState } from "react";
-import bastelliLogo from "@/assets/bastelli-logo.png";
+import { createContext, useContext, useEffect, useMemo, useState } from "react";
 
-const YT_VIDEO_ID = "LRTO8jzWVT0";
-const STORAGE_KEY = "vsl1_lead_unlocked";
+export const LEAD_STORAGE_KEY = "vsl1_lead_unlocked";
 
 // Endpoint do Google Apps Script (Web App) que grava cada lead na planilha.
 // Configure em VITE_LEADS_ENDPOINT (.env). Aceita a URL /exec completa
@@ -17,6 +15,21 @@ function resolveEndpoint(raw: string | undefined): string {
 const LEADS_ENDPOINT = resolveEndpoint(
   import.meta.env.VITE_LEADS_ENDPOINT as string | undefined,
 );
+
+type LeadGate = {
+  gated: boolean;
+  unlocked: boolean;
+  openModal: () => void;
+};
+
+// Por padrão a home não é gated: o vídeo aparece livre.
+export const LeadGateContext = createContext<LeadGate>({
+  gated: false,
+  unlocked: true,
+  openModal: () => {},
+});
+
+export const useLeadGate = () => useContext(LeadGateContext);
 
 type Lead = {
   nome: string;
@@ -40,8 +53,7 @@ function formatPhone(value: string) {
   const d = value.replace(/\D/g, "").slice(0, 11);
   if (d.length <= 2) return d;
   if (d.length <= 6) return `(${d.slice(0, 2)}) ${d.slice(2)}`;
-  if (d.length <= 10)
-    return `(${d.slice(0, 2)}) ${d.slice(2, 6)}-${d.slice(6)}`;
+  if (d.length <= 10) return `(${d.slice(0, 2)}) ${d.slice(2, 6)}-${d.slice(6)}`;
   return `(${d.slice(0, 2)}) ${d.slice(2, 7)}-${d.slice(7)}`;
 }
 
@@ -80,207 +92,7 @@ async function saveLead(lead: Lead) {
   }
 }
 
-export default function Vsl1() {
-  const [unlocked, setUnlocked] = useState(false);
-  const [modalOpen, setModalOpen] = useState(false);
-
-  useEffect(() => {
-    document.title = "Aula Gratuita — Curso Introdução ao E-commerce | Bastelli";
-    const meta = document.createElement("meta");
-    meta.name = "robots";
-    meta.content = "noindex, nofollow";
-    document.head.appendChild(meta);
-    try {
-      if (localStorage.getItem(STORAGE_KEY) === "1") setUnlocked(true);
-    } catch {
-      /* ignore */
-    }
-    return () => {
-      document.head.removeChild(meta);
-    };
-  }, []);
-
-  useEffect(() => {
-    document.body.style.overflow = modalOpen ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [modalOpen]);
-
-  function handleUnlock() {
-    try {
-      localStorage.setItem(STORAGE_KEY, "1");
-    } catch {
-      /* ignore */
-    }
-    setUnlocked(true);
-    setModalOpen(false);
-  }
-
-  return (
-    <div className="min-h-screen bg-bastelli-navy font-sans text-white">
-      {/* Texturas de fundo (mesma linguagem da home) */}
-      <div className="relative overflow-hidden">
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-0 opacity-[0.07] mix-blend-overlay"
-          style={{
-            backgroundImage:
-              "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
-          }}
-        />
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-0"
-          style={{
-            backgroundImage:
-              "linear-gradient(to right, rgba(255,255,255,0.06) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.06) 1px, transparent 1px)",
-            backgroundSize: "80px 80px",
-            maskImage:
-              "radial-gradient(ellipse at 50% 30%, rgba(0,0,0,1) 40%, rgba(0,0,0,0.25) 100%)",
-            WebkitMaskImage:
-              "radial-gradient(ellipse at 50% 30%, rgba(0,0,0,1) 40%, rgba(0,0,0,0.25) 100%)",
-          }}
-        />
-
-        {/* Top bar */}
-        <header className="relative mx-auto flex max-w-5xl items-center justify-between px-5 py-5 md:px-8">
-          <img src={bastelliLogo} alt="Bastelli" className="h-7 w-auto md:h-8" />
-          <span className="font-mono text-[10px] uppercase tracking-[0.24em] text-white/50">
-            Aula gratuita
-          </span>
-        </header>
-
-        <main className="relative mx-auto max-w-4xl px-5 pb-16 pt-6 md:px-8 md:pb-24 md:pt-10">
-          <div className="mb-6 flex justify-center">
-            <span className="inline-flex items-center gap-2 rounded-sm border border-bastelli-orange/50 bg-bastelli-orange/10 px-3 py-1.5 font-mono text-[11px] font-bold uppercase tracking-[0.18em] text-bastelli-orange">
-              <span className="relative inline-flex h-1.5 w-1.5">
-                <span className="absolute inset-0 animate-ping rounded-full bg-bastelli-orange/70" />
-                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-bastelli-orange" />
-              </span>
-              Curso Introdução ao E-commerce
-            </span>
-          </div>
-
-          <h1 className="mx-auto max-w-3xl text-balance text-center font-display text-[32px] font-semibold leading-[1.05] tracking-[-0.025em] md:text-[54px]">
-            A aula gratuita que mostra os{" "}
-            <span className="relative inline-block">
-              fundamentos
-              <span
-                aria-hidden
-                className="absolute -bottom-1 left-0 h-[5px] w-full bg-bastelli-orange/70 md:-bottom-2 md:h-[10px]"
-              />
-            </span>{" "}
-            do e-commerce de verdade
-          </h1>
-
-          <p className="mx-auto mt-6 max-w-2xl text-pretty text-center text-[15px] leading-relaxed text-white/75 md:mt-7 md:text-[18px]">
-            Em poucos minutos, Bruno Bastelli explica o que separa a loja que
-            vende da que só dá trabalho. Libere seu acesso e assista agora.
-          </p>
-
-          {/* Player */}
-          <div className="mx-auto mt-9 max-w-3xl md:mt-12">
-            {unlocked ? (
-              <div className="relative w-full overflow-hidden border border-white/15 shadow-[0_30px_80px_-40px_rgba(0,0,0,0.7)]">
-                <div style={{ aspectRatio: "16/9" }} className="relative w-full bg-black">
-                  <iframe
-                    src={`https://www.youtube.com/embed/${YT_VIDEO_ID}?rel=0&modestbranding=1&autoplay=1`}
-                    title="Aula gratuita — Bruno Bastelli"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowFullScreen
-                    className="absolute inset-0 h-full w-full border-0"
-                  />
-                </div>
-              </div>
-            ) : (
-              <button
-                type="button"
-                onClick={() => setModalOpen(true)}
-                aria-label="Liberar acesso à aula gratuita"
-                className="group relative block w-full overflow-hidden border border-white/15 shadow-[0_30px_80px_-40px_rgba(0,0,0,0.7)]"
-              >
-                <div style={{ aspectRatio: "16/9" }} className="relative w-full bg-black">
-                  <img
-                    src={`https://img.youtube.com/vi/${YT_VIDEO_ID}/maxresdefault.jpg`}
-                    alt="Prévia da aula gratuita com Bruno Bastelli"
-                    className="absolute inset-0 h-full w-full object-cover opacity-70 blur-[2px] transition group-hover:opacity-60"
-                  />
-                  <div className="absolute inset-0 bg-bastelli-navy/55" />
-                  <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 px-6 text-center">
-                    <span className="grid h-16 w-16 place-items-center rounded-full bg-bastelli-orange text-white shadow-lg transition group-hover:scale-105 md:h-20 md:w-20">
-                      <svg width="22" height="24" viewBox="0 0 22 24" fill="currentColor">
-                        <path d="M2 2v20l18-10L2 2z" />
-                      </svg>
-                    </span>
-                    <span className="font-display text-[18px] font-semibold md:text-[22px]">
-                      Clique para liberar sua aula
-                    </span>
-                    <span className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.2em] text-white/60">
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <rect x="3" y="11" width="18" height="11" rx="2" />
-                        <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-                      </svg>
-                      Acesso gratuito e imediato
-                    </span>
-                  </div>
-                </div>
-              </button>
-            )}
-
-            {!unlocked && (
-              <div className="mt-6 flex justify-center">
-                <button
-                  type="button"
-                  onClick={() => setModalOpen(true)}
-                  className="group/cta flex min-h-[56px] w-full max-w-md items-center justify-center gap-3 bg-bastelli-orange px-7 text-[15px] font-semibold text-white transition-all duration-200 hover:bg-[#d5602c] active:translate-y-[1px] sm:w-auto"
-                >
-                  Liberar acesso à aula
-                  <span aria-hidden className="text-lg leading-none transition-transform duration-200 group-hover/cta:translate-x-0.5">
-                    →
-                  </span>
-                </button>
-              </div>
-            )}
-          </div>
-
-          {/* Bullets */}
-          <ul className="mx-auto mt-12 grid max-w-3xl gap-3 md:mt-16 md:grid-cols-3 md:gap-4">
-            {[
-              "O que realmente faz uma loja vender (e o que só custa dinheiro).",
-              "Os erros de operação que travam o crescimento sem você perceber.",
-              "Por onde começar hoje, mesmo sem time e sem grande orçamento.",
-            ].map((t) => (
-              <li
-                key={t}
-                className="flex items-start gap-3 border border-white/10 bg-white/[0.03] p-4 text-[13px] leading-relaxed text-white/75 md:text-[14px]"
-              >
-                <span className="mt-0.5 text-bastelli-orange">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M20 6L9 17l-5-5" />
-                  </svg>
-                </span>
-                {t}
-              </li>
-            ))}
-          </ul>
-        </main>
-      </div>
-
-      <footer className="border-t border-white/10 py-8 text-center">
-        <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/40">
-          Bastelli Consultoria · E-commerce de Performance
-        </p>
-      </footer>
-
-      {modalOpen && (
-        <LeadModal onClose={() => setModalOpen(false)} onUnlock={handleUnlock} />
-      )}
-    </div>
-  );
-}
-
-function LeadModal({
+export function LeadModal({
   onClose,
   onUnlock,
 }: {
