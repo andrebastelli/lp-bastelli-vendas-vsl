@@ -1,20 +1,13 @@
-import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import { createContext, useContext, useEffect, useRef, useState } from "react";
 
 export const LEAD_STORAGE_KEY = "vsl1_lead_unlocked";
 
-// Endpoint do Google Apps Script (Web App) que grava cada lead na planilha.
-// Configure em VITE_LEADS_ENDPOINT (.env). Aceita a URL /exec completa
-// OU apenas o token do deploy (AKfycb...), montando a URL automaticamente.
-function resolveEndpoint(raw: string | undefined): string {
-  const v = (raw || "").trim();
-  if (!v) return "";
-  if (v.startsWith("http")) return v;
-  return `https://script.google.com/macros/s/${v}/exec`;
-}
-
-const LEADS_ENDPOINT = resolveEndpoint(
-  import.meta.env.VITE_LEADS_ENDPOINT as string | undefined,
-);
+// Formulário do HubSpot usado para liberar a aula.
+const HUBSPOT = {
+  portalId: "9446590",
+  formId: "a7fd3b20-e29a-42a5-8302-8c5e87bcac6b",
+  region: "na1",
+};
 
 type LeadGate = {
   gated: boolean;
@@ -31,81 +24,23 @@ export const LeadGateContext = createContext<LeadGate>({
 
 export const useLeadGate = () => useContext(LeadGateContext);
 
-type Lead = {
-  nome: string;
-  email: string;
-  telefone: string;
-  empresa: string;
-  cargo: string;
-  temLoja: "sim" | "nao" | "";
-};
+// Carrega o script de embed do HubSpot uma única vez.
+let hubspotScriptPromise: Promise<void> | null = null;
+function loadHubspotScript(): Promise<void> {
+  if (typeof window === "undefined") return Promise.resolve();
+  if ((window as any).hbspt) return Promise.resolve();
+  if (hubspotScriptPromise) return hubspotScriptPromise;
 
-const EMPTY_LEAD: Lead = {
-  nome: "",
-  email: "",
-  telefone: "",
-  empresa: "",
-  cargo: "",
-  temLoja: "",
-};
-
-function formatPhone(value: string) {
-  const d = value.replace(/\D/g, "").slice(0, 11);
-  if (d.length <= 2) return d;
-  if (d.length <= 6) return `(${d.slice(0, 2)}) ${d.slice(2)}`;
-  if (d.length <= 10) return `(${d.slice(0, 2)}) ${d.slice(2, 6)}-${d.slice(6)}`;
-  return `(${d.slice(0, 2)}) ${d.slice(2, 7)}-${d.slice(7)}`;
-}
-
-function isValidEmail(email: string) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-}
-
-// Data/hora no fuso de Brasília, formato "DD/MM/AAAA HH:mm:ss".
-function nowBrasilia() {
-  const parts = new Intl.DateTimeFormat("pt-BR", {
-    timeZone: "America/Sao_Paulo",
-    day: "2-digit",
-    month: "2-digit",
-    year: "numeric",
-    hour: "2-digit",
-    minute: "2-digit",
-    second: "2-digit",
-    hour12: false,
-  }).formatToParts(new Date());
-  const get = (t: string) => parts.find((p) => p.type === t)?.value ?? "";
-  return `${get("day")}/${get("month")}/${get("year")} ${get("hour")}:${get("minute")}:${get("second")}`;
-}
-
-async function saveLead(lead: Lead) {
-  const params = new URLSearchParams(window.location.search);
-  const payload = {
-    ...lead,
-    origem: "vsl1",
-    utm_source: params.get("utm_source") || "",
-    utm_medium: params.get("utm_medium") || "",
-    utm_campaign: params.get("utm_campaign") || "",
-    utm_content: params.get("utm_content") || "",
-    utm_term: params.get("utm_term") || "",
-    referrer: document.referrer || "",
-    data: nowBrasilia(),
-  };
-
-  if (!LEADS_ENDPOINT) {
-    console.log("[v0] LEADS_ENDPOINT não configurado. Lead:", payload);
-    return;
-  }
-  try {
-    await fetch(LEADS_ENDPOINT, {
-      method: "POST",
-      mode: "no-cors",
-      headers: { "Content-Type": "text/plain;charset=utf-8" },
-      body: JSON.stringify(payload),
-      keepalive: true,
-    });
-  } catch (err) {
-    console.log("[v0] Falha ao salvar lead:", err);
-  }
+  hubspotScriptPromise = new Promise<void>((resolve, reject) => {
+    const script = document.createElement("script");
+    script.src = "https://js.hsforms.net/forms/embed/v2.js";
+    script.charset = "utf-8";
+    script.type = "text/javascript";
+    script.onload = () => resolve();
+    script.onerror = () => reject(new Error("Falha ao carregar o HubSpot"));
+    document.head.appendChild(script);
+  });
+  return hubspotScriptPromise;
 }
 
 export function LeadModal({
@@ -115,9 +50,8 @@ export function LeadModal({
   onClose: () => void;
   onUnlock: () => void;
 }) {
-  const [lead, setLead] = useState<Lead>(EMPTY_LEAD);
-  const [errors, setErrors] = useState<Partial<Record<keyof Lead, boolean>>>({});
-  const [submitting, setSubmitting] = useState(false);
+  const targetRef = useRef<HTMLDivElement>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -127,48 +61,39 @@ export function LeadModal({
     return () => window.removeEventListener("keydown", onKey);
   }, [onClose]);
 
-  const progress = useMemo(() => {
-    const fields = [
-      lead.nome.trim().length > 1,
-      isValidEmail(lead.email),
-      lead.telefone.replace(/\D/g, "").length >= 10,
-      lead.empresa.trim().length > 0,
-      lead.cargo.trim().length > 0,
-      lead.temLoja !== "",
-    ];
-    const done = fields.filter(Boolean).length;
-    return Math.round((done / fields.length) * 100);
-  }, [lead]);
+  // Cria o formulário do HubSpot dentro do modal e escuta o envio.
+  useEffect(() => {
+    let cancelled = false;
 
-  function update<K extends keyof Lead>(key: K, value: Lead[K]) {
-    setLead((prev) => ({ ...prev, [key]: value }));
-    setErrors((prev) => ({ ...prev, [key]: false }));
-  }
+    loadHubspotScript()
+      .then(() => {
+        if (cancelled || !targetRef.current) return;
+        const hbspt = (window as any).hbspt;
+        if (!hbspt) return;
 
-  function validate() {
-    const next: Partial<Record<keyof Lead, boolean>> = {
-      nome: lead.nome.trim().length < 2,
-      email: !isValidEmail(lead.email),
-      telefone: lead.telefone.replace(/\D/g, "").length < 10,
-      empresa: lead.empresa.trim().length === 0,
-      cargo: lead.cargo.trim().length === 0,
-      temLoja: lead.temLoja === "",
+        // Repassa as UTMs da URL como campos ocultos, se existirem no form.
+        hbspt.forms.create({
+          portalId: HUBSPOT.portalId,
+          formId: HUBSPOT.formId,
+          region: HUBSPOT.region,
+          target: "#hubspot-lead-form",
+          onFormReady: () => {
+            if (!cancelled) setLoading(false);
+          },
+          onFormSubmitted: () => {
+            // Lead salvo no HubSpot: libera o acesso à aula.
+            onUnlock();
+          },
+        });
+      })
+      .catch(() => {
+        if (!cancelled) setLoading(false);
+      });
+
+    return () => {
+      cancelled = true;
     };
-    setErrors(next);
-    return !Object.values(next).some(Boolean);
-  }
-
-  async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    if (submitting) return;
-    if (!validate()) return;
-    setSubmitting(true);
-    await saveLead(lead);
-    onUnlock();
-  }
-
-  const inputBase =
-    "w-full rounded-md border bg-white px-4 py-3 text-[15px] text-bastelli-ink placeholder:text-bastelli-ink/40 outline-none transition focus:border-bastelli-orange focus:ring-2 focus:ring-bastelli-orange/20";
+  }, [onUnlock]);
 
   return (
     <div
@@ -193,22 +118,10 @@ export function LeadModal({
           </svg>
         </button>
 
-        {/* Cabeçalho com progresso */}
         <div className="mb-5 flex items-center gap-3">
           <span className="rounded-full border border-bastelli-orange/40 bg-bastelli-orange/10 px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-[0.14em] text-bastelli-orange">
             Último passo
           </span>
-          <div className="flex flex-1 items-center gap-2">
-            <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-bastelli-ink/10">
-              <div
-                className="h-full rounded-full bg-bastelli-orange transition-all duration-300"
-                style={{ width: `${Math.max(progress, 8)}%` }}
-              />
-            </div>
-            <span className="font-mono text-[11px] font-bold text-bastelli-ink/50">
-              {progress}%
-            </span>
-          </div>
         </div>
 
         <h2 className="font-display text-[24px] font-semibold leading-[1.1] tracking-[-0.02em] text-bastelli-ink md:text-[27px]">
@@ -219,102 +132,21 @@ export function LeadModal({
           Leva menos de 30 segundos. É gratuito e o acesso é imediato.
         </p>
 
-        <form onSubmit={handleSubmit} className="mt-5 flex flex-col gap-3" noValidate>
-          <div>
-            <input
-              type="text"
-              required
-              placeholder="Nome completo *"
-              value={lead.nome}
-              onChange={(e) => update("nome", e.target.value)}
-              autoFocus
-              className={`${inputBase} ${errors.nome ? "border-red-400" : "border-bastelli-line"}`}
-            />
-          </div>
-          <div>
-            <input
-              type="email"
-              inputMode="email"
-              required
-              placeholder="Seu melhor e-mail *"
-              value={lead.email}
-              onChange={(e) => update("email", e.target.value)}
-              className={`${inputBase} ${errors.email ? "border-red-400" : "border-bastelli-line"}`}
-            />
-          </div>
-          <div>
-            <input
-              type="tel"
-              inputMode="tel"
-              required
-              placeholder="Telefone / WhatsApp *"
-              value={lead.telefone}
-              onChange={(e) => update("telefone", formatPhone(e.target.value))}
-              className={`${inputBase} ${errors.telefone ? "border-red-400" : "border-bastelli-line"}`}
-            />
-          </div>
-          <div className="grid grid-cols-2 gap-3">
-            <input
-              type="text"
-              required
-              placeholder="Empresa *"
-              value={lead.empresa}
-              onChange={(e) => update("empresa", e.target.value)}
-              className={`${inputBase} ${errors.empresa ? "border-red-400" : "border-bastelli-line"}`}
-            />
-            <input
-              type="text"
-              required
-              placeholder="Cargo *"
-              value={lead.cargo}
-              onChange={(e) => update("cargo", e.target.value)}
-              className={`${inputBase} ${errors.cargo ? "border-red-400" : "border-bastelli-line"}`}
-            />
-          </div>
-
-          <div>
-            <span className="mb-2 block text-[13px] font-medium text-bastelli-ink/70">
-              Já tem uma loja virtual? *
-            </span>
-            <div className="grid grid-cols-2 gap-3">
-              {(["sim", "nao"] as const).map((opt) => {
-                const selected = lead.temLoja === opt;
-                return (
-                  <button
-                    key={opt}
-                    type="button"
-                    onClick={() => update("temLoja", opt)}
-                    className={`rounded-md border px-4 py-3 text-[14px] font-semibold capitalize transition ${
-                      selected
-                        ? "border-bastelli-orange bg-bastelli-orange/10 text-bastelli-orange"
-                        : errors.temLoja
-                          ? "border-red-400 text-bastelli-ink/70"
-                          : "border-bastelli-line text-bastelli-ink/70 hover:border-bastelli-ink/30"
-                    }`}
-                  >
-                    {opt === "sim" ? "Sim" : "Não"}
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-
-          <button
-            type="submit"
-            disabled={submitting}
-            className="group/cta mt-2 flex min-h-[54px] items-center justify-center gap-3 bg-bastelli-orange px-6 text-[15px] font-semibold text-white transition-all duration-200 hover:bg-[#d5602c] active:translate-y-[1px] disabled:opacity-60"
-          >
-            {submitting ? "Liberando..." : "Liberar acesso à aula"}
-            {!submitting && (
-              <span aria-hidden className="text-lg leading-none transition-transform duration-200 group-hover/cta:translate-x-0.5">
-                →
+        <div className="relative mt-5 min-h-[120px]">
+          {loading && (
+            <div className="flex items-center justify-center py-10" aria-live="polite">
+              <span className="h-6 w-6 animate-spin rounded-full border-2 border-bastelli-orange border-t-transparent" />
+              <span className="ml-3 text-[14px] text-bastelli-ink/60">
+                Carregando formulário...
               </span>
-            )}
-          </button>
-          <p className="text-center text-[11px] leading-relaxed text-bastelli-ink/45">
-            Seus dados estão seguros. Sem spam.
-          </p>
-        </form>
+            </div>
+          )}
+          <div id="hubspot-lead-form" ref={targetRef} className="hs-form-bastelli" />
+        </div>
+
+        <p className="mt-4 text-center text-[11px] leading-relaxed text-bastelli-ink/45">
+          Seus dados estão seguros. Sem spam.
+        </p>
       </div>
     </div>
   );
