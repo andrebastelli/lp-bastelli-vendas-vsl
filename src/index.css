@@ -18,6 +18,74 @@ html, body { background: #F6F4EF; color: #101923; font-family: "Inter Tight", ui
   [style*="roda-spin"] { animation: none !important; }
 }
 
+/* Formulário do HubSpot dentro do modal de captura (VSL1) */
+.hs-form-bastelli .hs-form-field { margin-bottom: 14px; }
+.hs-form-bastelli label {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(16, 25, 35, 0.7);
+  margin-bottom: 6px;
+}
+.hs-form-bastelli .hs-form-required { color: #e2622e; margin-left: 2px; }
+.hs-form-bastelli input[type="text"],
+.hs-form-bastelli input[type="email"],
+.hs-form-bastelli input[type="tel"],
+.hs-form-bastelli input[type="number"],
+.hs-form-bastelli select,
+.hs-form-bastelli textarea {
+  width: 100%;
+  border: 1px solid #e3ddd2;
+  border-radius: 8px;
+  background: #fff;
+  padding: 12px 16px;
+  font-size: 15px;
+  color: #101923;
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.hs-form-bastelli input:focus,
+.hs-form-bastelli select:focus,
+.hs-form-bastelli textarea:focus {
+  border-color: #e2622e;
+  box-shadow: 0 0 0 3px rgba(226, 98, 46, 0.18);
+}
+.hs-form-bastelli .hs-input.invalid { border-color: #f87171; }
+.hs-form-bastelli .hs-error-msgs { list-style: none; padding: 0; margin: 5px 0 0; }
+.hs-form-bastelli .hs-error-msgs label { color: #dc2626; font-size: 12px; font-weight: 400; }
+.hs-form-bastelli ul.inputs-list { list-style: none; padding: 0; margin: 4px 0 0; }
+.hs-form-bastelli .hs-form-booleancheckbox label,
+.hs-form-bastelli .inputs-list label {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-weight: 400;
+  color: rgba(16, 25, 35, 0.75);
+}
+.hs-form-bastelli .hs-form-booleancheckbox input,
+.hs-form-bastelli .inputs-list input { width: auto; margin-top: 3px; }
+.hs-form-bastelli .hs-button {
+  width: 100%;
+  margin-top: 6px;
+  border: none;
+  border-radius: 8px;
+  background: #e2622e;
+  color: #fff;
+  padding: 15px 24px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+.hs-form-bastelli .hs-button:hover { background: #d5602c; }
+.hs-form-bastelli .hs-button:active { transform: translateY(1px); }
+.hs-form-bastelli .submitted-message {
+  font-size: 15px;
+  color: #101923;
+  text-align: center;
+  padding: 12px 0;
+}
+
 a[href*="lovable.dev"],
 iframe[src*="lovable.dev"],
 div[style*="Edit with Lovable"],
